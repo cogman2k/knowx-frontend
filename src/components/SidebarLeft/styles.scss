@@ -1,0 +1,27 @@
+.layout-sidebar-left {
+  float: left;
+  display: inline-block;
+  min-height: 1100px;
+  width: 14%;
+  box-shadow: 0px 2px 2px #bfbfbf;
+  height: 100%;
+  background: #fff;
+}
+.sidebar-profile-img {
+  border-radius: 50%;
+  width: 129px;
+  height: 129px;
+  margin: 35px;
+  margin-top: 100px;
+}
+.sidebar-profile div {
+  font-size: 18px;
+  font-weight: 700;
+  text-align: center;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.fontSize-24 {
+  font-size: 24px !important;
+}

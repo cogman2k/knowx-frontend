@@ -1,0 +1,17 @@
+.container {
+  .title {
+    margin-top: 25px;
+  }
+  .hashtag {
+    margin-top: 25px;
+  }
+  .description {
+    margin-top: 35px;
+    .ck-content {
+      height: 500px;
+    }
+  }
+}
+.ck-editor__editable_inline {
+  max-height: 600px !important;
+}

@@ -1,0 +1,40 @@
+.background {
+  float: right;
+  height: 800px;
+  width: 35%;
+  background-image: url(./background.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+}
+.background::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(23, 7, 119, 0.329);
+}
+.description-authright {
+  text-align: right;
+  color: white;
+  position: absolute;
+  margin-left: 181px;
+  margin-top: 82px;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  h2 {
+    font-size: 32px;
+    font-weight: 400;
+    color: #fff;
+  }
+  span {
+    color: red;
+  }
+  h6 {
+    margin-top: 20px;
+    font-size: 16px;
+    font-weight: 400;
+    color: #fff;
+  }
+}

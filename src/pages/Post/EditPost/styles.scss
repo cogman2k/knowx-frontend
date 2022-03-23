@@ -1,0 +1,14 @@
+.container {
+  .hashtag {
+    margin-top: 25px;
+  }
+  .description {
+    margin-top: 35px;
+    .ck-content {
+      height: 500px;
+    }
+  }
+}
+.ck-editor__editable_inline {
+  min-height: 300px;
+}

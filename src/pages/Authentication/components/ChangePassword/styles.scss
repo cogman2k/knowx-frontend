@@ -1,0 +1,28 @@
+.themed-container {
+  width: 65%;
+  display: inline-block;
+}
+.text-center {
+  margin-top: 20%;
+  font-size: 22px;
+  text-align: center;
+}
+.change-password-wrapper {
+  width: 60%;
+  margin: 0 auto;
+  margin-top: 8%;
+  line-height: 5;
+}
+.show-hide-pwd-wrapper {
+  position: relative;
+}
+.errMsgStyl {
+  color: red;
+}
+.eyeIcon {
+  width: 25px;
+  height: 20px;
+  position: absolute;
+  top: 18px;
+  right: 6px;
+}

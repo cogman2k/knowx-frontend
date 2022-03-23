@@ -1,0 +1,35 @@
+.layout-header {
+  font-size: 16px;
+  text-transform: uppercase;
+  font-weight: 700;
+  height: 235px;
+  background: none;
+}
+.navigation {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  padding: 0;
+  height: 45px;
+  line-height: 45px;
+  overflow-x: hidden;
+  z-index: 1;
+  color: #767676;
+  .ant-menu-item a {
+    color: #767676;
+  }
+}
+.layout-header .banner {
+  margin-top: 45px;
+  height: 190px;
+  background-image: url(./banner.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+  // width: 1260px;
+}
+.ant-layout-header .ant-menu {
+  color: #767676;
+}
+.ant-menu {
+  justify-content: space-around;
+}

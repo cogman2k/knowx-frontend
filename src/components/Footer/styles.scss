@@ -1,0 +1,23 @@
+.footer-container {
+  clear: both;
+  width: 100%;
+  background: #00358e;
+  height: 160px;
+  font-family: Segoe UI;
+  position: relative;
+  color: #fff;
+}
+
+.footer-logo img {
+  position: absolute;
+  width: 170px;
+  height: 170px;
+  left: 12px;
+  top: -30px;
+}
+.mb-10 {
+  margin-bottom: 10px;
+}
+.mt--12 {
+  margin-top: -12px;
+}
