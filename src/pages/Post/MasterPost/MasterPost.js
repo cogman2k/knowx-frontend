@@ -1,4 +1,3 @@
-
 import { Layout, List, Avatar, Space, Spin, Typography, Divider } from "antd";
 import { LikeOutlined, MessageOutlined } from "@ant-design/icons";
 import { Link } from "react-router-dom";
@@ -34,7 +33,7 @@ const MasterPost = () => {
 
       try {
         const response = await fetch(
-          "http://127.0.0.1:8000/api/user/posts/masterpost",
+          "https://knowx-be.herokuapp.com/api/user/posts/masterpost",
           requestOptions
         );
         const responseJSON = await response.json();
@@ -106,7 +105,7 @@ const MasterPost = () => {
                             width={300}
                             style={{ objectFit: "contain" }}
                             alt="logo"
-                            src={`http://127.0.0.1:8000/${item.image}`}
+                            src={`https://knowx-be.herokuapp.com/${item.image}`}
                           />
                         }
                       >
@@ -120,7 +119,7 @@ const MasterPost = () => {
                               }
                             >
                               <Avatar
-                                src={`http://127.0.0.1:8000/${item.user_image}`}
+                                src={`https://knowx-be.herokuapp.com/${item.user_image}`}
                               />
                             </Link>
                           }

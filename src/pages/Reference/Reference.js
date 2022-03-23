@@ -1,4 +1,3 @@
-
 import {
   Layout,
   List,
@@ -13,7 +12,11 @@ import {
   Modal,
   Input,
 } from "antd";
-import { FileAddOutlined, DownloadOutlined, UploadOutlined } from "@ant-design/icons";
+import {
+  FileAddOutlined,
+  DownloadOutlined,
+  UploadOutlined,
+} from "@ant-design/icons";
 import React, { useEffect, useState } from "react";
 import Header from "../../components/Header/Header";
 import SidebarLeft from "../../components/SidebarLeft/SidebarLeft";
@@ -74,7 +77,7 @@ const Reference = () => {
       },
     };
     const response = await fetch(
-      "http://127.0.0.1:8000/api/user/subject/get",
+      "https://knowx-be.herokuapp.com/api/user/subject/get",
       requestOptions
     );
     const responseJSON = await response.json();
@@ -94,7 +97,7 @@ const Reference = () => {
     };
 
     const response = await fetch(
-      "http://127.0.0.1:8000/api/user/file/get",
+      "https://knowx-be.herokuapp.com/api/user/file/get",
       requestOptions
     );
     const responseJSON = await response.json();
@@ -111,7 +114,7 @@ const Reference = () => {
       },
     };
     const response = await fetch(
-      "http://127.0.0.1:8000/api/user/mentor/mymentor",
+      "https://knowx-be.herokuapp.com/api/user/mentor/mymentor",
       requestOptions
     );
     const responseJSON = await response.json();
@@ -172,7 +175,7 @@ const Reference = () => {
       message.error("Please choose file to upload!", 4);
     } else {
       const response = await fetch(
-        "http://127.0.0.1:8000/api/user/file/upload",
+        "https://knowx-be.herokuapp.com/api/user/file/upload",
         requestOptions
       );
       const responseJSON = await response.json();
@@ -304,7 +307,7 @@ const Reference = () => {
                           avatar={
                             <Avatar
                               style={{ marginLeft: "20px" }}
-                              src={`http://127.0.0.1:8000/${item.user_image}`}
+                              src={`https://knowx-be.herokuapp.com/${item.user_image}`}
                             />
                           }
                           title={
@@ -325,7 +328,7 @@ const Reference = () => {
                             </p>
                           }
                         />
-                        <a href={`http://127.0.0.1:8000/${item.url}`}>
+                        <a href={`https://knowx-be.herokuapp.com/${item.url}`}>
                           <Button
                             type="primary"
                             style={{ marginRight: "20px" }}

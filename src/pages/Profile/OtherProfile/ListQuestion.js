@@ -1,4 +1,3 @@
-
 import "./styles.scss";
 import { List, Avatar, Space, Spin, Typography } from "antd";
 import { LikeOutlined, MessageOutlined } from "@ant-design/icons";
@@ -32,7 +31,7 @@ const ListQuestion = () => {
 
       try {
         const response = await fetch(
-          `http://127.0.0.1:8000/api/user/get-by-id`,
+          `https://knowx-be.herokuapp.com/api/user/get-by-id`,
           requestOptions
         );
         const responseJSON = await response.json();
@@ -58,7 +57,7 @@ const ListQuestion = () => {
 
       try {
         const response = await fetch(
-          "http://127.0.0.1:8000/api/user/questions/getbyuserid",
+          "https://knowx-be.herokuapp.com/api/user/questions/getbyuserid",
           requestOptions
         );
         const responseJSON = await response.json();
@@ -125,7 +124,9 @@ const ListQuestion = () => {
             <List.Item.Meta
               avatar={
                 <Link to={`/otherprofile/${user.id}`}>
-                  <Avatar src={`http://127.0.0.1:8000/${user.image}`} />
+                  <Avatar
+                    src={`https://knowx-be.herokuapp.com/${user.image}`}
+                  />
                 </Link>
               }
               title={

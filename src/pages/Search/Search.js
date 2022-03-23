@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import "./styles.scss";
 import { Layout, Menu } from "antd";
@@ -44,8 +43,8 @@ const Search = () => {
       console.log(data);
       try {
         const response = await fetch(
-          "http://127.0.0.1:8000/api/user/posts/search",
-          requestOptions,
+          "https://knowx-be.herokuapp.com/api/user/posts/search",
+          requestOptions
         );
         const responseJSON = await response.json();
         if (responseJSON.status === "success") {
@@ -69,8 +68,8 @@ const Search = () => {
 
       try {
         const response = await fetch(
-          "http://127.0.0.1:8000/api/user/questions/search",
-          requestOptions,
+          "https://knowx-be.herokuapp.com/api/user/questions/search",
+          requestOptions
         );
         const responseJSON = await response.json();
         if (responseJSON.status === "success") {
@@ -94,8 +93,8 @@ const Search = () => {
 
       try {
         const response = await fetch(
-          "http://127.0.0.1:8000/api/user/search",
-          requestOptions,
+          "https://knowx-be.herokuapp.com/api/user/search",
+          requestOptions
         );
         const responseJSON = await response.json();
         console.log(responseJSON);
@@ -125,21 +124,11 @@ const Search = () => {
                 onClick={handleClick}
                 selectedKeys={key}
               >
-                <Menu.Item key="post">
-                  POSTS (
-                  {countPosts}
-                  )
-                </Menu.Item>
+                <Menu.Item key="post">POSTS ({countPosts})</Menu.Item>
                 <Menu.Item key="question">
-                  QUESTIONS (
-                  {countQuestions}
-                  )
+                  QUESTIONS ({countQuestions})
                 </Menu.Item>
-                <Menu.Item key="user">
-                  USERS (
-                  {countUsers}
-                  )
-                </Menu.Item>
+                <Menu.Item key="user">USERS ({countUsers})</Menu.Item>
               </Menu>
             </div>
             {key === "post" ? (

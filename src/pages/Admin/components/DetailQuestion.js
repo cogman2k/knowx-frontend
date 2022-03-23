@@ -1,10 +1,5 @@
-import {
-  DeleteOutlined, DownOutlined
-} from "@ant-design/icons";
-import {
-  Avatar, Button, Dropdown, Layout,
-  Menu, message, Modal
-} from "antd";
+import { DeleteOutlined, DownOutlined } from "@ant-design/icons";
+import { Avatar, Button, Dropdown, Layout, Menu, message, Modal } from "antd";
 import { useEffect, useState } from "react";
 import { Link, useHistory, useLocation } from "react-router-dom";
 import ListComment from "../../Question/Comment/ListComment";
@@ -35,7 +30,7 @@ const DetailQuestion = () => {
 
     try {
       const response = await fetch(
-        `http://127.0.0.1:8000/api/user/questions/${selectedId}`,
+        `https://knowx-be.herokuapp.com/api/user/questions/${selectedId}`,
         requestOptions
       );
       const responseJSON = await response.json();
@@ -86,14 +81,14 @@ const DetailQuestion = () => {
     setTimeout(async () => {
       try {
         const response = await fetch(
-          `http://127.0.0.1:8000/api/user/questions/${selectedId}`,
+          `https://knowx-be.herokuapp.com/api/user/questions/${selectedId}`,
           requestOptions
         );
         const responseJSON = await response.json();
         console.log(responseJSON);
         if (responseJSON.status === "success") {
           success();
-          history.goBack()
+          history.goBack();
         }
       } catch (error) {
         console.log("Faild fetch delete questions : ", error.message);
@@ -144,7 +139,7 @@ const DetailQuestion = () => {
                 <div className="postDetail-container">
                   <div className="postDetail-author">
                     <Avatar
-                      src={`http://127.0.0.1:8000/${author.image}`}
+                      src={`https://knowx-be.herokuapp.com/${author.image}`}
                       size={40}
                     />
                     <Link
@@ -179,7 +174,9 @@ const DetailQuestion = () => {
                   </div>
                   <div
                     className="postDetail-content"
-                    dangerouslySetInnerHTML={{ __html: selectedQuestion.content }}
+                    dangerouslySetInnerHTML={{
+                      __html: selectedQuestion.content,
+                    }}
                   />
 
                   <ListComment />

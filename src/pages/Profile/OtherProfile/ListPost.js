@@ -1,4 +1,3 @@
-
 import "./styles.scss";
 import { List, Avatar, Space, Spin, Typography } from "antd";
 import { LikeOutlined, MessageOutlined } from "@ant-design/icons";
@@ -32,7 +31,7 @@ const ListPost = () => {
 
       try {
         const response = await fetch(
-          `http://127.0.0.1:8000/api/user/get-by-id`,
+          `https://knowx-be.herokuapp.com/api/user/get-by-id`,
           requestOptions
         );
         const responseJSON = await response.json();
@@ -57,7 +56,7 @@ const ListPost = () => {
 
       try {
         const response = await fetch(
-          "http://127.0.0.1:8000/api/user/posts/getbyuserid",
+          "https://knowx-be.herokuapp.com/api/user/posts/getbyuserid",
           requestOptions
         );
         const responseJSON = await response.json();
@@ -124,14 +123,16 @@ const ListPost = () => {
               <img
                 width={272}
                 alt="logo"
-                src={`http://127.0.0.1:8000/${item.image}`}
+                src={`https://knowx-be.herokuapp.com/${item.image}`}
               />
             }
           >
             <List.Item.Meta
               avatar={
                 <Link to={`/otherprofile/${user.id}`}>
-                  <Avatar src={`http://127.0.0.1:8000/${user.image}`} />
+                  <Avatar
+                    src={`https://knowx-be.herokuapp.com/${user.image}`}
+                  />
                 </Link>
               }
               title={<Link to="/profile">{user.full_name}</Link>}

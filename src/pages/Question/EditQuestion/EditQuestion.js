@@ -1,4 +1,3 @@
-
 import { Layout, Input, Button, Space, Form, message } from "antd";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
@@ -35,7 +34,7 @@ const EditQuestion = () => {
 
       try {
         const response = await fetch(
-          `http://127.0.0.1:8000/api/user/questions/${selectedId}`,
+          `https://knowx-be.herokuapp.com/api/user/questions/${selectedId}`,
           requestOptions
         );
         const responseJSON = await response.json();
@@ -81,7 +80,7 @@ const EditQuestion = () => {
       setTimeout(async () => {
         try {
           const response = await fetch(
-            `http://127.0.0.1:8000/api/user/questions/${selectedId}`,
+            `https://knowx-be.herokuapp.com/api/user/questions/${selectedId}`,
             requestOptions
           );
           const responseJSON = await response.json();

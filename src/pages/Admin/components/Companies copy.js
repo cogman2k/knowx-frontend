@@ -17,7 +17,7 @@ const Companies = () => {
       };
       try {
         const response = await fetch(
-          "http://127.0.0.1:8000/api/admin/companies",
+          "https://knowx-be.herokuapp.com/api/admin/companies",
           requestOptions
         );
         const responseJSON = await response.json();
@@ -57,7 +57,10 @@ const Companies = () => {
                 <div className="profile-widget">
                   <div className="doctor-img">
                     <a className="avatar" href={`/admin/user/${company.id}`}>
-                      <img alt="" src={`http://127.0.0.1:8000/${company.image}`} />
+                      <img
+                        alt=""
+                        src={`https://knowx-be.herokuapp.com/${company.image}`}
+                      />
                     </a>
                   </div>
                   <div className="dropdown profile-action">

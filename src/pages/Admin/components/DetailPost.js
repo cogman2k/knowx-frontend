@@ -1,9 +1,13 @@
+import { DeleteOutlined, DownOutlined } from "@ant-design/icons";
 import {
-  DeleteOutlined, DownOutlined
-} from "@ant-design/icons";
-import {
-  Avatar, Button, Dropdown, Image, Layout,
-  Menu, message, Modal
+  Avatar,
+  Button,
+  Dropdown,
+  Image,
+  Layout,
+  Menu,
+  message,
+  Modal,
 } from "antd";
 import { useEffect, useState } from "react";
 import { Link, useHistory, useLocation } from "react-router-dom";
@@ -35,7 +39,7 @@ const DetailPost = () => {
 
     try {
       const response = await fetch(
-        `http://127.0.0.1:8000/api/user/posts/${selectedId}`,
+        `https://knowx-be.herokuapp.com/api/user/posts/${selectedId}`,
         requestOptions
       );
       const responseJSON = await response.json();
@@ -86,14 +90,14 @@ const DetailPost = () => {
     setTimeout(async () => {
       try {
         const response = await fetch(
-          `http://127.0.0.1:8000/api/user/posts/${selectedId}`,
+          `https://knowx-be.herokuapp.com/api/user/posts/${selectedId}`,
           requestOptions
         );
         const responseJSON = await response.json();
         console.log(responseJSON);
         if (responseJSON.status === "success") {
           success();
-          history.goBack()
+          history.goBack();
         }
       } catch (error) {
         console.log("Faild fetch delete post : ", error.message);
@@ -144,7 +148,7 @@ const DetailPost = () => {
                 <div className="postDetail-container">
                   <div className="postDetail-author">
                     <Avatar
-                      src={`http://127.0.0.1:8000/${author.image}`}
+                      src={`https://knowx-be.herokuapp.com/${author.image}`}
                       size={40}
                     />
                     <Link

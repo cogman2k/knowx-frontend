@@ -1,4 +1,3 @@
-
 import { Layout, List, Avatar, Space, Spin, Divider } from "antd";
 import { MessageOutlined, LikeOutlined } from "@ant-design/icons";
 import { Link } from "react-router-dom";
@@ -35,7 +34,7 @@ const MyQuestions = () => {
 
       try {
         const response = await fetch(
-          "http://127.0.0.1:8000/api/user",
+          "https://knowx-be.herokuapp.com/api/user",
           requestOptions
         );
         const responseJSON = await response.json();
@@ -56,7 +55,7 @@ const MyQuestions = () => {
 
       try {
         const response = await fetch(
-          "http://127.0.0.1:8000/api/user/questions",
+          "https://knowx-be.herokuapp.com/api/user/questions",
           requestOptions
         );
         const responseJSON = await response.json();
@@ -109,7 +108,9 @@ const MyQuestions = () => {
             <List.Item.Meta
               avatar={
                 <Link to="/profile">
-                  <Avatar src={`http://127.0.0.1:8000/${user.image}`} />
+                  <Avatar
+                    src={`https://knowx-be.herokuapp.com/${user.image}`}
+                  />
                 </Link>
               }
               title={<Link to="/profile">{user.full_name}</Link>}
@@ -148,11 +149,7 @@ const MyQuestions = () => {
               <div className="content">
                 <div>
                   <Divider orientation="left">
-                    <h5 style={{ color: "#00358E" }}>
-                      MY QUESTIONS (
-                      {count}
-                      )
-                    </h5>
+                    <h5 style={{ color: "#00358E" }}>MY QUESTIONS ({count})</h5>
                   </Divider>
                 </div>
                 {data}

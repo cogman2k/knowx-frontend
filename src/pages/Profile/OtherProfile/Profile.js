@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import "./styles.scss";
 import { Layout, Menu } from "antd";
@@ -40,7 +39,7 @@ const Profile = () => {
 
       try {
         const response = await fetch(
-          "http://127.0.0.1:8000/api/user/posts/getbyuserid",
+          "https://knowx-be.herokuapp.com/api/user/posts/getbyuserid",
           requestOptions
         );
         const responseJSON = await response.json();
@@ -66,7 +65,7 @@ const Profile = () => {
 
       try {
         const response = await fetch(
-          "http://127.0.0.1:8000/api/user/questions/getbyuserid",
+          "https://knowx-be.herokuapp.com/api/user/questions/getbyuserid",
           requestOptions
         );
         const responseJSON = await response.json();

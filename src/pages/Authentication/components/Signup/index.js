@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import { Form, Input, Button, notification } from "antd";
 import {
@@ -57,7 +56,7 @@ const Signup = () => {
       method: "POST",
       body: formData,
     };
-    fetch("http://127.0.0.1:8000/api/user/register", requestOptions)
+    fetch("https://knowx-be.herokuapp.com/api/user/register", requestOptions)
       .then((response) => response.json())
       .then((result) => {
         console.log(result);

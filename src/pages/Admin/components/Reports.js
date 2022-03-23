@@ -29,7 +29,7 @@ const AddCompanies = () => {
     };
     try {
       const response = await fetch(
-        "http://127.0.0.1:8000/api/user/posts/reports/get",
+        "https://knowx-be.herokuapp.com/api/user/posts/reports/get",
         requestOptions
       );
       const responseJSON = await response.json();

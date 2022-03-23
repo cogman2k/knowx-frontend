@@ -1,4 +1,3 @@
-
 import Header from "../layouts/header";
 import Sidebar from "../layouts/sidebar";
 import { useEffect, useState } from "react";
@@ -24,8 +23,8 @@ const Dashboard = () => {
 
       try {
         const response = await fetch(
-          "http://127.0.0.1:8000/api/admin/count",
-          requestOptions,
+          "https://knowx-be.herokuapp.com/api/admin/count",
+          requestOptions
         );
         const responseJSON = await response.json();
         if (responseJSON.status === "success") {
@@ -65,10 +64,7 @@ const Dashboard = () => {
             <div className="col-md-6 col-sm-6 col-lg-6 col-xl-3">
               <div className="dash-widget">
                 <span className="dash-widget-bg2">
-                  <i
-                    className="fa fa-building"
-                  >
-                  </i>
+                  <i className="fa fa-building"></i>
                 </span>
                 <div className="dash-widget-info text-right">
                   <h3>{companyAmount}</h3>
@@ -131,16 +127,14 @@ const Dashboard = () => {
                           <i
                             className="fa fa-circle current-users"
                             aria-hidden="true"
-                          >
-                          </i>
+                          ></i>
                           ICU
                         </li>
                         <li>
                           <i
                             className="fa fa-circle old-users"
                             aria-hidden="true"
-                          >
-                          </i>{" "}
+                          ></i>{" "}
                           OPD
                         </li>
                       </ul>
@@ -338,8 +332,7 @@ const Dashboard = () => {
                               src="assets/img/user.jpg"
                               alt=""
                               className="w-40 rounded-circle"
-                            >
-                            </img>
+                            ></img>
                             <span className="status online"></span>
                           </a>
                         </div>
@@ -359,8 +352,7 @@ const Dashboard = () => {
                               src="assets/img/user.jpg"
                               alt=""
                               className="w-40 rounded-circle"
-                            >
-                            </img>
+                            ></img>
                             <span className="status offline"></span>
                           </a>
                         </div>
@@ -380,8 +372,7 @@ const Dashboard = () => {
                               src="assets/img/user.jpg"
                               alt=""
                               className="w-40 rounded-circle"
-                            >
-                            </img>
+                            ></img>
                             <span className="status away"></span>
                           </a>
                         </div>
@@ -401,8 +392,7 @@ const Dashboard = () => {
                               src="assets/img/user.jpg"
                               alt=""
                               className="w-40 rounded-circle"
-                            >
-                            </img>
+                            ></img>
                             <span className="status online"></span>
                           </a>
                         </div>
@@ -422,8 +412,7 @@ const Dashboard = () => {
                               src="assets/img/user.jpg"
                               alt=""
                               className="w-40 rounded-circle"
-                            >
-                            </img>
+                            ></img>
                             <span className="status offline" />
                           </a>
                         </div>
@@ -443,8 +432,7 @@ const Dashboard = () => {
                               src="assets/img/user.jpg"
                               alt=""
                               className="w-40 rounded-circle"
-                            >
-                            </img>
+                            ></img>
                             <span className="status away" />
                           </a>
                         </div>

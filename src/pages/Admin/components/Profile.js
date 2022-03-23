@@ -28,7 +28,7 @@ const Profile = () => {
 
     try {
       const response = await fetch(
-        `http://127.0.0.1:8000/api/user/get-by-id`,
+        `https://knowx-be.herokuapp.com/api/user/get-by-id`,
         requestOptions
       );
       const responseJSON = await response.json();
@@ -52,7 +52,7 @@ const Profile = () => {
 
     try {
       const response = await fetch(
-        `http://127.0.0.1:8000/api/user/education/${selectedId}`,
+        `https://knowx-be.herokuapp.com/api/user/education/${selectedId}`,
         requestOptions
       );
       const responseJSON = await response.json();
@@ -77,7 +77,7 @@ const Profile = () => {
 
     try {
       const response = await fetch(
-        `http://127.0.0.1:8000/api/user/experience/${selectedId}`,
+        `https://knowx-be.herokuapp.com/api/user/experience/${selectedId}`,
         requestOptions
       );
       const responseJSON = await response.json();
@@ -103,7 +103,7 @@ const Profile = () => {
 
     try {
       const response = await fetch(
-        "http://127.0.0.1:8000/api/user/posts/getbyuserid",
+        "https://knowx-be.herokuapp.com/api/user/posts/getbyuserid",
         requestOptions
       );
       const responseJSON = await response.json();
@@ -130,7 +130,7 @@ const Profile = () => {
 
     try {
       const response = await fetch(
-        "http://127.0.0.1:8000/api/user/questions/getbyuserid",
+        "https://knowx-be.herokuapp.com/api/user/questions/getbyuserid",
         requestOptions
       );
       const responseJSON = await response.json();
@@ -303,7 +303,7 @@ const Profile = () => {
                       <a href="#">
                         <img
                           className="avatar"
-                          src={`http://127.0.0.1:8000/${data.image}`}
+                          src={`https://knowx-be.herokuapp.com/${data.image}`}
                           alt=""
                         />
                       </a>
@@ -315,7 +315,10 @@ const Profile = () => {
                         <div className="profile-info-left">
                           <h3
                             className="user-name m-t-0 mb-0"
-                            style={{ fontFamily: "Helvetica", fontWeight: "bold" }}
+                            style={{
+                              fontFamily: "Helvetica",
+                              fontWeight: "bold",
+                            }}
                           >
                             {data.full_name}
                           </h3>

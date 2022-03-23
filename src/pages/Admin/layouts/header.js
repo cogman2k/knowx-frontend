@@ -18,7 +18,7 @@ const header = () => {
       method: "GET",
       headers: myHeaders,
     };
-    fetch("http://127.0.0.1:8000/api/user/logout", requestOptions)
+    fetch("https://knowx-be.herokuapp.com/api/user/logout", requestOptions)
       .then((response) => response.json())
       .then((result) => {
         if (result.status === "success") {
@@ -190,7 +190,7 @@ const header = () => {
             <span className="user-img">
               <img
                 className="rounded-circle"
-                src={`http://127.0.0.1:8000/${avatar}`}
+                src={`https://knowx-be.herokuapp.com/${avatar}`}
                 width="40"
                 alt="Admin"
               />

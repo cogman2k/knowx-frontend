@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import { Redirect } from "react-router-dom";
 import { Form, Input, Button, Checkbox, Divider } from "antd";
@@ -34,7 +33,7 @@ const Signin = () => {
       body: formData,
     };
 
-    fetch("http://127.0.0.1:8000/api/user/login", requestOptions)
+    fetch("https://knowx-be.herokuapp.com/api/user/login", requestOptions)
       .then((response) => response.json())
       .then((result) => {
         if (result.status === "success") {

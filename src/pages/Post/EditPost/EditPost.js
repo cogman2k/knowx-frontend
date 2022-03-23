@@ -1,4 +1,3 @@
-
 import "./styles.scss";
 import { Layout, Input, Button, Space, Form, message } from "antd";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
@@ -37,7 +36,7 @@ const EditPost = () => {
 
       try {
         const response = await fetch(
-          `http://127.0.0.1:8000/api/user/posts/${selectedId}`,
+          `https://knowx-be.herokuapp.com/api/user/posts/${selectedId}`,
           requestOptions
         );
         const responseJSON = await response.json();
@@ -82,7 +81,7 @@ const EditPost = () => {
 
       try {
         const response = await fetch(
-          `http://127.0.0.1:8000/api/user/posts/${selectedId}`,
+          `https://knowx-be.herokuapp.com/api/user/posts/${selectedId}`,
           requestOptions
         );
         const responseJSON = await response.json();

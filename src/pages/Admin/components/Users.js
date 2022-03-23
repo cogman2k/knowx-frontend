@@ -27,7 +27,7 @@ const Users = () => {
 
     try {
       const response = await fetch(
-        "http://127.0.0.1:8000/api/admin/users",
+        "https://knowx-be.herokuapp.com/api/admin/users",
         requestOptions
       );
       const responseJSON = await response.json();
@@ -51,7 +51,7 @@ const Users = () => {
 
     try {
       const response = await fetch(
-        `http://127.0.0.1:8000/api/admin/delete-user/${row.id}`,
+        `https://knowx-be.herokuapp.com/api/admin/delete-user/${row.id}`,
         requestOptions
       );
       const responseJSON = await response.json();
@@ -107,7 +107,9 @@ const Users = () => {
               Student & Mentor
             </Button>
           ) : row.role === "admin" ? (
-            <Button size="sm" variant="info">Admin</Button>
+            <Button size="sm" variant="info">
+              Admin
+            </Button>
           ) : (
             <Button size="sm">Student</Button>
           )}

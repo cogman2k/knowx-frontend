@@ -1,4 +1,3 @@
-
 import "./styles.scss";
 import {
   Layout,
@@ -47,7 +46,7 @@ const MeetingOption = () => {
   };
 
   const handleStart = () => {
-    setImageUrl(`http://127.0.0.1:8000/${user.image}`);
+    setImageUrl(`https://knowx-be.herokuapp.com/${user.image}`);
     setMeeting(true);
   };
 
@@ -66,7 +65,7 @@ const MeetingOption = () => {
     };
     try {
       const response = await fetch(
-        `http://127.0.0.1:8000/api/user/sendlink`,
+        `https://knowx-be.herokuapp.com/api/user/sendlink`,
         requestOptions
       );
       const responseJSON = await response.json();
@@ -97,7 +96,9 @@ const MeetingOption = () => {
         renderItem={(item) => (
           <List.Item>
             <List.Item.Meta
-              avatar={<Avatar src={`http://127.0.0.1:8000/${item.image}`} />}
+              avatar={
+                <Avatar src={`https://knowx-be.herokuapp.com/${item.image}`} />
+              }
               title={<a href="https://ant.design">{item.full_name}</a>}
               description={item.is_online === 1 ? "online" : "offline"}
             />
@@ -137,7 +138,7 @@ const MeetingOption = () => {
 
       try {
         const response = await fetch(
-          "http://127.0.0.1:8000/api/user",
+          "https://knowx-be.herokuapp.com/api/user",
           requestOptions
         );
         const responseJSON = await response.json();
@@ -158,7 +159,7 @@ const MeetingOption = () => {
 
       try {
         const response = await fetch(
-          "http://127.0.0.1:8000/api/user/following",
+          "https://knowx-be.herokuapp.com/api/user/following",
           requestOptions
         );
         const responseJSON = await response.json();

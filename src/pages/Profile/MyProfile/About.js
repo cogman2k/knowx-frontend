@@ -1,8 +1,17 @@
 import { PlusOutlined } from "@ant-design/icons";
 import {
-  Button, Col,
-  DatePicker, Drawer, Form, Input, message,
-  Modal, Row, Space, Steps, Typography
+  Button,
+  Col,
+  DatePicker,
+  Drawer,
+  Form,
+  Input,
+  message,
+  Modal,
+  Row,
+  Space,
+  Steps,
+  Typography,
 } from "antd";
 import axios from "axios";
 import { useEffect, useState } from "react";
@@ -35,7 +44,7 @@ const About = () => {
 
     try {
       const response = await fetch(
-        "http://127.0.0.1:8000/api/user/education",
+        "https://knowx-be.herokuapp.com/api/user/education",
         requestOptions
       );
       const responseJSON = await response.json();
@@ -60,7 +69,7 @@ const About = () => {
     data.append("new_password", newPassword);
     data.append("confirm_password", confirmPassword);
     axios
-      .post("http://127.0.0.1:8000/api/user/change-password", data, {
+      .post("https://knowx-be.herokuapp.com/api/user/change-password", data, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -123,7 +132,7 @@ const About = () => {
   const closeDrawer = () => {
     setDrawer(false);
   };
-  
+
   return (
     <div>
       <div className="education-info content">
@@ -136,7 +145,10 @@ const About = () => {
 
         <Steps progressDot current={3} direction="vertical">
           {education.map((e) => (
-            <Step title={e.title} description={`[${e.start_date}-${e.end_date}] ${e.description}`} />
+            <Step
+              title={e.title}
+              description={`[${e.start_date}-${e.end_date}] ${e.description}`}
+            />
           ))}
         </Steps>
       </div>

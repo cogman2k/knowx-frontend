@@ -1,4 +1,3 @@
-
 import "./styles.scss";
 import { Layout, Input, Button, Space, message, Form, Divider } from "antd";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
@@ -49,7 +48,7 @@ const CreatePost = () => {
       setTimeout(async () => {
         try {
           const response = await fetch(
-            "http://127.0.0.1:8000/api/user/posts",
+            "https://knowx-be.herokuapp.com/api/user/posts",
             // eslint-disable-next-line comma-dangle
             requestOptions
           );
