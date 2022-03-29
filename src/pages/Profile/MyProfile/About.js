@@ -44,7 +44,7 @@ const About = () => {
 
     try {
       const response = await fetch(
-        "http://127.0.0.1:8000/api/user/education",
+        "https://knowx-fe.herokuapp.com/api/user/education",
         requestOptions
       );
       const responseJSON = await response.json();
@@ -69,7 +69,7 @@ const About = () => {
     data.append("new_password", newPassword);
     data.append("confirm_password", confirmPassword);
     axios
-      .post("http://127.0.0.1:8000/api/user/change-password", data, {
+      .post("https://knowx-fe.herokuapp.com/api/user/change-password", data, {
         headers: {
           Authorization: `Bearer ${token}`,
         },

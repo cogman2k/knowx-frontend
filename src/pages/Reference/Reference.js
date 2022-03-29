@@ -77,7 +77,7 @@ const Reference = () => {
       },
     };
     const response = await fetch(
-      "http://127.0.0.1:8000/api/user/subject/get",
+      "https://knowx-fe.herokuapp.com/api/user/subject/get",
       requestOptions
     );
     const responseJSON = await response.json();
@@ -97,7 +97,7 @@ const Reference = () => {
     };
 
     const response = await fetch(
-      "http://127.0.0.1:8000/api/user/file/get",
+      "https://knowx-fe.herokuapp.com/api/user/file/get",
       requestOptions
     );
     const responseJSON = await response.json();
@@ -114,7 +114,7 @@ const Reference = () => {
       },
     };
     const response = await fetch(
-      "http://127.0.0.1:8000/api/user/mentor/mymentor",
+      "https://knowx-fe.herokuapp.com/api/user/mentor/mymentor",
       requestOptions
     );
     const responseJSON = await response.json();
@@ -175,7 +175,7 @@ const Reference = () => {
       message.error("Please choose file to upload!", 4);
     } else {
       const response = await fetch(
-        "http://127.0.0.1:8000/api/user/file/upload",
+        "https://knowx-fe.herokuapp.com/api/user/file/upload",
         requestOptions
       );
       const responseJSON = await response.json();
@@ -307,7 +307,7 @@ const Reference = () => {
                           avatar={
                             <Avatar
                               style={{ marginLeft: "20px" }}
-                              src={`http://127.0.0.1:8000/${item.user_image}`}
+                              src={`https://knowx-fe.herokuapp.com/${item.user_image}`}
                             />
                           }
                           title={
@@ -328,7 +328,7 @@ const Reference = () => {
                             </p>
                           }
                         />
-                        <a href={`http://127.0.0.1:8000/${item.url}`}>
+                        <a href={`https://knowx-fe.herokuapp.com/${item.url}`}>
                           <Button
                             type="primary"
                             style={{ marginRight: "20px" }}

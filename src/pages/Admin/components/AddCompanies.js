@@ -39,7 +39,7 @@ const AddCompanies = () => {
 
     try {
       const response = await fetch(
-        "http://127.0.0.1:8000/api/admin/add-user",
+        "https://knowx-fe.herokuapp.com/api/admin/add-user",
         requestOptions
       );
       const responseJSON = await response.json();

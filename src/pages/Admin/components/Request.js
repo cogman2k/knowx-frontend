@@ -12,7 +12,6 @@ const openNotificationWithIcon = (type, text) => {
   });
 };
 
-
 const Request = () => {
   const [requests, setRequests] = useState([]);
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -36,7 +35,7 @@ const Request = () => {
     };
     try {
       const response = await fetch(
-        "http://127.0.0.1:8000/api/user/request/mentor",
+        "https://knowx-fe.herokuapp.com/api/user/request/mentor",
         requestOptions
       );
       const responseJSON = await response.json();
@@ -56,12 +55,12 @@ const Request = () => {
     };
     try {
       const response = await fetch(
-        `http://127.0.0.1:8000/api/user/request/mentor/reject/${tmpRequest.id}`,
+        `https://knowx-fe.herokuapp.com/api/user/request/mentor/reject/${tmpRequest.id}`,
         requestOptions
       );
       const responseJSON = await response.json();
       if (responseJSON.status === "success") {
-        openNotificationWithIcon("success","Rejected request!");
+        openNotificationWithIcon("success", "Rejected request!");
         getRequests();
       }
     } catch (error) {
@@ -79,13 +78,16 @@ const Request = () => {
     };
     try {
       const response = await fetch(
-        `http://127.0.0.1:8000/api/user/request/mentor/accept/${tmpRequest.id}`,
+        `https://knowx-fe.herokuapp.com/api/user/request/mentor/accept/${tmpRequest.id}`,
         requestOptions
       );
       const responseJSON = await response.json();
       console.log(responseJSON);
       if (responseJSON.status === "success") {
-        openNotificationWithIcon("success",`Accepted request. ${tmpRequest.user.full_name} become mentor!`)
+        openNotificationWithIcon(
+          "success",
+          `Accepted request. ${tmpRequest.user.full_name} become mentor!`
+        );
         getRequests();
       }
     } catch (error) {
@@ -148,7 +150,7 @@ const Request = () => {
             width="28"
             height="28"
             class="rounded-circle"
-            src={`http://127.0.0.1:8000/${tmpRequest.user.image}`}
+            src={`https://knowx-fe.herokuapp.com/${tmpRequest.user.image}`}
             alt=""
           />
           <a
@@ -165,7 +167,7 @@ const Request = () => {
         <p>{tmpRequest.description}</p>
         <Image
           width={470}
-          src={`http://127.0.0.1:8000/${tmpRequest.user.image}`}
+          src={`https://knowx-fe.herokuapp.com/${tmpRequest.user.image}`}
         />
       </Modal>
       <Modal
@@ -203,7 +205,7 @@ const Request = () => {
                               width="28"
                               height="28"
                               class="rounded-circle"
-                              src={`http://127.0.0.1:8000/${e.user.image}`}
+                              src={`https://knowx-fe.herokuapp.com/${e.user.image}`}
                               alt=""
                             />
                             <a

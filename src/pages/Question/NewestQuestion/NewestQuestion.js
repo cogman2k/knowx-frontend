@@ -33,7 +33,7 @@ const NewestQuestion = () => {
 
       try {
         const response = await fetch(
-          "http://127.0.0.1:8000/api/user/questions/newest",
+          "https://knowx-fe.herokuapp.com/api/user/questions/newest",
           requestOptions
         );
         const responseJSON = await response.json();
@@ -111,7 +111,7 @@ const NewestQuestion = () => {
                               }
                             >
                               <Avatar
-                                src={`http://127.0.0.1:8000/${item.user_image}`}
+                                src={`https://knowx-fe.herokuapp.com/${item.user_image}`}
                               />
                             </Link>
                           }

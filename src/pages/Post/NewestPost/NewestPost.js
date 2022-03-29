@@ -33,7 +33,7 @@ const NewestPost = () => {
 
       try {
         const response = await fetch(
-          "http://127.0.0.1:8000/api/user/posts/newest",
+          "https://knowx-fe.herokuapp.com/api/user/posts/newest",
           requestOptions
         );
         const responseJSON = await response.json();
@@ -108,7 +108,7 @@ const NewestPost = () => {
                             width={300}
                             style={{ objectFit: "contain" }}
                             alt="logo"
-                            src={`http://127.0.0.1:8000/${item.image}`}
+                            src={`https://knowx-fe.herokuapp.com/${item.image}`}
                           />
                         }
                       >
@@ -122,7 +122,7 @@ const NewestPost = () => {
                               }
                             >
                               <Avatar
-                                src={`http://127.0.0.1:8000/${item.user_image}`}
+                                src={`https://knowx-fe.herokuapp.com/${item.user_image}`}
                               />
                             </Link>
                           }

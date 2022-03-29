@@ -34,7 +34,7 @@ const EditQuestion = () => {
 
       try {
         const response = await fetch(
-          `http://127.0.0.1:8000/api/user/questions/${selectedId}`,
+          `https://knowx-fe.herokuapp.com/api/user/questions/${selectedId}`,
           requestOptions
         );
         const responseJSON = await response.json();
@@ -80,7 +80,7 @@ const EditQuestion = () => {
       setTimeout(async () => {
         try {
           const response = await fetch(
-            `http://127.0.0.1:8000/api/user/questions/${selectedId}`,
+            `https://knowx-fe.herokuapp.com/api/user/questions/${selectedId}`,
             requestOptions
           );
           const responseJSON = await response.json();

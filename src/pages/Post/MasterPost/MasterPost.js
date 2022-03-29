@@ -33,7 +33,7 @@ const MasterPost = () => {
 
       try {
         const response = await fetch(
-          "http://127.0.0.1:8000/api/user/posts/masterpost",
+          "https://knowx-fe.herokuapp.com/api/user/posts/masterpost",
           requestOptions
         );
         const responseJSON = await response.json();
@@ -105,7 +105,7 @@ const MasterPost = () => {
                             width={300}
                             style={{ objectFit: "contain" }}
                             alt="logo"
-                            src={`http://127.0.0.1:8000/${item.image}`}
+                            src={`https://knowx-fe.herokuapp.com/${item.image}`}
                           />
                         }
                       >
@@ -119,7 +119,7 @@ const MasterPost = () => {
                               }
                             >
                               <Avatar
-                                src={`http://127.0.0.1:8000/${item.user_image}`}
+                                src={`https://knowx-fe.herokuapp.com/${item.user_image}`}
                               />
                             </Link>
                           }
