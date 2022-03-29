@@ -59,7 +59,7 @@ const Reference = () => {
     };
 
     const response = await fetch(
-      "https://knowx-be.herokuapp.com/api/user/class/get",
+      "http://127.0.0.1:8000/api/user/class/get",
       requestOptions
     );
     const responseJSON = await response.json();
@@ -81,7 +81,7 @@ const Reference = () => {
     };
 
     const response = await fetch(
-      "https://knowx-be.herokuapp.com/api/user/file/getbyclass",
+      "http://127.0.0.1:8000/api/user/file/getbyclass",
       requestOptions
     );
     const responseJSON = await response.json();
@@ -122,7 +122,7 @@ const Reference = () => {
       message.error("Please choose file to upload!", 4);
     } else {
       const response = await fetch(
-        "https://knowx-be.herokuapp.com/api/user/file/upload",
+        "http://127.0.0.1:8000/api/user/file/upload",
         requestOptions
       );
       const responseJSON = await response.json();
@@ -172,7 +172,7 @@ const Reference = () => {
       },
     };
     const response = await fetch(
-      "https://knowx-be.herokuapp.com/api/user/file/remove",
+      "http://127.0.0.1:8000/api/user/file/remove",
       requestOptions
     );
     const responseJSON = await response.json();
@@ -225,7 +225,7 @@ const Reference = () => {
                     avatar={
                       <Avatar
                         style={{ marginLeft: "20px" }}
-                        src={`https://knowx-be.herokuapp.com/${item.user_image}`}
+                        src={`http://127.0.0.1:8000/${item.user_image}`}
                       />
                     }
                     title={
@@ -246,7 +246,7 @@ const Reference = () => {
                       </p>
                     }
                   />
-                  <a href={`https://knowx-be.herokuapp.com/${item.url}`}>
+                  <a href={`http://127.0.0.1:8000/${item.url}`}>
                     <Button
                       type="primary"
                       style={{ marginRight: "20px" }}

@@ -42,7 +42,7 @@ const CreateQuestion = () => {
     setTimeout(async () => {
       try {
         const response = await fetch(
-          "https://knowx-be.herokuapp.com/api/user/questions",
+          "http://127.0.0.1:8000/api/user/questions",
           // eslint-disable-next-line comma-dangle
           requestOptions
         );

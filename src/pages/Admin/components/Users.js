@@ -1,16 +1,27 @@
-import { useState, useEffect } from "react";
+import { Modal, notification } from "antd";
+import "bootstrap/dist/css/bootstrap.css";
+import { useEffect, useState } from "react";
+import { Button } from "react-bootstrap";
+import BootstrapTable from "react-bootstrap-table-next";
+import "react-bootstrap-table-next/dist/react-bootstrap-table2.min.css";
+import paginationFactory from "react-bootstrap-table2-paginator";
 import { useHistory } from "react-router-dom";
 import Header from "../layouts/header";
 import Sidebar from "../layouts/sidebar";
-import "react-bootstrap-table-next/dist/react-bootstrap-table2.min.css";
-import BootstrapTable from "react-bootstrap-table-next";
-import paginationFactory from "react-bootstrap-table2-paginator";
-import { Button } from "react-bootstrap";
-import "bootstrap/dist/css/bootstrap.css";
 import "./styles.scss";
+
+const openNotificationWithIcon = (type) => {
+  notification[type]({
+    message: "Success!",
+    description: "Deleted this user!",
+    top: 80,
+  });
+};
 
 const Users = () => {
   const [students, setStudents] = useState([]);
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [activeUser, setActiveUser] = useState({});
   const history = useHistory();
   useEffect(() => {
     getData();
@@ -27,7 +38,7 @@ const Users = () => {
 
     try {
       const response = await fetch(
-        "https://knowx-be.herokuapp.com/api/admin/users",
+        "http://127.0.0.1:8000/api/admin/users",
         requestOptions
       );
       const responseJSON = await response.json();
@@ -39,8 +50,7 @@ const Users = () => {
     }
   };
 
-  const handleDelete = async (row) => {
-    console.log(row.id);
+  const handleDelete = async () => {
     const token = sessionStorage.getItem("token");
     const requestOptions = {
       method: "DELETE",
@@ -51,14 +61,32 @@ const Users = () => {
 
     try {
       const response = await fetch(
-        `https://knowx-be.herokuapp.com/api/admin/delete-user/${row.id}`,
+        `http://127.0.0.1:8000/api/admin/delete-user/${activeUser.id}`,
         requestOptions
       );
       const responseJSON = await response.json();
-      getData();
+      if (responseJSON.status === "success") {
+        openNotificationWithIcon("success");
+        getData();
+      }
     } catch (error) {
       console.log("Failed fetch delete user", error.message);
     }
+  };
+
+  const showModal = (row) => {
+    console.log(row);
+    setActiveUser(row);
+    setIsModalVisible(true);
+  };
+
+  const handleOk = () => {
+    handleDelete();
+    setIsModalVisible(false);
+  };
+
+  const handleCancel = () => {
+    setIsModalVisible(false);
   };
 
   const columns = [
@@ -104,7 +132,7 @@ const Users = () => {
         <div style={{ width: "200px", display: "flex" }}>
           {row.isMentor ? (
             <Button variant="success" size="sm">
-              Student & Mentor
+              Mentor
             </Button>
           ) : row.role === "admin" ? (
             <Button size="sm" variant="info">
@@ -141,17 +169,14 @@ const Users = () => {
         textAlign: "center",
       }),
       formatter: (cell, row, rowIndex, formatExtraData) => (
-        <>
-          <Button variant="warning" size="sm">
-            Lock
-          </Button>
+        <div style={{display: "flex", justifyContent: "center"}}>
           <Button
             variant="danger"
             size="sm"
             style={{ marginLeft: "10px", marginRight: "10px" }}
-            onClick={() => handleDelete(row)}
+            onClick={() => showModal(row)}
           >
-            Delete
+            <i className="fa-solid fa-trash-can mr-10"></i>
           </Button>
           <Button
             variant="secondary"
@@ -159,15 +184,23 @@ const Users = () => {
             // style={{ marginLeft: "20px" }}
             onClick={() => history.push(`/admin/user/${row.id}`)}
           >
-            View
+            <i className="fa-solid fa-magnifying-glass"></i>
           </Button>
-        </>
+        </div>
       ),
     },
   ];
 
   return (
     <div className="main-wrapper">
+      <Modal
+        title="Confirm"
+        visible={isModalVisible}
+        onOk={handleOk}
+        onCancel={handleCancel}
+      >
+        Accept delete this user?
+      </Modal>
       <Header />
       <Sidebar />
       <div className="page-wrapper">

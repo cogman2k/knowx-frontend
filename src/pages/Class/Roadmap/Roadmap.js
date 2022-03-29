@@ -80,7 +80,7 @@ const Roadmap = () => {
 
     try {
       const response = await fetch(
-        "https://knowx-be.herokuapp.com/api/user/posts",
+        "http://127.0.0.1:8000/api/user/posts",
         requestOptions
       );
       const responseJSON = await response.json();
@@ -106,7 +106,7 @@ const Roadmap = () => {
 
     try {
       const response = await fetch(
-        "https://knowx-be.herokuapp.com/api/user/roadmap/addroadmap",
+        "http://127.0.0.1:8000/api/user/roadmap/addroadmap",
         requestOptions
       );
       const responseJSON = await response.json();
@@ -136,7 +136,7 @@ const Roadmap = () => {
 
     try {
       const response = await fetch(
-        "https://knowx-be.herokuapp.com/api/user/roadmap/getroadmap",
+        "http://127.0.0.1:8000/api/user/roadmap/getroadmap",
         requestOptions
       );
       const responseJSON = await response.json();
@@ -164,7 +164,7 @@ const Roadmap = () => {
       };
 
       const response = await fetch(
-        "https://knowx-be.herokuapp.com/api/user/class/get",
+        "http://127.0.0.1:8000/api/user/class/get",
         requestOptions
       );
       const responseJSON = await response.json();

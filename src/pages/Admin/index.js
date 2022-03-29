@@ -10,6 +10,7 @@ import AddCompanies from "./components/AddCompanies";
 import DetailPost from "./components/DetailPost";
 import DetailQuestion from "./components/DetailQuestion";
 import Reports from "./components/Reports";
+import Request from "./components/Request";
 
 function Admin(props) {
   const match = useRouteMatch();
@@ -25,6 +26,7 @@ function Admin(props) {
       <Route exact path={`${match.url}/post/:id`} component={DetailPost} />
       <Route exact path={`${match.url}/question/:id`} component={DetailQuestion} />
       <Route path={`${match.url}/reports`} component={Reports} />
+      <Route path={`${match.url}/requests`} component={Request} />
     </Switch>
   );
 }

@@ -28,7 +28,7 @@ const Information = () => {
 
       try {
         const response = await fetch(
-          `https://knowx-be.herokuapp.com/api/user/checkfollow`,
+          `http://127.0.0.1:8000/api/user/checkfollow`,
           requestOptions
         );
         const responseJSON = await response.json();
@@ -53,7 +53,7 @@ const Information = () => {
 
       try {
         const response = await fetch(
-          `https://knowx-be.herokuapp.com/api/user/get-by-id`,
+          `http://127.0.0.1:8000/api/user/get-by-id`,
           requestOptions
         );
         const responseJSON = await response.json();
@@ -81,7 +81,7 @@ const Information = () => {
       },
     };
 
-    fetch("https://knowx-be.herokuapp.com/api/user/follow", requestOptions)
+    fetch("http://127.0.0.1:8000/api/user/follow", requestOptions)
       .then((response) => response.json())
       .then((result) => {
         if (result.type === "follow") {
@@ -121,10 +121,7 @@ const Information = () => {
           style={{ color: "#1890FF" }}
         >
           <Descriptions.Item label="Image">
-            <Image
-              width={200}
-              src={`https://knowx-be.herokuapp.com/${user.image}`}
-            />
+            <Image width={200} src={`http://127.0.0.1:8000/${user.image}`} />
           </Descriptions.Item>
           <Descriptions.Item label="Name">{user.full_name}</Descriptions.Item>
           <Descriptions.Item label="Birthday">

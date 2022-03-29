@@ -39,7 +39,7 @@ const DetailPost = () => {
 
     try {
       const response = await fetch(
-        `https://knowx-be.herokuapp.com/api/user/posts/${selectedId}`,
+        `http://127.0.0.1:8000/api/user/posts/${selectedId}`,
         requestOptions
       );
       const responseJSON = await response.json();
@@ -90,7 +90,7 @@ const DetailPost = () => {
     setTimeout(async () => {
       try {
         const response = await fetch(
-          `https://knowx-be.herokuapp.com/api/user/posts/${selectedId}`,
+          `http://127.0.0.1:8000/api/user/posts/${selectedId}`,
           requestOptions
         );
         const responseJSON = await response.json();
@@ -148,7 +148,7 @@ const DetailPost = () => {
                 <div className="postDetail-container">
                   <div className="postDetail-author">
                     <Avatar
-                      src={`https://knowx-be.herokuapp.com/${author.image}`}
+                      src={`http://127.0.0.1:8000/${author.image}`}
                       size={40}
                     />
                     <Link

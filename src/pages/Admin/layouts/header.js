@@ -9,27 +9,6 @@ import "./styles.scss";
 
 const header = () => {
   const avatar = sessionStorage.getItem("avatar");
-  const handleLogout = () => {
-    const token = sessionStorage.getItem("token");
-    const myHeaders = new Headers();
-    myHeaders.append("Authorization", `Bearer ${token}`);
-
-    const requestOptions = {
-      method: "GET",
-      headers: myHeaders,
-    };
-    fetch("https://knowx-be.herokuapp.com/api/user/logout", requestOptions)
-      .then((response) => response.json())
-      .then((result) => {
-        if (result.status === "success") {
-          window.location.reload();
-          sessionStorage.clear();
-          const temp = window.location.origin;
-          window.location.href = `${temp}/auth`;
-        }
-      })
-      .catch((error) => console.log("error", error));
-  };
 
   return (
     <div className="header">
@@ -181,7 +160,7 @@ const header = () => {
             <span className="badge badge-pill bg-danger float-right">8</span>
           </a>
         </li>
-        <li className="nav-item dropdown has-arrow">
+        <li className="nav-item dropdown">
           <a
             href="#"
             className="dropdown-toggle nav-link user-link"
@@ -190,58 +169,16 @@ const header = () => {
             <span className="user-img">
               <img
                 className="rounded-circle"
-                src={`https://knowx-be.herokuapp.com/${avatar}`}
+                src={`http://127.0.0.1:8000/${avatar}`}
                 width="40"
                 alt="Admin"
               />
               <span className="status online" />
             </span>
-            <span>Admin</span>
+            <span>{sessionStorage.getItem("full_name")}</span>
           </a>
-          <div className="dropdown-menu">
-            <a className="dropdown-item" href="profile.html">
-              My Profile
-            </a>
-            <a className="dropdown-item" href="edit-profile.html">
-              Edit Profile
-            </a>
-            <a className="dropdown-item" href="settings.html">
-              Settings
-            </a>
-            <p
-              className="dropdown-item"
-              style={{ cursor: "pointer" }}
-              onClick={handleLogout}
-            >
-              Logout
-            </p>
-          </div>
         </li>
       </ul>
-      <div className="dropdown mobile-user-menu float-right">
-        <a
-          href="#"
-          className="nav-link dropdown-toggle"
-          data-toggle="dropdown"
-          aria-expanded="false"
-        >
-          <i className="fa fa-ellipsis-v" />
-        </a>
-        <div className="dropdown-menu dropdown-menu-right">
-          <a className="dropdown-item" href="profile.html">
-            My Profile
-          </a>
-          <a className="dropdown-item" href="edit-profile.html">
-            Edit Profile
-          </a>
-          <a className="dropdown-item" href="settings.html">
-            Settings
-          </a>
-          <a className="dropdown-item" href="login.html">
-            Logout
-          </a>
-        </div>
-      </div>
     </div>
   );
 };

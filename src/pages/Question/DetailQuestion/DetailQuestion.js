@@ -9,12 +9,14 @@ import {
   Space,
   Divider,
   Spin,
+  Input,
 } from "antd";
 import {
   DownOutlined,
   LikeFilled,
   DeleteOutlined,
   EditOutlined,
+  WarningFilled,
 } from "@ant-design/icons";
 import { useLocation, Redirect, Link } from "react-router-dom";
 import { useState, useEffect } from "react";
@@ -27,8 +29,10 @@ import ListComment from "../Comment/ListComment";
 import "./styles.scss";
 
 const { Content } = Layout;
+const { TextArea } = Input;
 
 const DetailQuestion = () => {
+  const userId = sessionStorage.getItem("user_id");
   const [modalText, setModalText] = useState("Accept delete this question?");
   const [confirmLoading, setConfirmLoading] = useState(false);
   const [visible, setVisible] = useState(false);
@@ -43,6 +47,8 @@ const DetailQuestion = () => {
   const [colorLike, setColorLike] = useState("");
   const [countLike, setCountLike] = useState(0);
   const [spin, setSpin] = useState(true);
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [description, setDescription] = useState("");
 
   useEffect(() => {
     async function getQuestionData() {
@@ -56,7 +62,7 @@ const DetailQuestion = () => {
 
       try {
         const response = await fetch(
-          `https://knowx-be.herokuapp.com/api/user/questions/${selectedId}`,
+          `http://127.0.0.1:8000/api/user/questions/${selectedId}`,
           requestOptions
         );
         const responseJSON = await response.json();
@@ -65,7 +71,7 @@ const DetailQuestion = () => {
         setUser(responseJSON.user);
         setSpin(false);
       } catch (error) {
-        console.log("Failed fetch list Posts", error.message);
+        console.log("Failed fetch", error.message);
       }
     }
 
@@ -82,11 +88,10 @@ const DetailQuestion = () => {
       };
       try {
         const response = await fetch(
-          `https://knowx-be.herokuapp.com/api/user/questions/checklike`,
+          `http://127.0.0.1:8000/api/user/questions/checklike`,
           requestOptions
         );
         const responseJSON = await response.json();
-        console.log(responseJSON);
         if (responseJSON.result === true) {
           setColorLike("#08c");
         } else {
@@ -113,7 +118,7 @@ const DetailQuestion = () => {
     };
     try {
       const response = await fetch(
-        `https://knowx-be.herokuapp.com/api/user/questions/like`,
+        `http://127.0.0.1:8000/api/user/questions/like`,
         requestOptions
       );
       const responseJSON = await response.json();
@@ -145,7 +150,7 @@ const DetailQuestion = () => {
     setTimeout(async () => {
       try {
         const response = await fetch(
-          `https://knowx-be.herokuapp.com/api/user/questions/${selectedId}`,
+          `http://127.0.0.1:8000/api/user/questions/${selectedId}`,
           requestOptions
         );
         const responseJSON = await response.json();
@@ -217,12 +222,65 @@ const DetailQuestion = () => {
     message.success("Success. Question deleted!", 5);
   };
 
+  const showModalReport = () => {
+    setIsModalVisible(true);
+  };
+
+  const handleOkReport = () => {
+    handleReport();
+    setIsModalVisible(false);
+  };
+
+  const handleCancelReport = () => {
+    setIsModalVisible(false);
+  };
+
+  const handleReport = async () => {
+    const token = sessionStorage.getItem("token");
+    const fm = new FormData();
+    fm.append("question_id", selectedId);
+    fm.append("description", description);
+    const requestOptions = {
+      method: "POST",
+      body: fm,
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
+    try {
+      const response = await fetch(
+        `http://127.0.0.1:8000/api/user/questions/report`,
+        requestOptions
+      );
+      const responseJSON = await response.json();
+      console.log(responseJSON);
+      if (responseJSON.status === "success") {
+        message.success("Report sended!");
+      }
+    } catch (error) {
+      console.log("Failed fetch ", error.message);
+    }
+  };
+
   return (
     <Layout>
       <Header />
       <Layout>
         <SidebarLeft />
         <Content>
+          <Modal
+            title="Report"
+            visible={isModalVisible}
+            onOk={handleOkReport}
+            onCancel={handleCancelReport}
+            okText="Send"
+          >
+            <TextArea
+              onChange={(e) => setDescription(e.target.value)}
+              placeholder="Description..."
+              autoSize={{ minRows: 3, maxRows: 5 }}
+            />
+          </Modal>
           <Modal
             title="Confirm"
             visible={visible}
@@ -242,7 +300,7 @@ const DetailQuestion = () => {
                 <div className="postDetail-container">
                   <div className="postDetail-author">
                     <Avatar
-                      src={`https://knowx-be.herokuapp.com/${user.image}`}
+                      src={`http://127.0.0.1:8000/${user.image}`}
                       size={40}
                     />
                     <Link
@@ -272,14 +330,27 @@ const DetailQuestion = () => {
                   </div>
                   <div className="postDetail-title">
                     <h5>{selectedQuestion.title}</h5>
-                    <div className="postDetail-dropdown">
-                      <Dropdown overlay={menu}>
-                        <Button>
-                          Option
-                          <DownOutlined />
-                        </Button>
-                      </Dropdown>
-                    </div>
+                    {user.id === parseInt(userId) ? (
+                      <div className="postDetail-dropdown">
+                        <Dropdown overlay={menu}>
+                          <Button>
+                            Option
+                            <DownOutlined />
+                          </Button>
+                        </Dropdown>
+                      </div>
+                    ) : (
+                      <WarningFilled
+                        style={{
+                          float: "right",
+                          position: "relative",
+                          left: "630px",
+                          fontSize: "20px",
+                          cursor: "pointer",
+                        }}
+                        onClick={showModalReport}
+                      />
+                    )}
                     <i className="ti-more-alt">
                       <div className="postDetail-option">
                         <a href="#">Edit</a>

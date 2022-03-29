@@ -76,7 +76,7 @@ const Questions = () => {
     };
     try {
       const response = await fetch(
-        "https://knowx-be.herokuapp.com/api/user/questions",
+        "http://127.0.0.1:8000/api/user/questions",
         // eslint-disable-next-line comma-dangle
         requestOptions
       );
@@ -190,7 +190,7 @@ const Questions = () => {
 
     try {
       const response = await fetch(
-        "https://knowx-be.herokuapp.com/api/user/questions/getbyclass",
+        "http://127.0.0.1:8000/api/user/questions/getbyclass",
         requestOptions
       );
       const responseJSON = await response.json();
@@ -218,7 +218,7 @@ const Questions = () => {
 
     try {
       const response = await fetch(
-        `https://knowx-be.herokuapp.com/api/user/class/getmembers`,
+        `http://127.0.0.1:8000/api/user/class/getmembers`,
         requestOptions
       );
       const responseJSON = await response.json();
@@ -302,9 +302,7 @@ const Questions = () => {
             <List.Item.Meta
               avatar={
                 <Link to={`/otherprofile/${item.user.id}`}>
-                  <Avatar
-                    src={`https://knowx-be.herokuapp.com/${item.user.image}`}
-                  />
+                  <Avatar src={`http://127.0.0.1:8000/${item.user.image}`} />
                 </Link>
               }
               title={

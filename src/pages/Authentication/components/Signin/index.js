@@ -33,12 +33,14 @@ const Signin = () => {
       body: formData,
     };
 
-    fetch("https://knowx-be.herokuapp.com/api/user/login", requestOptions)
+    fetch("http://127.0.0.1:8000/api/user/login", requestOptions)
       .then((response) => response.json())
       .then((result) => {
+        console.log(result);
         if (result.status === "success") {
           sessionStorage.setItem("token", result.token);
           sessionStorage.setItem("userName", loginData.email);
+          sessionStorage.setItem("full_name", result.user.full_name);
           sessionStorage.setItem("user_id", result.user_id);
           sessionStorage.setItem("role", result.role);
           sessionStorage.setItem("avatar", result.avatar);

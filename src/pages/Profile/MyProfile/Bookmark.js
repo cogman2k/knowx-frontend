@@ -27,7 +27,7 @@ const Bookmark = () => {
 
       try {
         const response = await fetch(
-          "https://knowx-be.herokuapp.com/api/user/posts/getbookmark",
+          "http://127.0.0.1:8000/api/user/posts/getbookmark",
           requestOptions
         );
         const responseJSON = await response.json();
@@ -85,16 +85,14 @@ const Bookmark = () => {
               <img
                 height={168}
                 alt="logo"
-                src={`https://knowx-be.herokuapp.com/${item.image}`}
+                src={`http://127.0.0.1:8000/${item.image}`}
               />
             }
           >
             <List.Item.Meta
               avatar={
                 <Link to="/profile">
-                  <Avatar
-                    src={`https://knowx-be.herokuapp.com/${item.user_image}`}
-                  />
+                  <Avatar src={`http://127.0.0.1:8000/${item.user_image}`} />
                 </Link>
               }
               title={<Link to="/profile">{item.full_name}</Link>}

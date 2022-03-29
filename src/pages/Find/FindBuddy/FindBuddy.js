@@ -63,7 +63,7 @@ const FindBuddy = () => {
 
     try {
       const response = await fetch(
-        `https://knowx-be.herokuapp.com/api/user/checkfollow`,
+        `http://127.0.0.1:8000/api/user/checkfollow`,
         requestOptions
       );
       const responseJSON = await response.json();
@@ -91,7 +91,7 @@ const FindBuddy = () => {
       },
     };
 
-    fetch("https://knowx-be.herokuapp.com/api/user/follow", requestOptions)
+    fetch("http://127.0.0.1:8000/api/user/follow", requestOptions)
       .then((response) => response.json())
       .then((result) => {
         if (result.type === "follow") {
@@ -128,7 +128,7 @@ const FindBuddy = () => {
       },
     };
     const response = await fetch(
-      "https://knowx-be.herokuapp.com/api/user/buddy/getall",
+      "http://127.0.0.1:8000/api/user/buddy/getall",
       requestOptions
     );
     const responseJSON = await response.json();
@@ -147,7 +147,7 @@ const FindBuddy = () => {
         },
       };
       const response = await fetch(
-        "https://knowx-be.herokuapp.com/api/user/subject/get",
+        "http://127.0.0.1:8000/api/user/subject/get",
         requestOptions
       );
       const responseJSON = await response.json();
@@ -167,7 +167,7 @@ const FindBuddy = () => {
     };
     try {
       const response = await fetch(
-        "https://knowx-be.herokuapp.com/api/user/buddy/myfindbuddy",
+        "http://127.0.0.1:8000/api/user/buddy/myfindbuddy",
         requestOptions
       );
       const responseJSON = await response.json();
@@ -201,7 +201,7 @@ const FindBuddy = () => {
     if (description !== "" && selectedSubject !== "") {
       try {
         const response = await fetch(
-          "https://knowx-be.herokuapp.com/api/user/buddy/create",
+          "http://127.0.0.1:8000/api/user/buddy/create",
           requestOptions
         );
         const responseJSON = await response.json();
@@ -229,7 +229,7 @@ const FindBuddy = () => {
       },
     };
     const response = await fetch(
-      "https://knowx-be.herokuapp.com/api/user/buddy/get",
+      "http://127.0.0.1:8000/api/user/buddy/get",
       requestOptions
     );
     const responseJSON = await response.json();
@@ -258,7 +258,7 @@ const FindBuddy = () => {
     };
     setTimeout(async () => {
       const response = await fetch(
-        "https://knowx-be.herokuapp.com/api/user/buddy/delete",
+        "http://127.0.0.1:8000/api/user/buddy/delete",
         requestOptions
       );
       const responseJSON = await response.json();
@@ -486,7 +486,7 @@ const FindBuddy = () => {
                           avatar={
                             <Avatar
                               size={64}
-                              src={`https://knowx-be.herokuapp.com/${item.image}`}
+                              src={`http://127.0.0.1:8000/${item.image}`}
                             />
                           }
                           title={
@@ -584,7 +584,7 @@ const FindBuddy = () => {
             shape="round"
             style={{ float: "right" }}
             onClick={() => {
-              window.open("https://knowx-be.herokuapp.com/chat");
+              window.open("http://127.0.0.1:8000/chat");
             }}
           >
             Send Message

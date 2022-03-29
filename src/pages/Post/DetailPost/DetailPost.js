@@ -12,6 +12,7 @@ import {
   Divider,
   Spin,
   Tooltip,
+  Input,
 } from "antd";
 import {
   DownOutlined,
@@ -19,6 +20,7 @@ import {
   BookFilled,
   DeleteOutlined,
   EditOutlined,
+  WarningFilled,
 } from "@ant-design/icons";
 import { useLocation, Redirect, Link } from "react-router-dom";
 import React, { useState, useEffect } from "react";
@@ -29,6 +31,7 @@ import Footer from "../../../components/Footer/Footer";
 import ListComment from "../Comment/ListComment";
 
 const { Content } = Layout;
+const { TextArea } = Input;
 
 const DetailPost = () => {
   const userId = sessionStorage.getItem("user_id");
@@ -38,6 +41,7 @@ const DetailPost = () => {
   const location = useLocation();
   const arr = location.pathname.split("/");
   const selectedId = arr[arr.length - 1];
+  const [isModalVisible, setIsModalVisible] = useState(false);
 
   const [selectedPost, setSelectedPost] = useState({});
   const [user, setUser] = useState({});
@@ -47,6 +51,7 @@ const DetailPost = () => {
   const [colorLike, setColorLike] = useState("#c7dfe2");
   const [countLike, setCountLike] = useState(0);
   const [spin, setSpin] = useState(true);
+  const [description, setDescription] = useState("");
 
   async function handleLike() {
     const token = sessionStorage.getItem("token");
@@ -61,7 +66,7 @@ const DetailPost = () => {
     };
     try {
       const response = await fetch(
-        `https://knowx-be.herokuapp.com/api/user/posts/like`,
+        `http://127.0.0.1:8000/api/user/posts/like`,
         requestOptions
       );
       const responseJSON = await response.json();
@@ -92,7 +97,7 @@ const DetailPost = () => {
     };
     try {
       const response = await fetch(
-        `https://knowx-be.herokuapp.com/api/user/posts/bookmark`,
+        `http://127.0.0.1:8000/api/user/posts/bookmark`,
         requestOptions
       );
       const responseJSON = await response.json();
@@ -122,7 +127,7 @@ const DetailPost = () => {
       };
       try {
         const response = await fetch(
-          `https://knowx-be.herokuapp.com/api/user/posts/checkbookmark`,
+          `http://127.0.0.1:8000/api/user/posts/checkbookmark`,
           requestOptions
         );
         const responseJSON = await response.json();
@@ -150,7 +155,7 @@ const DetailPost = () => {
       };
       try {
         const response = await fetch(
-          `https://knowx-be.herokuapp.com/api/user/posts/checklike`,
+          `http://127.0.0.1:8000/api/user/posts/checklike`,
           requestOptions
         );
         const responseJSON = await response.json();
@@ -176,7 +181,7 @@ const DetailPost = () => {
 
       try {
         const response = await fetch(
-          `https://knowx-be.herokuapp.com/api/user/posts/${selectedId}`,
+          `http://127.0.0.1:8000/api/user/posts/${selectedId}`,
           requestOptions
         );
         const responseJSON = await response.json();
@@ -193,7 +198,7 @@ const DetailPost = () => {
     checkLike();
     checkBookmark();
     getPostData();
-  }, [selectedId]);
+  }, []);
 
   async function handleDelete() {
     const token = sessionStorage.getItem("token");
@@ -207,7 +212,7 @@ const DetailPost = () => {
     setTimeout(async () => {
       try {
         const response = await fetch(
-          `https://knowx-be.herokuapp.com/api/user/posts/${selectedId}`,
+          `http://127.0.0.1:8000/api/user/posts/${selectedId}`,
           requestOptions
         );
         const responseJSON = await response.json();
@@ -286,12 +291,65 @@ const DetailPost = () => {
   const success = () => {
     message.success("Success. Post deleted!", 5);
   };
+
+  const showModalReport = () => {
+    setIsModalVisible(true);
+  };
+
+  const handleOkReport = () => {
+    handleReport();
+    setIsModalVisible(false);
+  };
+
+  const handleCancelReport = () => {
+    setIsModalVisible(false);
+  };
+
+  const handleReport = async () => {
+    const token = sessionStorage.getItem("token");
+    const fm = new FormData();
+    fm.append("post_id", selectedId);
+    fm.append("description", description);
+    const requestOptions = {
+      method: "POST",
+      body: fm,
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
+    try {
+      const response = await fetch(
+        `http://127.0.0.1:8000/api/user/posts/report`,
+        requestOptions
+      );
+      const responseJSON = await response.json();
+      if (responseJSON.status === "success") {
+        message.success("Report sended!");
+      }
+    } catch (error) {
+      console.log("Failed fetch ", error.message);
+    }
+  };
+
   return (
     <Layout>
       <Header />
       <Layout>
         <SidebarLeft />
         <Content>
+          <Modal
+            title="Report"
+            visible={isModalVisible}
+            onOk={handleOkReport}
+            onCancel={handleCancelReport}
+            okText="Send"
+          >
+            <TextArea
+              onChange={(e) => setDescription(e.target.value)}
+              placeholder="Description..."
+              autoSize={{ minRows: 3, maxRows: 5 }}
+            />
+          </Modal>
           <Modal
             title="Confirm"
             visible={visible}
@@ -311,7 +369,7 @@ const DetailPost = () => {
                 <div className="postDetail-container">
                   <div className="postDetail-author">
                     <Avatar
-                      src={`https://knowx-be.herokuapp.com/${user.image}`}
+                      src={`http://127.0.0.1:8000/${user.image}`}
                       size={40}
                     />
                     <Link
@@ -338,7 +396,18 @@ const DetailPost = () => {
                           </Button>
                         </Dropdown>
                       </div>
-                    ) : null}
+                    ) : (
+                      <WarningFilled
+                        style={{
+                          float: "right",
+                          position: "relative",
+                          left: "630px",
+                          fontSize: "20px",
+                          cursor: "pointer",
+                        }}
+                        onClick={showModalReport}
+                      />
+                    )}
                     <i className="ti-more-alt">
                       <div className="postDetail-option">
                         <a href="#">Edit</a>
