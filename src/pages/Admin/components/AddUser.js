@@ -39,7 +39,7 @@ const AddUser = () => {
 
     try {
       const response = await fetch(
-        "https://knowx-fe.herokuapp.com/api/admin/add-user",
+        "https://knowx-be.herokuapp.com/api/admin/add-user",
         requestOptions
       );
       const responseJSON = await response.json();

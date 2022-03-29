@@ -23,7 +23,7 @@ const Dashboard = () => {
 
       try {
         const response = await fetch(
-          "https://knowx-fe.herokuapp.com/api/admin/count",
+          "https://knowx-be.herokuapp.com/api/admin/count",
           requestOptions
         );
         const responseJSON = await response.json();

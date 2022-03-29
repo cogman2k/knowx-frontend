@@ -34,7 +34,7 @@ const MyQuestions = () => {
 
       try {
         const response = await fetch(
-          "https://knowx-fe.herokuapp.com/api/user",
+          "https://knowx-be.herokuapp.com/api/user",
           requestOptions
         );
         const responseJSON = await response.json();
@@ -55,7 +55,7 @@ const MyQuestions = () => {
 
       try {
         const response = await fetch(
-          "https://knowx-fe.herokuapp.com/api/user/questions",
+          "https://knowx-be.herokuapp.com/api/user/questions",
           requestOptions
         );
         const responseJSON = await response.json();
@@ -109,7 +109,7 @@ const MyQuestions = () => {
               avatar={
                 <Link to="/profile">
                   <Avatar
-                    src={`https://knowx-fe.herokuapp.com/${user.image}`}
+                    src={`https://knowx-be.herokuapp.com/${user.image}`}
                   />
                 </Link>
               }

@@ -31,7 +31,7 @@ const ListPost = () => {
 
       try {
         const response = await fetch(
-          `https://knowx-fe.herokuapp.com/api/user/get-by-id`,
+          `https://knowx-be.herokuapp.com/api/user/get-by-id`,
           requestOptions
         );
         const responseJSON = await response.json();
@@ -56,7 +56,7 @@ const ListPost = () => {
 
       try {
         const response = await fetch(
-          "https://knowx-fe.herokuapp.com/api/user/posts/getbyuserid",
+          "https://knowx-be.herokuapp.com/api/user/posts/getbyuserid",
           requestOptions
         );
         const responseJSON = await response.json();
@@ -123,7 +123,7 @@ const ListPost = () => {
               <img
                 width={272}
                 alt="logo"
-                src={`https://knowx-fe.herokuapp.com/${item.image}`}
+                src={`https://knowx-be.herokuapp.com/${item.image}`}
               />
             }
           >
@@ -131,7 +131,7 @@ const ListPost = () => {
               avatar={
                 <Link to={`/otherprofile/${user.id}`}>
                   <Avatar
-                    src={`https://knowx-fe.herokuapp.com/${user.image}`}
+                    src={`https://knowx-be.herokuapp.com/${user.image}`}
                   />
                 </Link>
               }

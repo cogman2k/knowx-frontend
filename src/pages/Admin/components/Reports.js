@@ -43,7 +43,7 @@ const AddCompanies = () => {
     };
     try {
       const response = await fetch(
-        "https://knowx-fe.herokuapp.com/api/user/posts/reports/get",
+        "https://knowx-be.herokuapp.com/api/user/posts/reports/get",
         requestOptions
       );
       const responseJSON = await response.json();
@@ -64,7 +64,7 @@ const AddCompanies = () => {
     };
     try {
       const response = await fetch(
-        "https://knowx-fe.herokuapp.com/api/user/questions/reports/get",
+        "https://knowx-be.herokuapp.com/api/user/questions/reports/get",
         requestOptions
       );
       const responseJSON = await response.json();
@@ -87,7 +87,7 @@ const AddCompanies = () => {
     setTimeout(async () => {
       try {
         const response = await fetch(
-          `https://knowx-fe.herokuapp.com/api/user/posts/report/${postId}`,
+          `https://knowx-be.herokuapp.com/api/user/posts/report/${postId}`,
           requestOptions
         );
         const responseJSON = await response.json();
@@ -113,7 +113,7 @@ const AddCompanies = () => {
     setTimeout(async () => {
       try {
         const response = await fetch(
-          `https://knowx-fe.herokuapp.com/api/user/questions/report/${questionId}`,
+          `https://knowx-be.herokuapp.com/api/user/questions/report/${questionId}`,
           requestOptions
         );
         const responseJSON = await response.json();

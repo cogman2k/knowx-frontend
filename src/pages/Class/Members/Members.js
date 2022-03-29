@@ -46,7 +46,7 @@ const Members = () => {
   };
 
   const handleStart = () => {
-    setImageUrl(`https://knowx-fe.herokuapp.com/${user.image}`);
+    setImageUrl(`https://knowx-be.herokuapp.com/${user.image}`);
     setMeeting(true);
   };
 
@@ -80,7 +80,7 @@ const Members = () => {
     };
     try {
       const response = await fetch(
-        `https://knowx-fe.herokuapp.com/api/user/sendlink`,
+        `https://knowx-be.herokuapp.com/api/user/sendlink`,
         requestOptions
       );
       const responseJSON = await response.json();
@@ -113,7 +113,7 @@ const Members = () => {
           <List.Item>
             <List.Item.Meta
               avatar={
-                <Avatar src={`https://knowx-fe.herokuapp.com/${item.image}`} />
+                <Avatar src={`https://knowx-be.herokuapp.com/${item.image}`} />
               }
               title={<a href="https://ant.design">{item.full_name}</a>}
               description={item.is_online === 1 ? "online" : "offline"}
@@ -171,7 +171,7 @@ const Members = () => {
           >
             <List.Item.Meta
               avatar={
-                <Avatar src={`https://knowx-fe.herokuapp.com/${item.image}`} />
+                <Avatar src={`https://knowx-be.herokuapp.com/${item.image}`} />
               }
               title={<a href="https://ant.design">{item.full_name}</a>}
               description={item.topic}
@@ -196,7 +196,7 @@ const Members = () => {
 
     try {
       const response = await fetch(
-        `https://knowx-fe.herokuapp.com/api/user/class/getmembers`,
+        `https://knowx-be.herokuapp.com/api/user/class/getmembers`,
         requestOptions
       );
       const responseJSON = await response.json();
@@ -224,7 +224,7 @@ const Members = () => {
 
       try {
         const response = await fetch(
-          "https://knowx-fe.herokuapp.com/api/user/following",
+          "https://knowx-be.herokuapp.com/api/user/following",
           requestOptions
         );
         const responseJSON = await response.json();
@@ -256,7 +256,7 @@ const Members = () => {
 
     try {
       const response = await fetch(
-        `https://knowx-fe.herokuapp.com/api/user/class/addmember`,
+        `https://knowx-be.herokuapp.com/api/user/class/addmember`,
         requestOptions
       );
       const responseJSON = await response.json();
@@ -292,7 +292,7 @@ const Members = () => {
 
     try {
       const response = await fetch(
-        `https://knowx-fe.herokuapp.com/api/user/class/removemember`,
+        `https://knowx-be.herokuapp.com/api/user/class/removemember`,
         requestOptions
       );
       const responseJSON = await response.json();
@@ -349,7 +349,7 @@ const Members = () => {
             <Avatar
               shape="square"
               size={50}
-              src={`https://knowx-fe.herokuapp.com/${author.image}`}
+              src={`https://knowx-be.herokuapp.com/${author.image}`}
             />
             <a
               href={`otherprofile/${author.id}`}
@@ -384,7 +384,7 @@ const Members = () => {
                     <Link to={`/otherprofile/${item.id}`}>
                       <Avatar
                         size="large"
-                        src={`https://knowx-fe.herokuapp.com/${item.image}`}
+                        src={`https://knowx-be.herokuapp.com/${item.image}`}
                       />
                     </Link>
                   }

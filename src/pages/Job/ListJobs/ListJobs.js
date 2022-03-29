@@ -26,7 +26,7 @@ const ListJobs = () => {
 
       try {
         const response = await fetch(
-          "https://knowx-fe.herokuapp.com/api/user/job/newest",
+          "https://knowx-be.herokuapp.com/api/user/job/newest",
           requestOptions
         );
         const responseJSON = await response.json();
@@ -92,7 +92,7 @@ const ListJobs = () => {
                             }
                           >
                             <Avatar
-                              src={`https://knowx-fe.herokuapp.com/${item.user_image}`}
+                              src={`https://knowx-be.herokuapp.com/${item.user_image}`}
                             />
                           </Link>
                         }

@@ -76,7 +76,7 @@ const Questions = () => {
     };
     try {
       const response = await fetch(
-        "https://knowx-fe.herokuapp.com/api/user/questions",
+        "https://knowx-be.herokuapp.com/api/user/questions",
         // eslint-disable-next-line comma-dangle
         requestOptions
       );
@@ -190,7 +190,7 @@ const Questions = () => {
 
     try {
       const response = await fetch(
-        "https://knowx-fe.herokuapp.com/api/user/questions/getbyclass",
+        "https://knowx-be.herokuapp.com/api/user/questions/getbyclass",
         requestOptions
       );
       const responseJSON = await response.json();
@@ -218,7 +218,7 @@ const Questions = () => {
 
     try {
       const response = await fetch(
-        `https://knowx-fe.herokuapp.com/api/user/class/getmembers`,
+        `https://knowx-be.herokuapp.com/api/user/class/getmembers`,
         requestOptions
       );
       const responseJSON = await response.json();
@@ -303,7 +303,7 @@ const Questions = () => {
               avatar={
                 <Link to={`/otherprofile/${item.user.id}`}>
                   <Avatar
-                    src={`https://knowx-fe.herokuapp.com/${item.user.image}`}
+                    src={`https://knowx-be.herokuapp.com/${item.user.image}`}
                   />
                 </Link>
               }

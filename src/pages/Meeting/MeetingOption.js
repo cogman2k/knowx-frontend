@@ -46,7 +46,7 @@ const MeetingOption = () => {
   };
 
   const handleStart = () => {
-    setImageUrl(`https://knowx-fe.herokuapp.com/${user.image}`);
+    setImageUrl(`https://knowx-be.herokuapp.com/${user.image}`);
     setMeeting(true);
   };
 
@@ -65,7 +65,7 @@ const MeetingOption = () => {
     };
     try {
       const response = await fetch(
-        `https://knowx-fe.herokuapp.com/api/user/sendlink`,
+        `https://knowx-be.herokuapp.com/api/user/sendlink`,
         requestOptions
       );
       const responseJSON = await response.json();
@@ -97,7 +97,7 @@ const MeetingOption = () => {
           <List.Item>
             <List.Item.Meta
               avatar={
-                <Avatar src={`https://knowx-fe.herokuapp.com/${item.image}`} />
+                <Avatar src={`https://knowx-be.herokuapp.com/${item.image}`} />
               }
               title={<a href="https://ant.design">{item.full_name}</a>}
               description={item.is_online === 1 ? "online" : "offline"}
@@ -138,7 +138,7 @@ const MeetingOption = () => {
 
       try {
         const response = await fetch(
-          "https://knowx-fe.herokuapp.com/api/user",
+          "https://knowx-be.herokuapp.com/api/user",
           requestOptions
         );
         const responseJSON = await response.json();
@@ -159,7 +159,7 @@ const MeetingOption = () => {
 
       try {
         const response = await fetch(
-          "https://knowx-fe.herokuapp.com/api/user/following",
+          "https://knowx-be.herokuapp.com/api/user/following",
           requestOptions
         );
         const responseJSON = await response.json();

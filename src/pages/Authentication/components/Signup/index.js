@@ -56,7 +56,7 @@ const Signup = () => {
       method: "POST",
       body: formData,
     };
-    fetch("https://knowx-fe.herokuapp.com/api/user/register", requestOptions)
+    fetch("https://knowx-be.herokuapp.com/api/user/register", requestOptions)
       .then((response) => response.json())
       .then((result) => {
         console.log(result);

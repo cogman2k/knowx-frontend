@@ -39,7 +39,7 @@ const Profile = () => {
 
       try {
         const response = await fetch(
-          "https://knowx-fe.herokuapp.com/api/user/posts/getbyuserid",
+          "https://knowx-be.herokuapp.com/api/user/posts/getbyuserid",
           requestOptions
         );
         const responseJSON = await response.json();
@@ -65,7 +65,7 @@ const Profile = () => {
 
       try {
         const response = await fetch(
-          "https://knowx-fe.herokuapp.com/api/user/questions/getbyuserid",
+          "https://knowx-be.herokuapp.com/api/user/questions/getbyuserid",
           requestOptions
         );
         const responseJSON = await response.json();

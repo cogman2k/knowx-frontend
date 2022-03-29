@@ -28,7 +28,7 @@ const Profile = () => {
 
     try {
       const response = await fetch(
-        `https://knowx-fe.herokuapp.com/api/user/get-by-id`,
+        `https://knowx-be.herokuapp.com/api/user/get-by-id`,
         requestOptions
       );
       const responseJSON = await response.json();
@@ -52,7 +52,7 @@ const Profile = () => {
 
     try {
       const response = await fetch(
-        `https://knowx-fe.herokuapp.com/api/user/education/${selectedId}`,
+        `https://knowx-be.herokuapp.com/api/user/education/${selectedId}`,
         requestOptions
       );
       const responseJSON = await response.json();
@@ -77,7 +77,7 @@ const Profile = () => {
 
     try {
       const response = await fetch(
-        `https://knowx-fe.herokuapp.com/api/user/experience/${selectedId}`,
+        `https://knowx-be.herokuapp.com/api/user/experience/${selectedId}`,
         requestOptions
       );
       const responseJSON = await response.json();
@@ -103,7 +103,7 @@ const Profile = () => {
 
     try {
       const response = await fetch(
-        "https://knowx-fe.herokuapp.com/api/user/posts/getbyuserid",
+        "https://knowx-be.herokuapp.com/api/user/posts/getbyuserid",
         requestOptions
       );
       const responseJSON = await response.json();
@@ -130,7 +130,7 @@ const Profile = () => {
 
     try {
       const response = await fetch(
-        "https://knowx-fe.herokuapp.com/api/user/questions/getbyuserid",
+        "https://knowx-be.herokuapp.com/api/user/questions/getbyuserid",
         requestOptions
       );
       const responseJSON = await response.json();
@@ -303,7 +303,7 @@ const Profile = () => {
                       <a href="#">
                         <img
                           className="avatar"
-                          src={`https://knowx-fe.herokuapp.com/${data.image}`}
+                          src={`https://knowx-be.herokuapp.com/${data.image}`}
                           alt=""
                         />
                       </a>

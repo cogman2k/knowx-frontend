@@ -38,7 +38,7 @@ const Users = () => {
 
     try {
       const response = await fetch(
-        "https://knowx-fe.herokuapp.com/api/admin/users",
+        "https://knowx-be.herokuapp.com/api/admin/users",
         requestOptions
       );
       const responseJSON = await response.json();
@@ -61,7 +61,7 @@ const Users = () => {
 
     try {
       const response = await fetch(
-        `https://knowx-fe.herokuapp.com/api/admin/delete-user/${activeUser.id}`,
+        `https://knowx-be.herokuapp.com/api/admin/delete-user/${activeUser.id}`,
         requestOptions
       );
       const responseJSON = await response.json();

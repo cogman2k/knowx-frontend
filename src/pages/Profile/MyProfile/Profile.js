@@ -36,7 +36,7 @@ const Profile = () => {
 
       try {
         const response = await fetch(
-          "https://knowx-fe.herokuapp.com/api/user",
+          "https://knowx-be.herokuapp.com/api/user",
           requestOptions
         );
         const responseJSON = await response.json();
@@ -61,7 +61,7 @@ const Profile = () => {
 
       try {
         const response = await fetch(
-          "https://knowx-fe.herokuapp.com/api/user/following",
+          "https://knowx-be.herokuapp.com/api/user/following",
           requestOptions
         );
         const responseJSON = await response.json();
@@ -84,7 +84,7 @@ const Profile = () => {
 
       try {
         const response = await fetch(
-          "https://knowx-fe.herokuapp.com/api/user/followers",
+          "https://knowx-be.herokuapp.com/api/user/followers",
           requestOptions
         );
         const responseJSON = await response.json();
@@ -108,7 +108,7 @@ const Profile = () => {
 
       try {
         const response = await fetch(
-          "https://knowx-fe.herokuapp.com/api/user/posts/getbookmark",
+          "https://knowx-be.herokuapp.com/api/user/posts/getbookmark",
           requestOptions
         );
         const responseJSON = await response.json();
@@ -153,7 +153,7 @@ const Profile = () => {
                   <Row>
                     <Col span={8}>
                       <Avatar
-                        src={`https://knowx-fe.herokuapp.com/${user.image}`}
+                        src={`https://knowx-be.herokuapp.com/${user.image}`}
                         size={128}
                       />
                     </Col>
@@ -172,7 +172,7 @@ const Profile = () => {
                           icon={<SendOutlined />}
                           type="primary"
                           onClick={() => {
-                            window.open("https://knowx-fe.herokuapp.com/chat");
+                            window.open("https://knowx-be.herokuapp.com/chat");
                           }}
                         >
                           Send Message

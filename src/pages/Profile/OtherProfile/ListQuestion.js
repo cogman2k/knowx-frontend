@@ -31,7 +31,7 @@ const ListQuestion = () => {
 
       try {
         const response = await fetch(
-          `https://knowx-fe.herokuapp.com/api/user/get-by-id`,
+          `https://knowx-be.herokuapp.com/api/user/get-by-id`,
           requestOptions
         );
         const responseJSON = await response.json();
@@ -57,7 +57,7 @@ const ListQuestion = () => {
 
       try {
         const response = await fetch(
-          "https://knowx-fe.herokuapp.com/api/user/questions/getbyuserid",
+          "https://knowx-be.herokuapp.com/api/user/questions/getbyuserid",
           requestOptions
         );
         const responseJSON = await response.json();
@@ -125,7 +125,7 @@ const ListQuestion = () => {
               avatar={
                 <Link to={`/otherprofile/${user.id}`}>
                   <Avatar
-                    src={`https://knowx-fe.herokuapp.com/${user.image}`}
+                    src={`https://knowx-be.herokuapp.com/${user.image}`}
                   />
                 </Link>
               }

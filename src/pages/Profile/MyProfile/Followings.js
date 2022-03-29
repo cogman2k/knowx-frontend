@@ -18,7 +18,7 @@ const Followings = () => {
 
       try {
         const response = await fetch(
-          "https://knowx-fe.herokuapp.com/api/user/following",
+          "https://knowx-be.herokuapp.com/api/user/following",
           requestOptions
         );
         const responseJSON = await response.json();
@@ -56,7 +56,7 @@ const Followings = () => {
               <List.Item.Meta
                 avatar={
                   <Avatar
-                    src={`https://knowx-fe.herokuapp.com/${item.image}`}
+                    src={`https://knowx-be.herokuapp.com/${item.image}`}
                   />
                 }
                 title={

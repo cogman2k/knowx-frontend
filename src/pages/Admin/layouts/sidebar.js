@@ -20,7 +20,7 @@ const sidebar = () => {
       };
       try {
         const response = await fetch(
-          "https://knowx-fe.herokuapp.com/api/user/posts/report/count",
+          "https://knowx-be.herokuapp.com/api/user/posts/report/count",
           requestOptions
         );
         const responseJSON = await response.json();
@@ -44,7 +44,7 @@ const sidebar = () => {
       };
       try {
         const response = await fetch(
-          "https://knowx-fe.herokuapp.com/api/user/questions/report/count",
+          "https://knowx-be.herokuapp.com/api/user/questions/report/count",
           requestOptions
         );
         const responseJSON = await response.json();
@@ -68,7 +68,7 @@ const sidebar = () => {
       };
       try {
         const response = await fetch(
-          "https://knowx-fe.herokuapp.com/api/user/request/mentor/count",
+          "https://knowx-be.herokuapp.com/api/user/request/mentor/count",
           requestOptions
         );
         const responseJSON = await response.json();
@@ -92,7 +92,7 @@ const sidebar = () => {
       method: "GET",
       headers: myHeaders,
     };
-    fetch("https://knowx-fe.herokuapp.com/api/user/logout", requestOptions)
+    fetch("https://knowx-be.herokuapp.com/api/user/logout", requestOptions)
       .then((response) => response.json())
       .then((result) => {
         if (result.status === "success") {

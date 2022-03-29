@@ -27,7 +27,7 @@ const Bookmark = () => {
 
       try {
         const response = await fetch(
-          "https://knowx-fe.herokuapp.com/api/user/posts/getbookmark",
+          "https://knowx-be.herokuapp.com/api/user/posts/getbookmark",
           requestOptions
         );
         const responseJSON = await response.json();
@@ -85,7 +85,7 @@ const Bookmark = () => {
               <img
                 height={168}
                 alt="logo"
-                src={`https://knowx-fe.herokuapp.com/${item.image}`}
+                src={`https://knowx-be.herokuapp.com/${item.image}`}
               />
             }
           >
@@ -93,7 +93,7 @@ const Bookmark = () => {
               avatar={
                 <Link to="/profile">
                   <Avatar
-                    src={`https://knowx-fe.herokuapp.com/${item.user_image}`}
+                    src={`https://knowx-be.herokuapp.com/${item.user_image}`}
                   />
                 </Link>
               }

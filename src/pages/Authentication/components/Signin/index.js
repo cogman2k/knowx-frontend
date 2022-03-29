@@ -33,7 +33,7 @@ const Signin = () => {
       body: formData,
     };
 
-    fetch("https://knowx-fe.herokuapp.com/api/user/login", requestOptions)
+    fetch("https://knowx-be.herokuapp.com/api/user/login", requestOptions)
       .then((response) => response.json())
       .then((result) => {
         console.log(result);

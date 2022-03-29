@@ -48,7 +48,7 @@ const FindMentor = () => {
 
     try {
       const response = await fetch(
-        `https://knowx-fe.herokuapp.com/api/user/checkfollow`,
+        `https://knowx-be.herokuapp.com/api/user/checkfollow`,
         requestOptions
       );
       const responseJSON = await response.json();
@@ -76,7 +76,7 @@ const FindMentor = () => {
       },
     };
 
-    fetch("https://knowx-fe.herokuapp.com/api/user/follow", requestOptions)
+    fetch("https://knowx-be.herokuapp.com/api/user/follow", requestOptions)
       .then((response) => response.json())
       .then((result) => {
         if (result.type === "follow") {
@@ -114,7 +114,7 @@ const FindMentor = () => {
         },
       };
       const response = await fetch(
-        "https://knowx-fe.herokuapp.com/api/user/mentor/getall",
+        "https://knowx-be.herokuapp.com/api/user/mentor/getall",
         requestOptions
       );
       const responseJSON = await response.json();
@@ -131,7 +131,7 @@ const FindMentor = () => {
         },
       };
       const response = await fetch(
-        "https://knowx-fe.herokuapp.com/api/user/subject/get",
+        "https://knowx-be.herokuapp.com/api/user/subject/get",
         requestOptions
       );
       const responseJSON = await response.json();
@@ -157,7 +157,7 @@ const FindMentor = () => {
         },
       };
       const response = await fetch(
-        "https://knowx-fe.herokuapp.com/api/user/mentor/get",
+        "https://knowx-be.herokuapp.com/api/user/mentor/get",
         requestOptions
       );
       const responseJSON = await response.json();
@@ -297,7 +297,7 @@ const FindMentor = () => {
                           avatar={
                             <Avatar
                               size={64}
-                              src={`https://knowx-fe.herokuapp.com/${item.image}`}
+                              src={`https://knowx-be.herokuapp.com/${item.image}`}
                             />
                           }
                           title={
@@ -396,7 +396,7 @@ const FindMentor = () => {
             style={{ float: "right" }}
             shape="round"
             onClick={() => {
-              window.open("https://knowx-fe.herokuapp.com/chat");
+              window.open("https://knowx-be.herokuapp.com/chat");
             }}
           >
             Send Message

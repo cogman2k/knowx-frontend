@@ -48,7 +48,7 @@ const CreatePost = () => {
       setTimeout(async () => {
         try {
           const response = await fetch(
-            "https://knowx-fe.herokuapp.com/api/user/posts",
+            "https://knowx-be.herokuapp.com/api/user/posts",
             // eslint-disable-next-line comma-dangle
             requestOptions
           );

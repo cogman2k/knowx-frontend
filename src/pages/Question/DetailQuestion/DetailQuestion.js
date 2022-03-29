@@ -62,7 +62,7 @@ const DetailQuestion = () => {
 
       try {
         const response = await fetch(
-          `https://knowx-fe.herokuapp.com/api/user/questions/${selectedId}`,
+          `https://knowx-be.herokuapp.com/api/user/questions/${selectedId}`,
           requestOptions
         );
         const responseJSON = await response.json();
@@ -88,7 +88,7 @@ const DetailQuestion = () => {
       };
       try {
         const response = await fetch(
-          `https://knowx-fe.herokuapp.com/api/user/questions/checklike`,
+          `https://knowx-be.herokuapp.com/api/user/questions/checklike`,
           requestOptions
         );
         const responseJSON = await response.json();
@@ -118,7 +118,7 @@ const DetailQuestion = () => {
     };
     try {
       const response = await fetch(
-        `https://knowx-fe.herokuapp.com/api/user/questions/like`,
+        `https://knowx-be.herokuapp.com/api/user/questions/like`,
         requestOptions
       );
       const responseJSON = await response.json();
@@ -150,7 +150,7 @@ const DetailQuestion = () => {
     setTimeout(async () => {
       try {
         const response = await fetch(
-          `https://knowx-fe.herokuapp.com/api/user/questions/${selectedId}`,
+          `https://knowx-be.herokuapp.com/api/user/questions/${selectedId}`,
           requestOptions
         );
         const responseJSON = await response.json();
@@ -249,7 +249,7 @@ const DetailQuestion = () => {
     };
     try {
       const response = await fetch(
-        `https://knowx-fe.herokuapp.com/api/user/questions/report`,
+        `https://knowx-be.herokuapp.com/api/user/questions/report`,
         requestOptions
       );
       const responseJSON = await response.json();
@@ -300,7 +300,7 @@ const DetailQuestion = () => {
                 <div className="postDetail-container">
                   <div className="postDetail-author">
                     <Avatar
-                      src={`https://knowx-fe.herokuapp.com/${user.image}`}
+                      src={`https://knowx-be.herokuapp.com/${user.image}`}
                       size={40}
                     />
                     <Link

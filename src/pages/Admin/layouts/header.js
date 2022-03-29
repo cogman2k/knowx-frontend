@@ -169,7 +169,7 @@ const header = () => {
             <span className="user-img">
               <img
                 className="rounded-circle"
-                src={`https://knowx-fe.herokuapp.com/${avatar}`}
+                src={`https://knowx-be.herokuapp.com/${avatar}`}
                 width="40"
                 alt="Admin"
               />

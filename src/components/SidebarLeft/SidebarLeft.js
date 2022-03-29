@@ -73,7 +73,7 @@ const SidebarLeft = () => {
             shape="round"
             size="large"
             onClick={() => {
-              window.open("https://knowx-fe.herokuapp.com/chat");
+              window.open("https://knowx-be.herokuapp.com/chat");
             }}
           >
             Go to Messages
@@ -89,7 +89,7 @@ const SidebarLeft = () => {
               <List.Item.Meta
                 avatar={
                   <Avatar
-                    src={`https://knowx-fe.herokuapp.com/${item.user_image}`}
+                    src={`https://knowx-be.herokuapp.com/${item.user_image}`}
                   />
                 }
                 title={
@@ -124,7 +124,7 @@ const SidebarLeft = () => {
 
       try {
         const response = await fetch(
-          "https://knowx-fe.herokuapp.com/api/user",
+          "https://knowx-be.herokuapp.com/api/user",
           requestOptions
         );
         const responseJSON = await response.json();
@@ -145,7 +145,7 @@ const SidebarLeft = () => {
 
       try {
         const response = await fetch(
-          "https://knowx-fe.herokuapp.com/api/user/unseenmessage",
+          "https://knowx-be.herokuapp.com/api/user/unseenmessage",
           requestOptions
         );
         const responseJSON = await response.json();
@@ -169,7 +169,7 @@ const SidebarLeft = () => {
       method: "GET",
       headers: myHeaders,
     };
-    fetch("https://knowx-fe.herokuapp.com/api/user/logout", requestOptions)
+    fetch("https://knowx-be.herokuapp.com/api/user/logout", requestOptions)
       .then((response) => response.json())
       .then((result) => {
         if (result.status === "success") {
@@ -193,7 +193,7 @@ const SidebarLeft = () => {
 
     try {
       const response = await fetch(
-        "https://knowx-fe.herokuapp.com/api/user/class/getclass",
+        "https://knowx-be.herokuapp.com/api/user/class/getclass",
         requestOptions
       );
       const responseJSON = await response.json();
@@ -252,7 +252,7 @@ const SidebarLeft = () => {
         <div className="sidebar-profile">
           <div className="sidebar-profile-img">
             <Avatar
-              src={`https://knowx-fe.herokuapp.com/${user.image}`}
+              src={`https://knowx-be.herokuapp.com/${user.image}`}
               size={128}
             />
           </div>
@@ -285,7 +285,7 @@ const SidebarLeft = () => {
               <Typography
                 style={{ fontWeight: "600" }}
                 onClick={() => {
-                  window.open("https://knowx-fe.herokuapp.com/chat");
+                  window.open("https://knowx-be.herokuapp.com/chat");
                 }}
               >
                 CHAT
