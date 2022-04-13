@@ -1,4 +1,4 @@
-import { Menu } from "antd";
+import { Menu, Avatar } from "antd";
 import "bootstrap/dist/css/bootstrap.css";
 import { useEffect, useState } from "react";
 import { useLocation, useHistory } from "react-router-dom";
@@ -15,6 +15,8 @@ const Profile = () => {
   const [key, setKey] = useState("about");
   const [education, setEducation] = useState([]);
   const [experience, setExperience] = useState([]);
+  const [postAmount, setPostAmount] = useState(0);
+  const [questionAmount, setQuestionAmount] = useState(0);
   const [posts, setPosts] = useState([]);
   const [questions, setQuestions] = useState([]);
 
@@ -110,6 +112,7 @@ const Profile = () => {
       console.log(responseJSON);
       if (responseJSON.status === "success") {
         setPosts(responseJSON.data);
+        setPostAmount(responseJSON.count);
       }
     } catch (error) {
       console.log("Failed fetch list Posts", error.message);
@@ -136,6 +139,7 @@ const Profile = () => {
       const responseJSON = await response.json();
       if (responseJSON.status === "success") {
         setQuestions(responseJSON.data);
+        setQuestionAmount(responseJSON.count);
       }
     } catch (error) {
       console.log("Failed fetch list questions", error.message);
@@ -299,15 +303,18 @@ const Profile = () => {
               <div className="col-md-12">
                 <div className="profile-view">
                   <div className="profile-img-wrap">
-                    <div className="profile-img">
-                      <a href="#">
-                        <img
+                    <a href="#">
+                      {/* <img
                           className="avatar"
                           src={`https://knowx-be.herokuapp.com/${data.image}`}
                           alt=""
-                        />
-                      </a>
-                    </div>
+                        /> */}
+                      <Avatar
+                        size={120}
+                        className="avatar"
+                        src={`https://knowx-be.herokuapp.com/${data.image}`}
+                      />
+                    </a>
                   </div>
                   <div className="profile-basic">
                     <div className="row">
@@ -320,7 +327,9 @@ const Profile = () => {
                               fontWeight: "bold",
                             }}
                           >
-                            {data.full_name}
+                            {data.role === "admin"
+                              ? data.first_name
+                              : data.full_name}
                           </h3>
                           <small className="text-muted">{data.role}</small>
                           <div className="staff-id">User ID : {data.id}</div>
@@ -383,9 +392,11 @@ const Profile = () => {
               onClick={handleClick}
               selectedKeys={key}
             >
-              <Menu.Item key="about">ABOUT</Menu.Item>
-              <Menu.Item key="posts">POSTS</Menu.Item>
-              <Menu.Item key="questions">QUESTIONS</Menu.Item>
+              <Menu.Item key="about">ABOUT </Menu.Item>
+              <Menu.Item key="posts">POSTS ({postAmount})</Menu.Item>
+              <Menu.Item key="questions">
+                QUESTIONS ({questionAmount})
+              </Menu.Item>
             </Menu>
             <div class="tab-content">
               {key === "about" ? About : key === "posts" ? Posts : Questions}

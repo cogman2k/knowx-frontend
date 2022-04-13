@@ -10,6 +10,7 @@ import {
   Divider,
   Spin,
   Input,
+  Select,
 } from "antd";
 import {
   DownOutlined,
@@ -30,6 +31,7 @@ import "./styles.scss";
 
 const { Content } = Layout;
 const { TextArea } = Input;
+const { Option } = Select;
 
 const DetailQuestion = () => {
   const userId = sessionStorage.getItem("user_id");
@@ -49,6 +51,22 @@ const DetailQuestion = () => {
   const [spin, setSpin] = useState(true);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [description, setDescription] = useState("");
+  const [disabled, setDisabled] = useState("none");
+
+  const listReport = [
+    <Option value="1">Report 1</Option>,
+    <Option value="2">Report 2</Option>,
+    <Option value="3">Report 3</Option>,
+    <Option value="4">Report 4</Option>,
+    <Option value="5">Other</Option>,
+  ];
+
+  function handleChange(value) {
+    setDescription(value);
+    if (value === "5") {
+      setDisabled("block");
+    }
+  }
 
   useEffect(() => {
     async function getQuestionData() {
@@ -103,7 +121,7 @@ const DetailQuestion = () => {
     }
     checkLike();
     getQuestionData();
-  }, [selectedId]);
+  }, []);
 
   async function handleLike() {
     const token = sessionStorage.getItem("token");
@@ -256,6 +274,8 @@ const DetailQuestion = () => {
       console.log(responseJSON);
       if (responseJSON.status === "success") {
         message.success("Report sended!");
+        setDisabled("none");
+        setDescription("");
       }
     } catch (error) {
       console.log("Failed fetch ", error.message);
@@ -275,7 +295,15 @@ const DetailQuestion = () => {
             onCancel={handleCancelReport}
             okText="Send"
           >
+            <Select
+              defaultValue={description}
+              style={{ width: 352, marginBottom: "20px" }}
+              onChange={handleChange}
+            >
+              {listReport}
+            </Select>
             <TextArea
+              style={{ display: disabled }}
               onChange={(e) => setDescription(e.target.value)}
               placeholder="Description..."
               autoSize={{ minRows: 3, maxRows: 5 }}
@@ -341,13 +369,8 @@ const DetailQuestion = () => {
                       </div>
                     ) : (
                       <WarningFilled
-                        style={{
-                          float: "right",
-                          position: "relative",
-                          left: "630px",
-                          fontSize: "20px",
-                          cursor: "pointer",
-                        }}
+                        sclassName="postDetail-dropdown"
+                        style={{ fontSize: "24px" }}
                         onClick={showModalReport}
                       />
                     )}

@@ -5,6 +5,14 @@ import { useState } from "react";
 import "bootstrap/dist/css/bootstrap.css";
 import "./styles.scss";
 
+const openNotificationWithIcon = (type) => {
+  notification[type]({
+    message: "Success!",
+    description: "Added new account!",
+    top: 80,
+  });
+};
+
 const AddUser = () => {
   const history = useHistory();
   const [firstName, setFirstName] = useState("");
@@ -45,6 +53,7 @@ const AddUser = () => {
       const responseJSON = await response.json();
       console.log(responseJSON);
       if (responseJSON.status === "success") {
+        openNotificationWithIcon("success");
         history.push("/admin/users");
       }
       if (responseJSON.status === "error") {
@@ -189,7 +198,6 @@ const AddUser = () => {
                             }}
                           >
                             <option>student</option>
-                            <option>company</option>
                             <option>admin</option>
                           </select>
                         </div>

@@ -1,41 +1,85 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, notification } from "react";
+import { Avatar, Modal } from "antd";
 import Header from "../layouts/header";
 import Sidebar from "../layouts/sidebar";
 import "./styles.scss";
 
 const Companies = () => {
   const [companies, setCompanies] = useState([]);
+  const [activeUser, setActiveUser] = useState({});
+  const [isModalVisible, setIsModalVisible] = useState(false);
+
+  const getData = async () => {
+    const token = sessionStorage.getItem("token");
+    const requestOptions = {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
+    try {
+      const response = await fetch(
+        "https://knowx-be.herokuapp.com/api/admin/companies",
+        requestOptions
+      );
+      const responseJSON = await response.json();
+      if (responseJSON.status === "success") {
+        setCompanies(responseJSON.data);
+      }
+    } catch (error) {
+      console.log("Failed fetch get all students", error.message);
+    }
+  };
 
   useEffect(() => {
-    const getData = async () => {
-      const token = sessionStorage.getItem("token");
-      const requestOptions = {
-        method: "GET",
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      };
-      try {
-        const response = await fetch(
-          "https://knowx-be.herokuapp.com/api/admin/companies",
-          requestOptions
-        );
-        const responseJSON = await response.json();
-        console.log(responseJSON);
-        if (responseJSON.status === "success") {
-          setCompanies(responseJSON.data);
-        }
-      } catch (error) {
-        console.log("Failed fetch get all students", error.message);
-      }
-    };
     getData();
   }, []);
+
+  const handleDelete = async () => {
+    const token = sessionStorage.getItem("token");
+    const requestOptions = {
+      method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
+
+    const response = await fetch(
+      `https://knowx-be.herokuapp.com/api/admin/delete-user/${activeUser}`,
+      requestOptions
+    );
+    const responseJSON = await response.json();
+    if (responseJSON.status === "success") {
+      getData();
+    }
+  };
+
+  const showModal = (id) => {
+    setActiveUser(id);
+    setIsModalVisible(true);
+  };
+
+  const handleOk = () => {
+    handleDelete();
+    setIsModalVisible(false);
+  };
+
+  const handleCancel = () => {
+    setIsModalVisible(false);
+  };
 
   return (
     <div className="main-wrapper">
       <Header />
       <Sidebar />
+      <Modal
+        title="Confirm"
+        visible={isModalVisible}
+        onOk={handleOk}
+        onCancel={handleCancel}
+      >
+        Accept delete this user?
+      </Modal>
       <div className="page-wrapper">
         <div className="content">
           <div className="row">
@@ -56,12 +100,21 @@ const Companies = () => {
               <div className="col-md-4 col-sm-4  col-lg-3" key={company.id}>
                 <div className="profile-widget">
                   <div className="doctor-img">
-                    <a className="avatar" href={`/admin/user/${company.id}`}>
-                      <img
+                    <a href={`/admin/user/${company.id}`}>
+                      {/* <img
                         alt=""
+                        src={`https://knowx-be.herokuapp.com/${company.image}`}
+                      /> */}
+                      <Avatar
+                        size={80}
                         src={`https://knowx-be.herokuapp.com/${company.image}`}
                       />
                     </a>
+
+                    {/* <Avatar
+                        size={64}
+                        src={`https://knowx-be.herokuapp.com/${company.image}`}
+                      /> */}
                   </div>
                   <div className="dropdown profile-action">
                     <a
@@ -70,7 +123,10 @@ const Companies = () => {
                       data-toggle="dropdown"
                       aria-expanded="false"
                     >
-                      <i className="fa fa-ellipsis-v"></i>
+                      <i
+                        className="fa-solid fa-xmark"
+                        onClick={() => showModal(company.id)}
+                      ></i>
                     </a>
                     <div className="dropdown-menu dropdown-menu-right">
                       <a className="dropdown-item" href="edit-doctor.html">

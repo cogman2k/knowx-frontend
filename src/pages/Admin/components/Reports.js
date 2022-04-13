@@ -1,9 +1,12 @@
-import { Menu, message, Modal, notification } from "antd";
+import { Menu, Modal, notification, Select, Button } from "antd";
 import { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import Header from "../layouts/header";
 import Sidebar from "../layouts/sidebar";
+import { RedoOutlined } from "@ant-design/icons";
 import "./styles.scss";
+
+const { Option } = Select;
 
 const openNotificationWithIcon = (type) => {
   notification[type]({
@@ -13,7 +16,7 @@ const openNotificationWithIcon = (type) => {
   });
 };
 
-const AddCompanies = () => {
+const Reports = () => {
   const history = useHistory();
   const [reportPosts, setReportPosts] = useState([]);
   const [reportQuestions, setReportQuestions] = useState([]);
@@ -27,7 +30,6 @@ const AddCompanies = () => {
   const [visibleQuestion, setVisibleQuestion] = useState(false);
   const [postId, setPostId] = useState("");
   const [questionId, setQuestionId] = useState("");
-  const users = <div>users</div>;
 
   const handleClick = (e) => {
     setKey(e.key);
@@ -178,10 +180,27 @@ const AddCompanies = () => {
     setVisibleQuestion(true);
   };
 
+  function onChange(value) {
+    console.log(`selected ${value}`);
+    setReportQuestions((el) => el.question_id === value);
+  }
+
+  function onSearch(val) {
+    console.log("search:", val);
+  }
+
   const PostReports = (
     <div className="col-12">
       <div className="card">
         <div className="card-block">
+          <Button
+            style={{ float: "right" }}
+            type="primary"
+            onClick={getPostReports}
+            icon={<RedoOutlined />}
+          >
+            Reset
+          </Button>
           <div className="table-responsive">
             <table className="table mb-0 new-patient-table posts">
               <thead>
@@ -194,7 +213,15 @@ const AddCompanies = () => {
               </thead>
               <tbody>
                 {reportPosts.map((e) => (
-                  <tr>
+                  <tr
+                    key={e.id}
+                    style={{ cursor: "pointer" }}
+                    onClick={() => {
+                      setReportPosts(
+                        reportPosts.filter((el) => el.post_id === e.post_id)
+                      );
+                    }}
+                  >
                     <th scope="row">
                       <b className="name">{e.post_id}</b>
                     </th>
@@ -231,11 +258,19 @@ const AddCompanies = () => {
     <div className="col-12">
       <div className="card">
         <div className="card-block">
+          <Button
+            style={{ float: "right" }}
+            type="primary"
+            onClick={getQuestionReports}
+            icon={<RedoOutlined />}
+          >
+            Reset
+          </Button>
           <div className="table-responsive">
             <table className="table mb-0 new-patient-table posts">
               <thead>
                 <tr>
-                  <th scope="col">Question ID</th>
+                  <th scope="col">Question ID </th>
                   <th scope="col">Description</th>
                   <th scope="col">Date</th>
                   <th scope="col">Action</th>
@@ -243,7 +278,17 @@ const AddCompanies = () => {
               </thead>
               <tbody>
                 {reportQuestions.map((e) => (
-                  <tr>
+                  <tr
+                    key={e.id}
+                    style={{ cursor: "pointer" }}
+                    onClick={() => {
+                      setReportQuestions(
+                        reportQuestions.filter(
+                          (el) => el.question_id === e.question_id
+                        )
+                      );
+                    }}
+                  >
                     <th scope="row">
                       <b className="name">{e.question_id}</b>
                     </th>
@@ -302,6 +347,11 @@ const AddCompanies = () => {
       <Sidebar />
       <div className="page-wrapper">
         <div className="content">
+          <div className="row" style={{ marginLeft: "3px" }}>
+            <div className="col-sm-4 col-3">
+              <h4 className="page-title">Reports</h4>
+            </div>
+          </div>
           <div className="profile-tabs">
             <Menu
               mode="horizontal"
@@ -324,4 +374,4 @@ const AddCompanies = () => {
   );
 };
 
-export default AddCompanies;
+export default Reports;

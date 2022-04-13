@@ -1,24 +1,26 @@
-import "antd/dist/antd.css";
-import "./styles.scss";
-import React, { useState, useEffect } from "react";
 import {
-  Layout,
-  Menu,
-  Button,
-  Avatar,
-  Typography,
-  Badge,
-  Modal,
-  List,
-} from "antd";
-import {
+  BellOutlined,
   ExportOutlined,
-  ReadFilled,
-  BellFilled,
-  MessageFilled,
-  FileFilled,
+  FileOutlined,
+  MessageOutlined,
+  ReadOutlined,
 } from "@ant-design/icons";
+import {
+  Avatar,
+  Badge,
+  Button,
+  Col,
+  Layout,
+  List,
+  Menu,
+  Modal,
+  Row,
+  Typography,
+} from "antd";
+import "antd/dist/antd.css";
+import React, { useEffect, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
+import "./styles.scss";
 
 const { Sider } = Layout;
 const { Title } = Typography;
@@ -197,7 +199,6 @@ const SidebarLeft = () => {
         requestOptions
       );
       const responseJSON = await response.json();
-      console.log(responseJSON);
       setClasses(responseJSON.data);
     } catch (error) {
       console.log("Faild fetch messages : ", error.message);
@@ -249,28 +250,36 @@ const SidebarLeft = () => {
       {modal}
       {modalClass}
       <Sider width={200} className="site-layout-background">
-        <div className="sidebar-profile">
-          <div className="sidebar-profile-img">
-            <Avatar
-              src={`https://knowx-be.herokuapp.com/${user.image}`}
-              size={128}
-            />
-          </div>
-          <div>
-            <Link to="/profile">
-              <Title level={4} style={{ color: "#00358E" }}>
-                {user.full_name}
-              </Title>
-            </Link>
-          </div>
-        </div>
-        <Menu mode="inline" style={{ height: "100%", borderRight: 0 }}>
-          <Menu.Item key="2" icon={<ReadFilled className="fontSize-24" />}>
+        <Menu mode="inline" style={{ borderRight: 0 }}>
+          <Menu.Item key="0" style={{ marginTop: "15px" }}>
+            <Row>
+              <Col span={6}>
+                <Avatar
+                  size={36}
+                  src={`https://knowx-be.herokuapp.com/${user.image}`}
+                />
+              </Col>
+              <Col span={18}>
+                <Link to="/profile">
+                  <Title
+                    level={5}
+                    style={{
+                      color: "#00358E",
+                      lineHeight: "42.6px",
+                    }}
+                  >
+                    {user.full_name}
+                  </Title>
+                </Link>
+              </Col>
+            </Row>
+          </Menu.Item>
+          <Menu.Item key="2" icon={<ReadOutlined className="fontSize-24" />}>
             <Typography style={{ fontWeight: "600" }} onClick={showModalClass}>
               MY CLASS
             </Typography>
           </Menu.Item>
-          <Menu.Item key="3" icon={<FileFilled className="fontSize-24" />}>
+          <Menu.Item key="3" icon={<FileOutlined className="fontSize-24" />}>
             <Typography
               style={{ fontWeight: "600" }}
               onClick={() => {
@@ -280,7 +289,7 @@ const SidebarLeft = () => {
               REFERENCE
             </Typography>
           </Menu.Item>
-          <Menu.Item key="4" icon={<MessageFilled className="fontSize-24" />}>
+          <Menu.Item key="4" icon={<MessageOutlined className="fontSize-24" />}>
             {numberMessages === 0 ? (
               <Typography
                 style={{ fontWeight: "600" }}
@@ -307,7 +316,7 @@ const SidebarLeft = () => {
               </Badge>
             )}
           </Menu.Item>
-          <Menu.Item key="5" icon={<BellFilled className="fontSize-24" />}>
+          <Menu.Item key="5" icon={<BellOutlined className="fontSize-24" />}>
             <Typography style={{ fontWeight: "600" }}>NOTIFICATION</Typography>
           </Menu.Item>
           <Menu.Item key="6" style={{ bottom: "-600px" }}>

@@ -24,8 +24,6 @@ const Meeting = (props) => {
 
     api = new window.JitsiMeetExternalAPI(domain, options);
 
-    api.executeCommand("avatarUrl", props.imageUrl);
-
     api.addEventListeners({
       videoConferenceLeft: handleVideoConferenceLeft,
       participantLeft: handleParticipantLeft,
@@ -37,7 +35,6 @@ const Meeting = (props) => {
   };
 
   const handleVideoConferenceLeft = () => {
-    console.log("handleVideoConferenceLeft");
     return history.push("/homepage");
   };
 

@@ -43,34 +43,38 @@ const Followings = () => {
 
   return (
     <div>
-      <List
-        itemLayout="horizontal"
-        size="large"
-        pagination={{
-          pageSize: 5,
-        }}
-        dataSource={listFollowing}
-        renderItem={(item) => (
-          <div>
-            <List.Item className="list">
-              <List.Item.Meta
-                avatar={
-                  <Avatar
-                    src={`https://knowx-be.herokuapp.com/${item.image}`}
-                  />
-                }
-                title={
-                  <a href={`/otherprofile/${item.id}`}>{item.full_name}</a>
-                }
-                description={`${item.email} | ${item.topic}`}
-              />
-              <Button>
-                <Link to={`/otherprofile/${item.id}`}>View Profile</Link>
-              </Button>
-            </List.Item>
-          </div>
-        )}
-      />
+      {listFollowing.length > 0 ? (
+        <List
+          itemLayout="horizontal"
+          size="large"
+          pagination={{
+            pageSize: 5,
+          }}
+          dataSource={listFollowing}
+          renderItem={(item) => (
+            <div>
+              <List.Item className="list">
+                <List.Item.Meta
+                  avatar={
+                    <Avatar
+                      src={`https://knowx-be.herokuapp.com/${item.image}`}
+                    />
+                  }
+                  title={
+                    <a href={`/otherprofile/${item.id}`}>{item.full_name}</a>
+                  }
+                  description={`${item.email} | ${item.topic}`}
+                />
+                <Button>
+                  <Link to={`/otherprofile/${item.id}`}>View Profile</Link>
+                </Button>
+              </List.Item>
+            </div>
+          )}
+        />
+      ) : (
+        "You have no following users!"
+      )}
     </div>
   );
 };

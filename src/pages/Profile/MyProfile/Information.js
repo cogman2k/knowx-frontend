@@ -7,7 +7,6 @@ import {
   Input,
   Button,
   Modal,
-  Descriptions,
   Space,
   notification,
   Image,
@@ -16,16 +15,14 @@ import {
   DatePicker,
   Typography,
   Select,
+  Row,
+  Col,
 } from "antd";
-import { SettingFilled } from "@ant-design/icons";
 
-const { Title } = Typography;
 const { Option } = Select;
 
 const Information = () => {
-  const [info, setInfo] = useState("");
   const [picture, setPicture] = useState();
-  const [editMode, setEditMode] = useState(false);
   const [user, setUser] = useState({});
   const [spin, setSpin] = useState(true);
   const [oldPassword, setOldPassword] = useState("");
@@ -154,10 +151,10 @@ const Information = () => {
         const responseJSON = await response.json();
         if (responseJSON.status === "success") {
           setUser(responseJSON.data);
-          setEditMode(false);
-          setInfo("");
           openNotificationWithIcon("success", "Information updated!");
-          // window.location.reload(true);
+          setTimeout(async () => {
+            window.location.reload();
+          }, 1000);
         } else {
           setLoading(false);
           openNotificationWithIcon("error", "Update profile failed!");
@@ -185,376 +182,291 @@ const Information = () => {
   };
 
   const tmpInforData = { ...user };
-
-  const editInfo = (
-    <div>
-      <Form
-        name="basic"
-        initialValue={{
-          first_name: tmpInforData.first_name,
-          last_name: tmpInforData.last_name,
-          email: tmpInforData.email,
-          phone: tmpInforData.phone,
-          image: tmpInforData.image,
-          gender: tmpInforData.gender,
-          birthday: tmpInforData.birthday,
-          topic: tmpInforData.topic,
-          description: tmpInforData.description,
-        }}
-      >
-        <div className="form-edit">
-          <Form.Item
-            rules={[{ required: true }]}
-            name="image"
-            initialValue={tmpInforData.image}
-            label="Image"
-          >
-            <div className="input-group mb-3">
-              <input
-                style={{ marginLeft: "105px" }}
-                type="file"
-                className="form-control"
-                onChange={handleImage}
-              />
-            </div>
-          </Form.Item>
-
-          <Form.Item
-            rules={[{ required: true }]}
-            name="email"
-            initialValue={tmpInforData.email}
-            label="Email"
-          >
-            <Input
-              width="100px"
-              disabled
-              onChange={(e) => {
-                tmpInforData.email = e.target.value;
-              }}
-            />
-          </Form.Item>
-          <Form.Item
-            rules={[{ required: true }]}
-            name="first_name"
-            initialValue={tmpInforData.first_name}
-            label="First name"
-          >
-            <Input
-              width="100px"
-              onChange={(e) => {
-                tmpInforData.first_name = e.target.value;
-              }}
-            />
-          </Form.Item>
-          <Form.Item
-            label="Last name"
-            rules={[{ required: true }]}
-            name="last_name"
-            initialValue={tmpInforData.last_name}
-          >
-            <Input
-              onChange={(e) => {
-                tmpInforData.last_name = e.target.value;
-              }}
-            />
-          </Form.Item>
-          <Form.Item
-            label="Gender"
-            rules={[{ required: true }]}
-            name="gender"
-            initialValue={tmpInforData.gender}
-          >
-            {/* <Input
-              onChange={(e) => {
-                tmpInforData.gender = e.target.value;
-              }}
-            /> */}
-            <div style={{ marginLeft: "100px" }}>
-              <Select
-                defaultValue="Male"
-                style={{ width: 300, marginleft: "108px" }}
-                onChange={(value) => {
-                  tmpInforData.gender = value;
-                  console.log(value);
-                }}
-              >
-                <Option value="Male">Male</Option>
-                <Option value="Female">Female</Option>
-              </Select>
-            </div>
-          </Form.Item>
-          <Form.Item
-            label="Phone"
-            rules={[{ required: true }]}
-            name="phone"
-            initialValue={tmpInforData.phone}
-          >
-            <Input
-              onChange={(e) => {
-                tmpInforData.phone = e.target.value;
-              }}
-            />
-          </Form.Item>
-          <Form.Item
-            label="Birthday"
-            rules={[{ required: true }]}
-            name="birthday"
-          >
-            {/* <Input
-              onChange={(e) => {
-                tmpInforData.birthday = e.target.value;
-              }}
-            /> */}
-            <div>
-              <DatePicker
-                size="large"
-                defaultValue={moment(tmpInforData.birthday, dateFormatList[0])}
-                format={dateFormatList}
-                style={{ width: "300px", marginLeft: "92px" }}
-                onChange={(date, dateString) => {
-                  tmpInforData.birthday = dateString;
-                }}
-              />
-            </div>
-          </Form.Item>
-          <Form.Item
-            label="Topic"
-            rules={[{ required: true }]}
-            name="topic"
-            initialValue={tmpInforData.topic}
-          >
-            <Input
-              onChange={(e) => {
-                tmpInforData.topic = e.target.value;
-              }}
-            />
-          </Form.Item>
-          <Form.Item
-            label="Description"
-            rules={[{ required: true }]}
-            name="description"
-            initialValue={tmpInforData.description}
-          >
-            <Input.TextArea
-              onChange={(e) => {
-                tmpInforData.description = e.target.value;
-              }}
-            />
-          </Form.Item>
-          <Form.Item>
-            <div style={{ textAlign: "center" }}>
-              <Space size={20}>
-                <Button
-                  size="medium"
-                  type="primary"
-                  onClick={handleEdit}
-                  style={{ width: "100px" }}
-                  loading={loading}
-                >
-                  EDIT
-                </Button>
-                <Button
-                  size="medium"
-                  type="primary"
-                  style={{ width: "100px" }}
-                  onClick={() => {
-                    setEditMode(false);
-                    setInfo("");
-                  }}
-                >
-                  CANCEL
-                </Button>
-              </Space>
-            </div>
-          </Form.Item>
-        </div>
-      </Form>
-    </div>
-  );
-
   return (
-    <div className="container">
+    <div className="container" style={{ height: "auto" }}>
       {spin ? (
-        <div className="spin">
+        <div style={{ textAlign: "center" }}>
           <Spin size="large" />
         </div>
       ) : (
-        <div className=" content">
-          <div style={{ height: "100%", overflow: "auto" }}>
-            <div className="personal-profile">
-              {/* <span
-                style={{
-                  fontWeight: "bold",
-                  fontSize: "16px",
-                  marginRight: "25px",
-                  marginTop: "25px",
-                  paddingBottom: "25px",
-                }}
-              >
-                Personal information
-              </span> */}
-              <Title
-                level={5}
-                style={{ display: "inline-block", marginRight: "20px" }}
-              >
-                INFORMATION
-              </Title>
-              <Button
-                type="primary"
-                onClick={() => {
-                  setInfo("none");
-                  setEditMode(true);
-                }}
-                icon={<SettingFilled />}
-              >
-                EDIT
-              </Button>
+        <div>
+          <div className="edit-info content">
+            <h5>Personal information</h5>
 
-              {editMode ? editInfo : null}
+            {/* UI edit profile */}
 
-              <Descriptions
-                bordered
-                column={1}
-                style={{ display: `${info}`, marginTop: "0px" }}
-              >
-                <Descriptions.Item label="Image">
-                  <Image
-                    width={182}
-                    src={`https://knowx-be.herokuapp.com/${user.image}`}
-                  />
-                </Descriptions.Item>
-                <Descriptions.Item label="Name">
-                  {user.full_name}
-                </Descriptions.Item>
-                <Descriptions.Item label="Birthday">
-                  {user.birthday}
-                </Descriptions.Item>
-                <Descriptions.Item label="Gender">
-                  {user.gender}
-                </Descriptions.Item>
-                <Descriptions.Item label="Email">
-                  {user.email}
-                </Descriptions.Item>
-                <Descriptions.Item label="Phone">
-                  {user.phone}
-                </Descriptions.Item>
-                <Descriptions.Item label="Topic">
-                  {user.topic}
-                </Descriptions.Item>
-                <Descriptions.Item label="Description">
-                  {user.description}
-                </Descriptions.Item>
-              </Descriptions>
-            </div>
-            <div>
-              <Title
-                className="title-account-info"
-                level={5}
-                style={{ marginTop: "20px" }}
-              >
-                ACCOUNT
-              </Title>
-              <Form name="basic">
-                <Form.Item
-                  style={{ marginBottom: 0 }}
-                  name="email"
-                  label="Email"
-                >
-                  <span className="">{user.email}</span>
-                </Form.Item>
-                <Form.Item
-                  style={{ marginBottom: 0 }}
-                  name="password"
-                  label="Password"
-                >
-                  <span className="">********</span>
-                </Form.Item>
-              </Form>
-              <Button type="primary" onClick={showModal}>
-                Change Password
-              </Button>
-              <Modal
-                visible={visible}
-                title="Change Password"
-                onOk={handleOk}
-                onCancel={handleCancel}
-                footer={[
-                  <Button key="back" onClick={handleCancel}>
-                    Return
-                  </Button>,
-                  <Button
-                    key="submit"
-                    type="primary"
-                    loading={loading}
-                    onClick={handleOk}
-                  >
-                    Change
-                  </Button>,
-                ]}
-              >
-                <Form name="changepassword" form={form}>
+            <Form
+              layout="vertical"
+              name="basic"
+              hideRequiredMark
+              initialValue={{
+                first_name: tmpInforData.first_name,
+                last_name: tmpInforData.last_name,
+                email: tmpInforData.email,
+                phone: tmpInforData.phone,
+                image: tmpInforData.image,
+                gender: tmpInforData.gender,
+                birthday: tmpInforData.birthday,
+                topic: tmpInforData.topic,
+                description: tmpInforData.description,
+              }}
+            >
+              <Row gutter={16} style={{ marginBottom: "-25px" }}>
+                <Col span={8}>
                   <Form.Item
-                    rules={[
-                      {
-                        required: true,
-                        message: "Please input your old password!",
-                      },
-                    ]}
-                    name="old-password"
-                    label="Old Password"
+                    rules={[{ required: true }]}
+                    name="avatar"
+                    initialValue={tmpInforData.image}
+                    label="Avatar"
                   >
-                    <Input.Password
-                      maxLength={30}
-                      placeholder="Old Password"
-                      onChange={(e) => {
-                        setOldPassword(e.target.value);
-                      }}
-                      style={{ marginLeft: "26px", width: "337px" }}
-                    />
+                    <div className="input-group mb-3">
+                      <input
+                        type="file"
+                        className="form-control"
+                        onChange={handleImage}
+                      />
+                    </div>
                   </Form.Item>
+                </Col>
+              </Row>
+
+              <Row gutter={16}>
+                <Col span={8}>
                   <Form.Item
-                    rules={[
-                      {
-                        required: true,
-                        message: "Please input your new password!",
-                      },
-                    ]}
-                    name="new-password"
-                    label="New Password"
+                    rules={[{ required: true }]}
+                    name="first_name"
+                    initialValue={tmpInforData.first_name}
+                    label="First name"
                   >
-                    <Input.Password
-                      maxLength={30}
-                      placeholder="New Password"
+                    <Input
                       onChange={(e) => {
-                        setNewPassword(e.target.value);
-                      }}
-                      style={{ marginLeft: "20px", width: "338px" }}
-                    />
-                  </Form.Item>
-                  <Form.Item
-                    rules={[
-                      {
-                        required: true,
-                        message: "Please input your confirm new password!",
-                      },
-                    ]}
-                    name="confirm-password"
-                    label="Confirm Password"
-                  >
-                    <Input.Password
-                      maxLength={30}
-                      placeholder="Confirm password"
-                      onChange={(e) => {
-                        setConfirmPassword(e.target.value);
+                        tmpInforData.first_name = e.target.value;
                       }}
                     />
                   </Form.Item>
-                </Form>
-              </Modal>
-            </div>
+                </Col>
+                <Col span={8}>
+                  <Form.Item
+                    label="Last name"
+                    rules={[{ required: true }]}
+                    name="last_name"
+                    initialValue={tmpInforData.last_name}
+                  >
+                    <Input
+                      onChange={(e) => {
+                        tmpInforData.last_name = e.target.value;
+                      }}
+                    />
+                  </Form.Item>
+                </Col>
+                <Col span={6}>
+                  <Form.Item
+                    label="Birthday"
+                    rules={[{ required: true }]}
+                    name="birthday"
+                  >
+                    <DatePicker
+                      size="middle"
+                      defaultValue={moment(
+                        tmpInforData.birthday,
+                        dateFormatList[0]
+                      )}
+                      format={dateFormatList}
+                      onChange={(date, dateString) => {
+                        tmpInforData.birthday = dateString;
+                      }}
+                    />
+                  </Form.Item>
+                </Col>
+              </Row>
+              <Row gutter={16}>
+                <Col span={8}>
+                  <Form.Item
+                    label="Gender"
+                    rules={[{ required: true }]}
+                    name="gender"
+                    initialValue={tmpInforData.gender}
+                  >
+                    <Select
+                      defaultValue="Male"
+                      onChange={(value) => {
+                        tmpInforData.gender = value;
+                        console.log(value);
+                      }}
+                    >
+                      <Option value="Male">Male</Option>
+                      <Option value="Female">Female</Option>
+                    </Select>
+                  </Form.Item>
+                </Col>
+                <Col span={8}>
+                  <Form.Item
+                    label="Phone"
+                    rules={[{ required: true }]}
+                    name="phone"
+                    initialValue={tmpInforData.phone}
+                  >
+                    <Input
+                      onChange={(e) => {
+                        tmpInforData.phone = e.target.value;
+                      }}
+                    />
+                  </Form.Item>
+                </Col>
+                <Col span={6}>
+                  <Form.Item
+                    rules={[{ required: true }]}
+                    name="email"
+                    initialValue={tmpInforData.email}
+                    label="Email"
+                  >
+                    <Input
+                      width="100px"
+                      disabled
+                      onChange={(e) => {
+                        tmpInforData.email = e.target.value;
+                      }}
+                    />
+                  </Form.Item>
+                </Col>
+              </Row>
+              <Row gutter={16}>
+                <Col span={8}>
+                  <Form.Item
+                    label="Topic"
+                    rules={[{ required: true }]}
+                    name="topic"
+                    initialValue={tmpInforData.topic}
+                  >
+                    <Input
+                      onChange={(e) => {
+                        tmpInforData.topic = e.target.value;
+                      }}
+                    />
+                  </Form.Item>
+                </Col>
+                <Col span={14}>
+                  <Form.Item
+                    label="Description"
+                    rules={[{ required: true }]}
+                    name="description"
+                    initialValue={tmpInforData.description}
+                  >
+                    <Input.TextArea
+                      onChange={(e) => {
+                        tmpInforData.description = e.target.value;
+                      }}
+                    />
+                  </Form.Item>
+                </Col>
+              </Row>
+              <Form.Item>
+                <div style={{ textAlign: "center" }}>
+                  <Space>
+                    <Button
+                      shape="round"
+                      size="large"
+                      type="primary"
+                      onClick={handleEdit}
+                      style={{ width: "125px" }}
+                      loading={loading}
+                    >
+                      SAVE
+                    </Button>
+                  </Space>
+                </div>
+              </Form.Item>
+            </Form>
           </div>
+
+          {/* UI change-password */}
         </div>
       )}
+
+      <div className="content" style={{ height: "auto" }}>
+        <h5>Account</h5>
+        <Button type="primary" onClick={showModal}>
+          Change Password
+        </Button>
+        <Modal
+          visible={visible}
+          title="Change Password"
+          onOk={handleOk}
+          onCancel={handleCancel}
+          footer={[
+            <Button key="back" onClick={handleCancel}>
+              Return
+            </Button>,
+            <Button
+              key="submit"
+              type="primary"
+              loading={loading}
+              onClick={handleOk}
+            >
+              Change
+            </Button>,
+          ]}
+        >
+          <Form name="changepassword" form={form}>
+            <Form.Item
+              rules={[
+                {
+                  required: true,
+                  message: "Please input your old password!",
+                },
+              ]}
+              name="old-password"
+              label="Old Password"
+            >
+              <Input.Password
+                maxLength={30}
+                placeholder="Old Password"
+                onChange={(e) => {
+                  setOldPassword(e.target.value);
+                }}
+                style={{ marginLeft: "26px", width: "337px" }}
+              />
+            </Form.Item>
+            <Form.Item
+              rules={[
+                {
+                  required: true,
+                  message: "Please input your new password!",
+                },
+              ]}
+              name="new-password"
+              label="New Password"
+            >
+              <Input.Password
+                maxLength={30}
+                placeholder="New Password"
+                onChange={(e) => {
+                  setNewPassword(e.target.value);
+                }}
+                style={{ marginLeft: "20px", width: "338px" }}
+              />
+            </Form.Item>
+            <Form.Item
+              rules={[
+                {
+                  required: true,
+                  message: "Please input your confirm new password!",
+                },
+              ]}
+              name="confirm-password"
+              label="Confirm Password"
+            >
+              <Input.Password
+                maxLength={30}
+                placeholder="Confirm password"
+                onChange={(e) => {
+                  setConfirmPassword(e.target.value);
+                }}
+              />
+            </Form.Item>
+          </Form>
+        </Modal>
+      </div>
     </div>
   );
 };

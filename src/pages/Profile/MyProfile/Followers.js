@@ -21,7 +21,6 @@ const Followers = () => {
           requestOptions
         );
         const responseJSON = await response.json();
-        console.log(responseJSON);
         if (responseJSON.status === "success") {
           setListFollowing(responseJSON.data);
         }
@@ -31,7 +30,6 @@ const Followers = () => {
       }
     }
     getListFollowers();
-    console.log("list: ", listFollowing);
   }, []);
 
   if (spin) {

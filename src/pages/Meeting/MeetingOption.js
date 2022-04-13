@@ -194,11 +194,7 @@ const MeetingOption = () => {
           <Content>
             <div className="container">
               {meeting ? (
-                <Meeting
-                  room={room}
-                  imageUrl={imageUrl}
-                  userName={user.full_name}
-                />
+                <Meeting room={room} userName={user.full_name} />
               ) : (
                 <div>
                   {modal}

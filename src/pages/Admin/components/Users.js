@@ -75,7 +75,6 @@ const Users = () => {
   };
 
   const showModal = (row) => {
-    console.log(row);
     setActiveUser(row);
     setIsModalVisible(true);
   };
@@ -207,7 +206,7 @@ const Users = () => {
         <div className="content">
           <div className="row">
             <div className="col-sm-12">
-              <h4 className="page-title">Students</h4>
+              <h4 className="page-title">Users</h4>
             </div>
             <div className="text-right m-b-20">
               <a

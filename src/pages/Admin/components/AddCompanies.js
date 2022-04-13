@@ -1,34 +1,46 @@
 import Header from "../layouts/header";
 import Sidebar from "../layouts/sidebar";
+import { notification } from "antd";
 import { useHistory } from "react-router-dom";
 import { useState } from "react";
 import "bootstrap/dist/css/bootstrap.css";
 import "./styles.scss";
+import "./style.css";
+
+const openNotificationWithIcon = (type) => {
+  notification[type]({
+    message: "Success!",
+    description: "Added new account!",
+    top: 80,
+  });
+};
 
 const AddCompanies = () => {
   const history = useHistory();
   const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
+  const [address, setAddress] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [gender, setGender] = useState("");
+  const [gender, setGender] = useState("null");
   const [phone, setPhone] = useState("");
-  const [role, setRole] = useState("student");
+  const [role, setRole] = useState("company");
+  const [image, setImage] = useState("");
   const [msg, setMsg] = useState();
 
   const handleAddUser = async () => {
     const token = sessionStorage.getItem("token");
     const formData = new FormData();
     formData.append("first_name", firstName);
-    formData.append("last_name", lastName);
+    formData.append("last_name", firstName);
     formData.append("email", email);
     formData.append("password", password);
     formData.append("password_confirmation", confirmPassword);
     formData.append("phone", phone);
     formData.append("role", role);
     formData.append("gender", gender);
-    formData.append("address", "None");
+    formData.append("address", address);
+    formData.append("image", image);
     const requestOptions = {
       method: "POST",
       body: formData,
@@ -45,7 +57,8 @@ const AddCompanies = () => {
       const responseJSON = await response.json();
       console.log(responseJSON);
       if (responseJSON.status === "success") {
-        history.push("/admin/users");
+        openNotificationWithIcon("success");
+        history.push("/admin/companies");
       }
       if (responseJSON.status === "error") {
         setMsg(responseJSON.validation_errors);
@@ -53,6 +66,12 @@ const AddCompanies = () => {
     } catch (error) {
       console.log("Failed fetch add new user", error.message);
     }
+  };
+
+  const handlePreview = (e) => {
+    setImage(e.target.files[0]);
+    const file = e.target.files[0];
+    blah.src = URL.createObjectURL(file);
   };
 
   return (
@@ -63,7 +82,7 @@ const AddCompanies = () => {
         <div className="content">
           <div className="row">
             <div className="col-sm-12">
-              <h4 className="page-title">Add new user</h4>
+              <h4 className="page-title">Add new companie</h4>
             </div>
           </div>
           <div className="row">
@@ -73,7 +92,7 @@ const AddCompanies = () => {
                   <div className="col-sm-6">
                     <div className="form-group">
                       <label>
-                        First Name <span className="text-danger">*</span>
+                        Company name <span className="text-danger">*</span>
                       </label>
                       <input
                         onChange={(e) => setFirstName(e.target.value)}
@@ -88,15 +107,15 @@ const AddCompanies = () => {
                   <div className="col-sm-6">
                     <div className="form-group">
                       <label>
-                        Last Name <span className="text-danger">*</span>
+                        Address <span className="text-danger">*</span>
                       </label>
                       <input
-                        onChange={(e) => setLastName(e.target.value)}
+                        onChange={(e) => setAddress(e.target.value)}
                         className="form-control"
                         type="text"
                       />
                       {msg ? (
-                        <p className="text-danger">{msg.last_name}</p>
+                        <p className="text-danger">{msg.address}</p>
                       ) : null}
                     </div>
                   </div>
@@ -142,58 +161,19 @@ const AddCompanies = () => {
                     </div>
                   </div>
                   <div className="col-sm-6">
-                    <div className="form-group gender-select">
-                      <label className="gen-label">Gender:</label>
-                      <div className="form-check-inline">
-                        <label className="form-check-label">
-                          <input
-                            value="Male"
-                            type="radio"
-                            name="gender"
-                            className="form-check-input"
-                            onChange={(e) => {
-                              const { value } = e.target;
-                              setGender(value);
-                            }}
-                          />
-                          Male
-                        </label>
-                      </div>
-                      <div className="form-check-inline">
-                        <label className="form-check-label">
-                          <input
-                            value="Female"
-                            type="radio"
-                            name="gender"
-                            className="form-check-input"
-                            onChange={(e) => {
-                              const { value } = e.target;
-                              setGender(value);
-                            }}
-                          />
-                          Female
-                        </label>
-                      </div>
-                      {msg ? <p className="text-danger">{msg.gender}</p> : null}
-                    </div>
-                  </div>
-                  <div className="col-sm-12">
-                    <div className="row">
-                      <div className="col-sm-6 col-md-6 col-lg-3">
-                        <div className="form-group">
-                          <label>Role</label>
-                          <select
-                            className="form-control select"
-                            onChange={(e) => {
-                              setRole(e.target.value);
-                            }}
-                          >
-                            <option>student</option>
-                            <option>company</option>
-                            <option>admin</option>
-                          </select>
+                    <div className="form-group">
+                      <label>Avatar</label>
+                      <div className="profile-upload">
+                        <div className="upload-img">
+                          <img alt="" id="blah" src="assets/img/user.jpg" />
                         </div>
-                        {msg ? <p className="text-danger">{msg.role}</p> : null}
+                        <div className="upload-input">
+                          <input
+                            type="file"
+                            className="form-control"
+                            onChange={handlePreview}
+                          />
+                        </div>
                       </div>
                     </div>
                   </div>

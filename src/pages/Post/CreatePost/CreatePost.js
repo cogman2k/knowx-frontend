@@ -101,6 +101,7 @@ const CreatePost = () => {
   };
 
   const handleImage = (e) => {
+    console.log(e.target.files[0]);
     setPicture(e.target.files[0]);
   };
 

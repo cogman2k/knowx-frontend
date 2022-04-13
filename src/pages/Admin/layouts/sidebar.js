@@ -4,10 +4,11 @@ import "./styles.scss";
 import "./style.css";
 import { LogoutOutlined } from "@ant-design/icons";
 
-const sidebar = () => {
+const sidebar = (props) => {
   const [reportsPost, setReportsPost] = useState(0);
   const [reportsQuestion, setReportsQuestion] = useState(0);
   const [countRequest, setCountRequest] = useState(0);
+  const [activeObject, setActiveObject] = useState(null);
 
   useEffect(() => {
     const getReports = async () => {
@@ -111,7 +112,7 @@ const sidebar = () => {
         <div id="sidebar-menu" className="sidebar-menu">
           <ul>
             <li className="menu-title">Main</li>
-            <li>
+            <li className="active">
               <a href="/admin">
                 <i className="fa fa-dashboard" /> <span>Dashboard</span>
               </a>

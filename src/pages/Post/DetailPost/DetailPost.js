@@ -13,6 +13,7 @@ import {
   Spin,
   Tooltip,
   Input,
+  Select,
 } from "antd";
 import {
   DownOutlined,
@@ -32,6 +33,7 @@ import ListComment from "../Comment/ListComment";
 
 const { Content } = Layout;
 const { TextArea } = Input;
+const { Option } = Select;
 
 const DetailPost = () => {
   const userId = sessionStorage.getItem("user_id");
@@ -52,6 +54,15 @@ const DetailPost = () => {
   const [countLike, setCountLike] = useState(0);
   const [spin, setSpin] = useState(true);
   const [description, setDescription] = useState("");
+  const [disabled, setDisabled] = useState("none");
+
+  const listReport = [
+    <Option value="1">Report 1</Option>,
+    <Option value="2">Report 2</Option>,
+    <Option value="3">Report 3</Option>,
+    <Option value="4">Report 4</Option>,
+    <Option value="5">Other</Option>,
+  ];
 
   async function handleLike() {
     const token = sessionStorage.getItem("token");
@@ -325,11 +336,20 @@ const DetailPost = () => {
       const responseJSON = await response.json();
       if (responseJSON.status === "success") {
         message.success("Report sended!");
+        setDisabled("none");
+        setDescription("");
       }
     } catch (error) {
       console.log("Failed fetch ", error.message);
     }
   };
+
+  function handleChange(value) {
+    setDescription(value);
+    if (value === "5") {
+      setDisabled("block");
+    }
+  }
 
   return (
     <Layout>
@@ -343,8 +363,17 @@ const DetailPost = () => {
             onOk={handleOkReport}
             onCancel={handleCancelReport}
             okText="Send"
+            width={400}
           >
+            <Select
+              defaultValue="1"
+              style={{ width: 352, marginBottom: "20px" }}
+              onChange={handleChange}
+            >
+              {listReport}
+            </Select>
             <TextArea
+              style={{ display: disabled }}
               onChange={(e) => setDescription(e.target.value)}
               placeholder="Description..."
               autoSize={{ minRows: 3, maxRows: 5 }}
@@ -398,13 +427,8 @@ const DetailPost = () => {
                       </div>
                     ) : (
                       <WarningFilled
-                        style={{
-                          float: "right",
-                          position: "relative",
-                          left: "630px",
-                          fontSize: "20px",
-                          cursor: "pointer",
-                        }}
+                        className="postDetail-dropdown"
+                        style={{ fontSize: "24px" }}
                         onClick={showModalReport}
                       />
                     )}

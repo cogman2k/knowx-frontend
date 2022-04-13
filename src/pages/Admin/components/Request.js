@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import Header from "../layouts/header";
 import Sidebar from "../layouts/sidebar";
 import "./style.css";
-import { Image, Modal, notification } from "antd";
+import { Image, Modal, notification, Space, Card } from "antd";
 
 const openNotificationWithIcon = (type, text) => {
   notification[type]({
@@ -144,12 +144,13 @@ const Request = () => {
         onOk={handleOk}
         onCancel={handleCancel}
         okText="Accept"
+        width={800}
       >
         <div style={{ display: "flex", marginBottom: "20px" }}>
           <img
             width="28"
             height="28"
-            class="rounded-circle"
+            className="rounded-circle"
             src={`https://knowx-be.herokuapp.com/${tmpRequest.user.image}`}
             alt=""
           />
@@ -161,14 +162,35 @@ const Request = () => {
             {tmpRequest.user.full_name}
           </a>
         </div>
-        <b>Subject: </b>
-        <p>{tmpRequest.subject.name}</p>
-        <b>Description: </b>
-        <p>{tmpRequest.description}</p>
-        <Image
-          width={470}
-          src={`https://knowx-be.herokuapp.com/${tmpRequest.user.image}`}
-        />
+        <Space>
+          <Card title="User Information" style={{ height: "306px" }}>
+            <b>Posts:</b>
+            <span className="ml-3">{tmpRequest.countPosts}</span>
+            <br />
+            <b>Questions:</b>
+            <span className="ml-3">{tmpRequest.countQuestions}</span>
+            <br />
+            <b>Class mentoring:</b>
+            <span className="ml-3">{tmpRequest.countClass}</span>
+            <br />
+            <b>Followers:</b>
+            <span className="ml-3">{tmpRequest.followers}</span>
+          </Card>
+          <Card title="Request infomation">
+            <Space>
+              <div>
+                <b>Subject: </b>
+                <p>{tmpRequest.subject.name}</p>
+                <b>Description: </b>
+                <p>{tmpRequest.description}</p>
+              </div>
+              <Image
+                height={200}
+                src={`https://knowx-be.herokuapp.com/${tmpRequest.user.image}`}
+              />
+            </Space>
+          </Card>
+        </Space>
       </Modal>
       <Modal
         title="Confirm"
@@ -183,6 +205,11 @@ const Request = () => {
       <Sidebar />
       <div className="page-wrapper">
         <div className="content">
+          <div className="row" style={{ marginLeft: "3px" }}>
+            <div className="col-sm-4 col-3">
+              <h4 className="page-title">Requests</h4>
+            </div>
+          </div>
           <div className="col-12">
             <div className="card">
               <div className="card-block">
@@ -204,7 +231,7 @@ const Request = () => {
                             <img
                               width="28"
                               height="28"
-                              class="rounded-circle"
+                              className="rounded-circle"
                               src={`https://knowx-be.herokuapp.com/${e.user.image}`}
                               alt=""
                             />
