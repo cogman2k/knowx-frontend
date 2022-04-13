@@ -19,7 +19,7 @@ const Companies = () => {
     };
     try {
       const response = await fetch(
-        "http://127.0.0.1:8000/api/admin/companies",
+        "https://knowx-be.herokuapp.com/api/admin/companies",
         requestOptions
       );
       const responseJSON = await response.json();
@@ -45,7 +45,7 @@ const Companies = () => {
     };
 
     const response = await fetch(
-      `http://127.0.0.1:8000/api/admin/delete-user/${activeUser}`,
+      `https://knowx-be.herokuapp.com/api/admin/delete-user/${activeUser}`,
       requestOptions
     );
     const responseJSON = await response.json();
@@ -103,17 +103,17 @@ const Companies = () => {
                     <a href={`/admin/user/${company.id}`}>
                       {/* <img
                         alt=""
-                        src={`http://127.0.0.1:8000/${company.image}`}
+                        src={`https://knowx-be.herokuapp.com/${company.image}`}
                       /> */}
                       <Avatar
                         size={80}
-                        src={`http://127.0.0.1:8000/${company.image}`}
+                        src={`https://knowx-be.herokuapp.com/${company.image}`}
                       />
                     </a>
 
                     {/* <Avatar
                         size={64}
-                        src={`http://127.0.0.1:8000/${company.image}`}
+                        src={`https://knowx-be.herokuapp.com/${company.image}`}
                       /> */}
                   </div>
                   <div className="dropdown profile-action">

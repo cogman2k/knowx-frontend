@@ -21,7 +21,7 @@ const sidebar = (props) => {
       };
       try {
         const response = await fetch(
-          "http://127.0.0.1:8000/api/user/posts/report/count",
+          "https://knowx-be.herokuapp.com/api/user/posts/report/count",
           requestOptions
         );
         const responseJSON = await response.json();
@@ -45,7 +45,7 @@ const sidebar = (props) => {
       };
       try {
         const response = await fetch(
-          "http://127.0.0.1:8000/api/user/questions/report/count",
+          "https://knowx-be.herokuapp.com/api/user/questions/report/count",
           requestOptions
         );
         const responseJSON = await response.json();
@@ -69,7 +69,7 @@ const sidebar = (props) => {
       };
       try {
         const response = await fetch(
-          "http://127.0.0.1:8000/api/user/request/mentor/count",
+          "https://knowx-be.herokuapp.com/api/user/request/mentor/count",
           requestOptions
         );
         const responseJSON = await response.json();
@@ -93,7 +93,7 @@ const sidebar = (props) => {
       method: "GET",
       headers: myHeaders,
     };
-    fetch("http://127.0.0.1:8000/api/user/logout", requestOptions)
+    fetch("https://knowx-be.herokuapp.com/api/user/logout", requestOptions)
       .then((response) => response.json())
       .then((result) => {
         if (result.status === "success") {

@@ -35,7 +35,7 @@ const DetailJob = () => {
 
       try {
         const response = await fetch(
-          `http://127.0.0.1:8000/api/user/job/show`,
+          `https://knowx-be.herokuapp.com/api/user/job/show`,
           requestOptions
         );
         const responseJSON = await response.json();
@@ -79,7 +79,7 @@ const DetailJob = () => {
                 >
                   <div className="postDetail-author">
                     <Avatar
-                      src={`http://127.0.0.1:8000/${user.image}`}
+                      src={`https://knowx-be.herokuapp.com/${user.image}`}
                       size={40}
                     />
                     <Link

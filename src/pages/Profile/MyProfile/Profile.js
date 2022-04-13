@@ -81,7 +81,7 @@ const Profile = () => {
 
       try {
         const response = await fetch(
-          "http://127.0.0.1:8000/api/user",
+          "https://knowx-be.herokuapp.com/api/user",
           requestOptions
         );
         const responseJSON = await response.json();
@@ -106,7 +106,7 @@ const Profile = () => {
 
       try {
         const response = await fetch(
-          "http://127.0.0.1:8000/api/user/following",
+          "https://knowx-be.herokuapp.com/api/user/following",
           requestOptions
         );
         const responseJSON = await response.json();
@@ -129,7 +129,7 @@ const Profile = () => {
 
       try {
         const response = await fetch(
-          "http://127.0.0.1:8000/api/user/followers",
+          "https://knowx-be.herokuapp.com/api/user/followers",
           requestOptions
         );
         const responseJSON = await response.json();
@@ -152,7 +152,7 @@ const Profile = () => {
 
       try {
         const response = await fetch(
-          "http://127.0.0.1:8000/api/user/posts/getbookmark",
+          "https://knowx-be.herokuapp.com/api/user/posts/getbookmark",
           requestOptions
         );
         const responseJSON = await response.json();
@@ -177,7 +177,7 @@ const Profile = () => {
         },
       };
       const response = await fetch(
-        "http://127.0.0.1:8000/api/user/subject/get",
+        "https://knowx-be.herokuapp.com/api/user/subject/get",
         requestOptions
       );
       const responseJSON = await response.json();
@@ -224,7 +224,7 @@ const Profile = () => {
       },
     };
     const response = await fetch(
-      `http://127.0.0.1:8000/api/user/request/mentor`,
+      `https://knowx-be.herokuapp.com/api/user/request/mentor`,
       requestOptions
     );
     const responseJSON = await response.json();
@@ -271,7 +271,7 @@ const Profile = () => {
                     <Row>
                       <Col span={8}>
                         <Avatar
-                          src={`http://127.0.0.1:8000/${user.image}`}
+                          src={`https://knowx-be.herokuapp.com/${user.image}`}
                           size={128}
                         />
                       </Col>

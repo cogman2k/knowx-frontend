@@ -14,6 +14,7 @@ import {
   Tooltip,
   Input,
   Select,
+  Tag,
 } from "antd";
 import {
   DownOutlined,
@@ -77,7 +78,7 @@ const DetailPost = () => {
     };
     try {
       const response = await fetch(
-        `http://127.0.0.1:8000/api/user/posts/like`,
+        `https://knowx-be.herokuapp.com/api/user/posts/like`,
         requestOptions
       );
       const responseJSON = await response.json();
@@ -108,7 +109,7 @@ const DetailPost = () => {
     };
     try {
       const response = await fetch(
-        `http://127.0.0.1:8000/api/user/posts/bookmark`,
+        `https://knowx-be.herokuapp.com/api/user/posts/bookmark`,
         requestOptions
       );
       const responseJSON = await response.json();
@@ -138,7 +139,7 @@ const DetailPost = () => {
       };
       try {
         const response = await fetch(
-          `http://127.0.0.1:8000/api/user/posts/checkbookmark`,
+          `https://knowx-be.herokuapp.com/api/user/posts/checkbookmark`,
           requestOptions
         );
         const responseJSON = await response.json();
@@ -166,7 +167,7 @@ const DetailPost = () => {
       };
       try {
         const response = await fetch(
-          `http://127.0.0.1:8000/api/user/posts/checklike`,
+          `https://knowx-be.herokuapp.com/api/user/posts/checklike`,
           requestOptions
         );
         const responseJSON = await response.json();
@@ -192,7 +193,7 @@ const DetailPost = () => {
 
       try {
         const response = await fetch(
-          `http://127.0.0.1:8000/api/user/posts/${selectedId}`,
+          `https://knowx-be.herokuapp.com/api/user/posts/${selectedId}`,
           requestOptions
         );
         const responseJSON = await response.json();
@@ -223,7 +224,7 @@ const DetailPost = () => {
     setTimeout(async () => {
       try {
         const response = await fetch(
-          `http://127.0.0.1:8000/api/user/posts/${selectedId}`,
+          `https://knowx-be.herokuapp.com/api/user/posts/${selectedId}`,
           requestOptions
         );
         const responseJSON = await response.json();
@@ -329,7 +330,7 @@ const DetailPost = () => {
     };
     try {
       const response = await fetch(
-        `http://127.0.0.1:8000/api/user/posts/report`,
+        `https://knowx-be.herokuapp.com/api/user/posts/report`,
         requestOptions
       );
       const responseJSON = await response.json();
@@ -397,7 +398,7 @@ const DetailPost = () => {
                 <div className="postDetail-container">
                   <div className="postDetail-author">
                     <Avatar
-                      src={`http://127.0.0.1:8000/${user.image}`}
+                      src={`https://knowx-be.herokuapp.com/${user.image}`}
                       size={40}
                     />
                     <Link
@@ -411,7 +412,7 @@ const DetailPost = () => {
                     {formatDate(selectedPost.updated_at)}
                   </div>
                   <div className="postDetail-hastag">
-                    <span>{selectedPost.hashtag}</span>
+                    <Tag color="blue">{selectedPost.hashtag}</Tag>
                   </div>
                   <div className="postDetail-title">
                     <h5>{selectedPost.title}</h5>

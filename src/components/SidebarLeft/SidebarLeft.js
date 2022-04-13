@@ -75,7 +75,7 @@ const SidebarLeft = () => {
             shape="round"
             size="large"
             onClick={() => {
-              window.open("http://127.0.0.1:8000/chat");
+              window.open("https://knowx-be.herokuapp.com/chat");
             }}
           >
             Go to Messages
@@ -90,7 +90,9 @@ const SidebarLeft = () => {
             <List.Item>
               <List.Item.Meta
                 avatar={
-                  <Avatar src={`http://127.0.0.1:8000/${item.user_image}`} />
+                  <Avatar
+                    src={`https://knowx-be.herokuapp.com/${item.user_image}`}
+                  />
                 }
                 title={
                   <Link to={`/otherprofile/${item.user_id}`}>
@@ -124,7 +126,7 @@ const SidebarLeft = () => {
 
       try {
         const response = await fetch(
-          "http://127.0.0.1:8000/api/user",
+          "https://knowx-be.herokuapp.com/api/user",
           requestOptions
         );
         const responseJSON = await response.json();
@@ -145,7 +147,7 @@ const SidebarLeft = () => {
 
       try {
         const response = await fetch(
-          "http://127.0.0.1:8000/api/user/unseenmessage",
+          "https://knowx-be.herokuapp.com/api/user/unseenmessage",
           requestOptions
         );
         const responseJSON = await response.json();
@@ -169,7 +171,7 @@ const SidebarLeft = () => {
       method: "GET",
       headers: myHeaders,
     };
-    fetch("http://127.0.0.1:8000/api/user/logout", requestOptions)
+    fetch("https://knowx-be.herokuapp.com/api/user/logout", requestOptions)
       .then((response) => response.json())
       .then((result) => {
         if (result.status === "success") {
@@ -193,7 +195,7 @@ const SidebarLeft = () => {
 
     try {
       const response = await fetch(
-        "http://127.0.0.1:8000/api/user/class/getclass",
+        "https://knowx-be.herokuapp.com/api/user/class/getclass",
         requestOptions
       );
       const responseJSON = await response.json();
@@ -252,7 +254,10 @@ const SidebarLeft = () => {
           <Menu.Item key="0" style={{ marginTop: "15px" }}>
             <Row>
               <Col span={6}>
-                <Avatar size={36} src={`http://127.0.0.1:8000/${user.image}`} />
+                <Avatar
+                  size={36}
+                  src={`https://knowx-be.herokuapp.com/${user.image}`}
+                />
               </Col>
               <Col span={18}>
                 <Link to="/profile">
@@ -289,7 +294,7 @@ const SidebarLeft = () => {
               <Typography
                 style={{ fontWeight: "600" }}
                 onClick={() => {
-                  window.open("http://127.0.0.1:8000/chat");
+                  window.open("https://knowx-be.herokuapp.com/chat");
                 }}
               >
                 CHAT

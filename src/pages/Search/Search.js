@@ -43,7 +43,7 @@ const Search = () => {
       console.log(data);
       try {
         const response = await fetch(
-          "http://127.0.0.1:8000/api/user/posts/search",
+          "https://knowx-be.herokuapp.com/api/user/posts/search",
           requestOptions
         );
         const responseJSON = await response.json();
@@ -68,7 +68,7 @@ const Search = () => {
 
       try {
         const response = await fetch(
-          "http://127.0.0.1:8000/api/user/questions/search",
+          "https://knowx-be.herokuapp.com/api/user/questions/search",
           requestOptions
         );
         const responseJSON = await response.json();
@@ -93,7 +93,7 @@ const Search = () => {
 
       try {
         const response = await fetch(
-          "http://127.0.0.1:8000/api/user/search",
+          "https://knowx-be.herokuapp.com/api/user/search",
           requestOptions
         );
         const responseJSON = await response.json();

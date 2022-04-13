@@ -13,7 +13,7 @@ const Mentor = () => {
         },
       };
       const response = await fetch(
-        "http://127.0.0.1:8000/api/user/mentor/mymentor",
+        "https://knowx-be.herokuapp.com/api/user/mentor/mymentor",
         requestOptions
       );
       const responseJSON = await response.json();

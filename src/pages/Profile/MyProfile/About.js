@@ -69,7 +69,7 @@ const About = () => {
 
     try {
       const response = await fetch(
-        `http://127.0.0.1:8000/api/user/education/${id}`,
+        `https://knowx-be.herokuapp.com/api/user/education/${id}`,
         requestOptions
       );
       const responseJSON = await response.json();
@@ -89,7 +89,7 @@ const About = () => {
 
     try {
       const response = await fetch(
-        `http://127.0.0.1:8000/api/user/experience/${id}`,
+        `https://knowx-be.herokuapp.com/api/user/experience/${id}`,
         requestOptions
       );
       const responseJSON = await response.json();
@@ -130,7 +130,7 @@ const About = () => {
       headers: { Authorization: `Bearer ${token}` },
     };
     const response = await fetch(
-      "http://127.0.0.1:8000/api/user/education",
+      "https://knowx-be.herokuapp.com/api/user/education",
       requestOptions
     );
     const responseJSON = await response.json();
@@ -152,7 +152,7 @@ const About = () => {
       headers: { Authorization: `Bearer ${token}` },
     };
     const response = await fetch(
-      "http://127.0.0.1:8000/api/user/experience",
+      "https://knowx-be.herokuapp.com/api/user/experience",
       requestOptions
     );
     const responseJSON = await response.json();
@@ -172,7 +172,7 @@ const About = () => {
       headers: { Authorization: `Bearer ${token}` },
     };
     const response = await fetch(
-      `http://127.0.0.1:8000/api/user/education/${activeEducation}`,
+      `https://knowx-be.herokuapp.com/api/user/education/${activeEducation}`,
       requestOptions
     );
     const responseJSON = await response.json();
@@ -190,7 +190,7 @@ const About = () => {
       headers: { Authorization: `Bearer ${token}` },
     };
     const response = await fetch(
-      `http://127.0.0.1:8000/api/user/experience/${activeExperience}`,
+      `https://knowx-be.herokuapp.com/api/user/experience/${activeExperience}`,
       requestOptions
     );
     const responseJSON = await response.json();

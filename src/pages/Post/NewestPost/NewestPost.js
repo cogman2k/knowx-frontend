@@ -1,4 +1,13 @@
-import { Layout, List, Avatar, Space, Spin, Typography, Divider } from "antd";
+import {
+  Layout,
+  List,
+  Avatar,
+  Space,
+  Spin,
+  Typography,
+  Divider,
+  Tag,
+} from "antd";
 import { LikeOutlined, MessageOutlined } from "@ant-design/icons";
 import { Link } from "react-router-dom";
 import React, { useEffect, useState } from "react";
@@ -33,7 +42,7 @@ const NewestPost = () => {
 
       try {
         const response = await fetch(
-          "http://127.0.0.1:8000/api/user/posts/newest",
+          "https://knowx-be.herokuapp.com/api/user/posts/newest",
           requestOptions
         );
         const responseJSON = await response.json();
@@ -108,7 +117,7 @@ const NewestPost = () => {
                             width={300}
                             style={{ objectFit: "contain" }}
                             alt="logo"
-                            src={`http://127.0.0.1:8000/${item.image}`}
+                            src={`https://knowx-be.herokuapp.com/${item.image}`}
                           />
                         }
                       >
@@ -122,7 +131,7 @@ const NewestPost = () => {
                               }
                             >
                               <Avatar
-                                src={`http://127.0.0.1:8000/${item.user_image}`}
+                                src={`https://knowx-be.herokuapp.com/${item.user_image}`}
                               />
                             </Link>
                           }
@@ -149,7 +158,7 @@ const NewestPost = () => {
                         {`${formatDate(item.updated_at)}  |  `}
                         {
                           <a href={`/search/${item.hashtag.replace("#", "")}`}>
-                            <span>{item.hashtag}</span>
+                            <Tag color="blue">{item.hashtag}</Tag>
                           </a>
                         }
                       </List.Item>

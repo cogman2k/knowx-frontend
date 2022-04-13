@@ -1,4 +1,13 @@
-import { Layout, List, Avatar, Space, Spin, Typography, Divider } from "antd";
+import {
+  Layout,
+  List,
+  Avatar,
+  Space,
+  Spin,
+  Typography,
+  Divider,
+  Tag,
+} from "antd";
 import { LikeOutlined, MessageOutlined } from "@ant-design/icons";
 import { Link } from "react-router-dom";
 import React, { useEffect, useState } from "react";
@@ -34,7 +43,7 @@ const MyPosts = () => {
 
       try {
         const response = await fetch(
-          "http://127.0.0.1:8000/api/user",
+          "https://knowx-be.herokuapp.com/api/user",
           requestOptions
         );
         const responseJSON = await response.json();
@@ -55,7 +64,7 @@ const MyPosts = () => {
 
       try {
         const response = await fetch(
-          "http://127.0.0.1:8000/api/user/posts",
+          "https://knowx-be.herokuapp.com/api/user/posts",
           requestOptions
         );
         const responseJSON = await response.json();
@@ -111,14 +120,16 @@ const MyPosts = () => {
                 width={300}
                 style={{ objectFit: "contain" }}
                 alt="logo"
-                src={`http://127.0.0.1:8000/${item.image}`}
+                src={`https://knowx-be.herokuapp.com/${item.image}`}
               />
             }
           >
             <List.Item.Meta
               avatar={
                 <Link to="/profile">
-                  <Avatar src={`http://127.0.0.1:8000/${user.image}`} />
+                  <Avatar
+                    src={`https://knowx-be.herokuapp.com/${user.image}`}
+                  />
                 </Link>
               }
               title={<Link to="/profile">{user.full_name}</Link>}
@@ -132,7 +143,7 @@ const MyPosts = () => {
             {`${formatDate(item.updated_at)}  |  `}
             {
               <a href={`/search/${item.hashtag.replace("#", "")}`}>
-                <span>{item.hashtag}</span>
+                <Tag color="blue">{item.hashtag}</Tag>
               </a>
             }
           </List.Item>

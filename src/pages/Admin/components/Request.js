@@ -35,7 +35,7 @@ const Request = () => {
     };
     try {
       const response = await fetch(
-        "http://127.0.0.1:8000/api/user/request/mentor",
+        "https://knowx-be.herokuapp.com/api/user/request/mentor",
         requestOptions
       );
       const responseJSON = await response.json();
@@ -55,7 +55,7 @@ const Request = () => {
     };
     try {
       const response = await fetch(
-        `http://127.0.0.1:8000/api/user/request/mentor/reject/${tmpRequest.id}`,
+        `https://knowx-be.herokuapp.com/api/user/request/mentor/reject/${tmpRequest.id}`,
         requestOptions
       );
       const responseJSON = await response.json();
@@ -78,7 +78,7 @@ const Request = () => {
     };
     try {
       const response = await fetch(
-        `http://127.0.0.1:8000/api/user/request/mentor/accept/${tmpRequest.id}`,
+        `https://knowx-be.herokuapp.com/api/user/request/mentor/accept/${tmpRequest.id}`,
         requestOptions
       );
       const responseJSON = await response.json();
@@ -151,7 +151,7 @@ const Request = () => {
             width="28"
             height="28"
             className="rounded-circle"
-            src={`http://127.0.0.1:8000/${tmpRequest.user.image}`}
+            src={`https://knowx-be.herokuapp.com/${tmpRequest.user.image}`}
             alt=""
           />
           <a
@@ -189,7 +189,7 @@ const Request = () => {
               </div>
               <Image
                 height={200}
-                src={`http://127.0.0.1:8000/${tmpRequest.user.image}`}
+                src={`https://knowx-be.herokuapp.com/${tmpRequest.user.image}`}
               />
             </Space>
           </Card>
@@ -235,7 +235,7 @@ const Request = () => {
                               width="28"
                               height="28"
                               className="rounded-circle"
-                              src={`http://127.0.0.1:8000/${e.user.image}`}
+                              src={`https://knowx-be.herokuapp.com/${e.user.image}`}
                               alt=""
                             />
                             <a

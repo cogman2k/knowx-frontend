@@ -27,7 +27,7 @@ const SearchQuestion = () => {
 
       try {
         const response = await fetch(
-          "http://127.0.0.1:8000/api/user/search",
+          "https://knowx-be.herokuapp.com/api/user/search",
           requestOptions
         );
         const responseJSON = await response.json();
@@ -77,7 +77,11 @@ const SearchQuestion = () => {
           >
             <Skeleton avatar title={false} loading={item.loading} active>
               <List.Item.Meta
-                avatar={<Avatar src={`http://127.0.0.1:8000/${item.image}`} />}
+                avatar={
+                  <Avatar
+                    src={`https://knowx-be.herokuapp.com/${item.image}`}
+                  />
+                }
                 title={
                   <a href={`/otherprofile/${item.id}`}>{item.full_name}</a>
                 }
