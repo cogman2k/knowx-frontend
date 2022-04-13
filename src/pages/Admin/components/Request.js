@@ -95,10 +95,6 @@ const Request = () => {
     }
   };
 
-  useEffect(() => {
-    getRequests();
-  }, []);
-
   const formatDate = (timestams) => {
     const options = {
       month: "long",
@@ -109,14 +105,18 @@ const Request = () => {
     return new Date(timestams).toLocaleDateString(undefined, options);
   };
 
+  useEffect(() => {
+    getRequests();
+  }, []);
+
   const showModal = (e) => {
-    setTmpRequest(e);
     setIsModalVisible(true);
+    setTmpRequest(e);
   };
 
   const showModalReject = (e) => {
-    setTmpRequest(e);
     setIsModalVisibleReject(true);
+    setTmpRequest(e);
   };
 
   const handleOk = () => {

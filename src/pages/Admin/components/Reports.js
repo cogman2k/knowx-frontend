@@ -145,8 +145,8 @@ const Reports = () => {
   }, []);
 
   const handleOk = () => {
-    rejectReportPost();
     setConfirmLoading(true);
+    rejectReportPost();
     setTimeout(() => {
       setVisible(false);
       setConfirmLoading(false);
