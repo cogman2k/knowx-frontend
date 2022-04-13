@@ -35,7 +35,7 @@ const Request = () => {
     };
     try {
       const response = await fetch(
-        "https://knowx-be.herokuapp.com/api/user/request/mentor",
+        "http://127.0.0.1:8000/api/user/request/mentor",
         requestOptions
       );
       const responseJSON = await response.json();
@@ -55,7 +55,7 @@ const Request = () => {
     };
     try {
       const response = await fetch(
-        `https://knowx-be.herokuapp.com/api/user/request/mentor/reject/${tmpRequest.id}`,
+        `http://127.0.0.1:8000/api/user/request/mentor/reject/${tmpRequest.id}`,
         requestOptions
       );
       const responseJSON = await response.json();
@@ -78,7 +78,7 @@ const Request = () => {
     };
     try {
       const response = await fetch(
-        `https://knowx-be.herokuapp.com/api/user/request/mentor/accept/${tmpRequest.id}`,
+        `http://127.0.0.1:8000/api/user/request/mentor/accept/${tmpRequest.id}`,
         requestOptions
       );
       const responseJSON = await response.json();
@@ -144,14 +144,14 @@ const Request = () => {
         onOk={handleOk}
         onCancel={handleCancel}
         okText="Accept"
-        width={800}
+        width={810}
       >
         <div style={{ display: "flex", marginBottom: "20px" }}>
           <img
             width="28"
             height="28"
             className="rounded-circle"
-            src={`https://knowx-be.herokuapp.com/${tmpRequest.user.image}`}
+            src={`http://127.0.0.1:8000/${tmpRequest.user.image}`}
             alt=""
           />
           <a
@@ -163,7 +163,10 @@ const Request = () => {
           </a>
         </div>
         <Space>
-          <Card title="User Information" style={{ height: "306px" }}>
+          <Card
+            title="User Information"
+            style={{ height: "306px", width: "220px" }}
+          >
             <b>Posts:</b>
             <span className="ml-3">{tmpRequest.countPosts}</span>
             <br />
@@ -186,7 +189,7 @@ const Request = () => {
               </div>
               <Image
                 height={200}
-                src={`https://knowx-be.herokuapp.com/${tmpRequest.user.image}`}
+                src={`http://127.0.0.1:8000/${tmpRequest.user.image}`}
               />
             </Space>
           </Card>
@@ -232,7 +235,7 @@ const Request = () => {
                               width="28"
                               height="28"
                               className="rounded-circle"
-                              src={`https://knowx-be.herokuapp.com/${e.user.image}`}
+                              src={`http://127.0.0.1:8000/${e.user.image}`}
                               alt=""
                             />
                             <a

@@ -57,8 +57,8 @@ const DetailPost = () => {
   const [disabled, setDisabled] = useState("none");
 
   const listReport = [
-    <Option value="1">Report 1</Option>,
-    <Option value="2">Report 2</Option>,
+    <Option value="1">Inappropriate language</Option>,
+    <Option value="2">Intentionally attacking other individuals</Option>,
     <Option value="3">Report 3</Option>,
     <Option value="4">Report 4</Option>,
     <Option value="5">Other</Option>,
@@ -69,7 +69,7 @@ const DetailPost = () => {
     const fm = new FormData();
     fm.append("post_id", selectedId);
     const requestOptions = {
-      method: "POST", // goi api co dieu kien gui di
+      method: "POST",
       body: fm,
       headers: {
         Authorization: `Bearer ${token}`,
@@ -77,7 +77,7 @@ const DetailPost = () => {
     };
     try {
       const response = await fetch(
-        `https://knowx-be.herokuapp.com/api/user/posts/like`,
+        `http://127.0.0.1:8000/api/user/posts/like`,
         requestOptions
       );
       const responseJSON = await response.json();
@@ -100,7 +100,7 @@ const DetailPost = () => {
     const fm = new FormData();
     fm.append("post_id", selectedId);
     const requestOptions = {
-      method: "POST", // goi api co dieu kien gui di
+      method: "POST",
       body: fm,
       headers: {
         Authorization: `Bearer ${token}`,
@@ -108,7 +108,7 @@ const DetailPost = () => {
     };
     try {
       const response = await fetch(
-        `https://knowx-be.herokuapp.com/api/user/posts/bookmark`,
+        `http://127.0.0.1:8000/api/user/posts/bookmark`,
         requestOptions
       );
       const responseJSON = await response.json();
@@ -138,7 +138,7 @@ const DetailPost = () => {
       };
       try {
         const response = await fetch(
-          `https://knowx-be.herokuapp.com/api/user/posts/checkbookmark`,
+          `http://127.0.0.1:8000/api/user/posts/checkbookmark`,
           requestOptions
         );
         const responseJSON = await response.json();
@@ -158,7 +158,7 @@ const DetailPost = () => {
       const fm = new FormData();
       fm.append("post_id", selectedId);
       const requestOptions = {
-        method: "POST", // goi api co dieu kien gui di
+        method: "POST",
         body: fm,
         headers: {
           Authorization: `Bearer ${token}`,
@@ -166,7 +166,7 @@ const DetailPost = () => {
       };
       try {
         const response = await fetch(
-          `https://knowx-be.herokuapp.com/api/user/posts/checklike`,
+          `http://127.0.0.1:8000/api/user/posts/checklike`,
           requestOptions
         );
         const responseJSON = await response.json();
@@ -192,7 +192,7 @@ const DetailPost = () => {
 
       try {
         const response = await fetch(
-          `https://knowx-be.herokuapp.com/api/user/posts/${selectedId}`,
+          `http://127.0.0.1:8000/api/user/posts/${selectedId}`,
           requestOptions
         );
         const responseJSON = await response.json();
@@ -223,7 +223,7 @@ const DetailPost = () => {
     setTimeout(async () => {
       try {
         const response = await fetch(
-          `https://knowx-be.herokuapp.com/api/user/posts/${selectedId}`,
+          `http://127.0.0.1:8000/api/user/posts/${selectedId}`,
           requestOptions
         );
         const responseJSON = await response.json();
@@ -242,7 +242,6 @@ const DetailPost = () => {
     setEditMode(true);
   }
 
-  // convert timestams to date
   const formatDate = (timestams) => {
     const options = {
       year: "numeric",
@@ -330,7 +329,7 @@ const DetailPost = () => {
     };
     try {
       const response = await fetch(
-        `https://knowx-be.herokuapp.com/api/user/posts/report`,
+        `http://127.0.0.1:8000/api/user/posts/report`,
         requestOptions
       );
       const responseJSON = await response.json();
@@ -398,7 +397,7 @@ const DetailPost = () => {
                 <div className="postDetail-container">
                   <div className="postDetail-author">
                     <Avatar
-                      src={`https://knowx-be.herokuapp.com/${user.image}`}
+                      src={`http://127.0.0.1:8000/${user.image}`}
                       size={40}
                     />
                     <Link

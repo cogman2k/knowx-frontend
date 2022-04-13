@@ -19,7 +19,7 @@ const Companies = () => {
     };
     try {
       const response = await fetch(
-        "https://knowx-be.herokuapp.com/api/admin/companies",
+        "http://127.0.0.1:8000/api/admin/companies",
         requestOptions
       );
       const responseJSON = await response.json();
@@ -45,7 +45,7 @@ const Companies = () => {
     };
 
     const response = await fetch(
-      `https://knowx-be.herokuapp.com/api/admin/delete-user/${activeUser}`,
+      `http://127.0.0.1:8000/api/admin/delete-user/${activeUser}`,
       requestOptions
     );
     const responseJSON = await response.json();
@@ -78,7 +78,7 @@ const Companies = () => {
         onOk={handleOk}
         onCancel={handleCancel}
       >
-        Accept delete this user?
+        Delete this company? (yes/no)
       </Modal>
       <div className="page-wrapper">
         <div className="content">
@@ -103,17 +103,17 @@ const Companies = () => {
                     <a href={`/admin/user/${company.id}`}>
                       {/* <img
                         alt=""
-                        src={`https://knowx-be.herokuapp.com/${company.image}`}
+                        src={`http://127.0.0.1:8000/${company.image}`}
                       /> */}
                       <Avatar
                         size={80}
-                        src={`https://knowx-be.herokuapp.com/${company.image}`}
+                        src={`http://127.0.0.1:8000/${company.image}`}
                       />
                     </a>
 
                     {/* <Avatar
                         size={64}
-                        src={`https://knowx-be.herokuapp.com/${company.image}`}
+                        src={`http://127.0.0.1:8000/${company.image}`}
                       /> */}
                   </div>
                   <div className="dropdown profile-action">
@@ -143,7 +143,7 @@ const Companies = () => {
                     </div>
                   </div>
                   <h4 className="doctor-name text-ellipsis">
-                    <a href="profile.html">{company.full_name}</a>
+                    <a href={`/user/${company.id}`}>{company.full_name}</a>
                   </h4>
                   <div className="doc-prof">{company.email}</div>
                   <div className="user-country">

@@ -43,7 +43,7 @@ const ListComment = () => {
     };
     try {
       const response = await fetch(
-        `https://knowx-be.herokuapp.com/api/user/questions/comment/get`,
+        `http://127.0.0.1:8000/api/user/questions/comment/get`,
         requestOptions
       );
       const responseJSON = await response.json();
@@ -69,7 +69,7 @@ const ListComment = () => {
     setTimeout(async () => {
       try {
         const response = await fetch(
-          `https://knowx-be.herokuapp.com/api/user/questions/comment/create`,
+          `http://127.0.0.1:8000/api/user/questions/comment/create`,
           requestOptions
         );
         const responseJSON = await response.json();
@@ -135,7 +135,7 @@ const ListComment = () => {
 
     try {
       const response = await fetch(
-        `https://knowx-be.herokuapp.com/api/user/questions/comment/delete`,
+        `http://127.0.0.1:8000/api/user/questions/comment/delete`,
         requestOptions
       );
       const responseJSON = await response.json();
@@ -213,7 +213,7 @@ const ListComment = () => {
               <li>
                 <Comment
                   author={item.full_name}
-                  avatar={`https://knowx-be.herokuapp.com/${item.image}`}
+                  avatar={`http://127.0.0.1:8000/${item.image}`}
                   content={item.comment}
                   datetime={formatDate(item.updated_at)}
                 />

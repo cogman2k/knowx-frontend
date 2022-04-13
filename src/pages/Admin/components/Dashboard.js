@@ -23,7 +23,7 @@ const Dashboard = () => {
 
       try {
         const response = await fetch(
-          "https://knowx-be.herokuapp.com/api/admin/count",
+          "http://127.0.0.1:8000/api/admin/count",
           requestOptions
         );
         const responseJSON = await response.json();

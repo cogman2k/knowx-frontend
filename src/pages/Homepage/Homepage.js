@@ -47,7 +47,7 @@ const Homepage = () => {
 
       try {
         const response = await fetch(
-          "https://knowx-be.herokuapp.com/api/user/posts/recomment",
+          "http://127.0.0.1:8000/api/user/posts/recomment",
           requestOptions
         );
         const responseJSON = await response.json();
@@ -119,7 +119,7 @@ const Homepage = () => {
                           width={300}
                           style={{ objectFit: "contain" }}
                           alt="logo"
-                          src={`https://knowx-be.herokuapp.com/${item.image}`}
+                          src={`http://127.0.0.1:8000/${item.image}`}
                         />
                       }
                     >
@@ -133,7 +133,7 @@ const Homepage = () => {
                             }
                           >
                             <Avatar
-                              src={`https://knowx-be.herokuapp.com/${item.user_image}`}
+                              src={`http://127.0.0.1:8000/${item.user_image}`}
                             />
                           </Link>
                         }

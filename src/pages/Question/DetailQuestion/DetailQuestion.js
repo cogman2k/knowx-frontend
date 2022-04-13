@@ -80,7 +80,7 @@ const DetailQuestion = () => {
 
       try {
         const response = await fetch(
-          `https://knowx-be.herokuapp.com/api/user/questions/${selectedId}`,
+          `http://127.0.0.1:8000/api/user/questions/${selectedId}`,
           requestOptions
         );
         const responseJSON = await response.json();
@@ -106,7 +106,7 @@ const DetailQuestion = () => {
       };
       try {
         const response = await fetch(
-          `https://knowx-be.herokuapp.com/api/user/questions/checklike`,
+          `http://127.0.0.1:8000/api/user/questions/checklike`,
           requestOptions
         );
         const responseJSON = await response.json();
@@ -136,7 +136,7 @@ const DetailQuestion = () => {
     };
     try {
       const response = await fetch(
-        `https://knowx-be.herokuapp.com/api/user/questions/like`,
+        `http://127.0.0.1:8000/api/user/questions/like`,
         requestOptions
       );
       const responseJSON = await response.json();
@@ -168,7 +168,7 @@ const DetailQuestion = () => {
     setTimeout(async () => {
       try {
         const response = await fetch(
-          `https://knowx-be.herokuapp.com/api/user/questions/${selectedId}`,
+          `http://127.0.0.1:8000/api/user/questions/${selectedId}`,
           requestOptions
         );
         const responseJSON = await response.json();
@@ -267,7 +267,7 @@ const DetailQuestion = () => {
     };
     try {
       const response = await fetch(
-        `https://knowx-be.herokuapp.com/api/user/questions/report`,
+        `http://127.0.0.1:8000/api/user/questions/report`,
         requestOptions
       );
       const responseJSON = await response.json();
@@ -328,7 +328,7 @@ const DetailQuestion = () => {
                 <div className="postDetail-container">
                   <div className="postDetail-author">
                     <Avatar
-                      src={`https://knowx-be.herokuapp.com/${user.image}`}
+                      src={`http://127.0.0.1:8000/${user.image}`}
                       size={40}
                     />
                     <Link

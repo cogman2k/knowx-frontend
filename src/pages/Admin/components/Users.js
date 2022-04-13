@@ -38,7 +38,7 @@ const Users = () => {
 
     try {
       const response = await fetch(
-        "https://knowx-be.herokuapp.com/api/admin/users",
+        "http://127.0.0.1:8000/api/admin/users",
         requestOptions
       );
       const responseJSON = await response.json();
@@ -61,7 +61,7 @@ const Users = () => {
 
     try {
       const response = await fetch(
-        `https://knowx-be.herokuapp.com/api/admin/delete-user/${activeUser.id}`,
+        `http://127.0.0.1:8000/api/admin/delete-user/${activeUser.id}`,
         requestOptions
       );
       const responseJSON = await response.json();

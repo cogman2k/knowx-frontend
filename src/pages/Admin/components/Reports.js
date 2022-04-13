@@ -45,7 +45,7 @@ const Reports = () => {
     };
     try {
       const response = await fetch(
-        "https://knowx-be.herokuapp.com/api/user/posts/reports/get",
+        "http://127.0.0.1:8000/api/user/posts/reports/get",
         requestOptions
       );
       const responseJSON = await response.json();
@@ -66,7 +66,7 @@ const Reports = () => {
     };
     try {
       const response = await fetch(
-        "https://knowx-be.herokuapp.com/api/user/questions/reports/get",
+        "http://127.0.0.1:8000/api/user/questions/reports/get",
         requestOptions
       );
       const responseJSON = await response.json();
@@ -89,7 +89,7 @@ const Reports = () => {
     setTimeout(async () => {
       try {
         const response = await fetch(
-          `https://knowx-be.herokuapp.com/api/user/posts/report/${postId}`,
+          `http://127.0.0.1:8000/api/user/posts/report/${postId}`,
           requestOptions
         );
         const responseJSON = await response.json();
@@ -115,7 +115,7 @@ const Reports = () => {
     setTimeout(async () => {
       try {
         const response = await fetch(
-          `https://knowx-be.herokuapp.com/api/user/questions/report/${questionId}`,
+          `http://127.0.0.1:8000/api/user/questions/report/${questionId}`,
           requestOptions
         );
         const responseJSON = await response.json();

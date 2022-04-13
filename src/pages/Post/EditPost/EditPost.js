@@ -36,7 +36,7 @@ const EditPost = () => {
 
       try {
         const response = await fetch(
-          `https://knowx-be.herokuapp.com/api/user/posts/${selectedId}`,
+          `http://127.0.0.1:8000/api/user/posts/${selectedId}`,
           requestOptions
         );
         const responseJSON = await response.json();
@@ -81,7 +81,7 @@ const EditPost = () => {
 
       try {
         const response = await fetch(
-          `https://knowx-be.herokuapp.com/api/user/posts/${selectedId}`,
+          `http://127.0.0.1:8000/api/user/posts/${selectedId}`,
           requestOptions
         );
         const responseJSON = await response.json();

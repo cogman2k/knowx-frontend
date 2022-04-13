@@ -54,7 +54,7 @@ const Profile = () => {
 
       try {
         const response = await fetch(
-          `https://knowx-be.herokuapp.com/api/user/checkfollow`,
+          `http://127.0.0.1:8000/api/user/checkfollow`,
           requestOptions
         );
         const responseJSON = await response.json();
@@ -79,7 +79,7 @@ const Profile = () => {
 
       try {
         const response = await fetch(
-          `https://knowx-be.herokuapp.com/api/user/get-by-id`,
+          `http://127.0.0.1:8000/api/user/get-by-id`,
           requestOptions
         );
         const responseJSON = await response.json();
@@ -107,7 +107,7 @@ const Profile = () => {
       },
     };
 
-    fetch("https://knowx-be.herokuapp.com/api/user/follow", requestOptions)
+    fetch("http://127.0.0.1:8000/api/user/follow", requestOptions)
       .then((response) => response.json())
       .then((result) => {
         if (result.type === "follow") {
@@ -148,7 +148,7 @@ const Profile = () => {
 
       try {
         const response = await fetch(
-          "https://knowx-be.herokuapp.com/api/user/posts/getbyuserid",
+          "http://127.0.0.1:8000/api/user/posts/getbyuserid",
           requestOptions
         );
         const responseJSON = await response.json();
@@ -174,7 +174,7 @@ const Profile = () => {
 
       try {
         const response = await fetch(
-          "https://knowx-be.herokuapp.com/api/user/questions/getbyuserid",
+          "http://127.0.0.1:8000/api/user/questions/getbyuserid",
           requestOptions
         );
         const responseJSON = await response.json();
@@ -207,7 +207,7 @@ const Profile = () => {
                     <Row>
                       <Col span={8}>
                         <Avatar
-                          src={`https://knowx-be.herokuapp.com/${user.image}`}
+                          src={`http://127.0.0.1:8000/${user.image}`}
                           size={128}
                         />
                       </Col>
@@ -233,9 +233,7 @@ const Profile = () => {
                               icon={<SendOutlined />}
                               type="primary"
                               onClick={() => {
-                                window.open(
-                                  "https://knowx-be.herokuapp.com/chat"
-                                );
+                                window.open("http://127.0.0.1:8000/chat");
                               }}
                             >
                               Send Message
