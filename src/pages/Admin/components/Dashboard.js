@@ -4,13 +4,18 @@ import { useEffect, useState } from "react";
 import "bootstrap/dist/css/bootstrap.css";
 import "./styles.scss";
 import "../assets/css/style.css";
-// import "react-bootstrap-table-next/dist/react-bootstrap-table2.min.css";
+import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
+import { Doughnut } from "react-chartjs-2";
+
+ChartJS.register(ArcElement, Tooltip, Legend);
 
 const Dashboard = () => {
   const [studentAmount, setStudentAmount] = useState(0);
   const [companyAmount, setCompanyAmount] = useState(0);
   const [adminAmount, setAdminAmount] = useState(0);
   const [mentorAmount, setMentorAmount] = useState(0);
+  const [postAmount, setPostAmount] = useState(0);
+  const [questionAmount, setQuestionAmount] = useState(0);
   useEffect(() => {
     const getData = async () => {
       const token = sessionStorage.getItem("token");
@@ -33,6 +38,8 @@ const Dashboard = () => {
           setAdminAmount(responseJSON.admin);
           setCompanyAmount(responseJSON.company);
           setMentorAmount(responseJSON.mentor);
+          setPostAmount(responseJSON.posts);
+          setQuestionAmount(responseJSON.questions);
         }
       } catch (error) {
         console.log("Failed fetch count data", error.message);
@@ -41,6 +48,30 @@ const Dashboard = () => {
 
     getData();
   }, []);
+
+  const data2 = {
+    labels: ["Students", "Mentors"],
+    datasets: [
+      {
+        label: "# of Votes",
+        data: [studentAmount, mentorAmount],
+        backgroundColor: ["#ffbc35", "#7a92a3"],
+        borderWidth: 1,
+      },
+    ],
+  };
+
+  const data1 = {
+    labels: ["Posts", "Questions"],
+    datasets: [
+      {
+        label: "# of Votes",
+        data: [postAmount, questionAmount],
+        backgroundColor: ["rgb(255, 99, 132)", "rgb(54, 162, 235)"],
+        borderWidth: 1,
+      },
+    ],
+  };
 
   return (
     <div className="main-wrapper">
@@ -105,48 +136,40 @@ const Dashboard = () => {
           <div className="row">
             <div className="col-12 col-md-6 col-lg-6 col-xl-6">
               <div className="card">
-                <div className="card-body">
+                <div
+                  className="card-body"
+                  style={{
+                    position: "relative",
+                    height: "50vh",
+                    width: "30vw",
+                  }}
+                >
                   <div className="chart-title">
-                    <h4>Patient Total</h4>
-                    <span className="float-right">
-                      <i className="fa fa-caret-up" aria-hidden="true"></i> 15%
-                      Higher than Last Month
-                    </span>
+                    <h4>Posts/Questions</h4>
+                    <Doughnut data={data1} style={{ marginLeft: "150px" }} />
                   </div>
-                  <canvas id="linegraph"></canvas>
                 </div>
               </div>
             </div>
             <div className="col-12 col-md-6 col-lg-6 col-xl-6">
               <div className="card">
-                <div className="card-body">
+                <div
+                  className="card-body"
+                  style={{
+                    position: "relative",
+                    height: "50vh",
+                    width: "30vw",
+                  }}
+                >
                   <div className="chart-title">
-                    <h4>Patients In</h4>
-                    <div className="float-right">
-                      <ul className="chat-user-total">
-                        <li>
-                          <i
-                            className="fa fa-circle current-users"
-                            aria-hidden="true"
-                          ></i>
-                          ICU
-                        </li>
-                        <li>
-                          <i
-                            className="fa fa-circle old-users"
-                            aria-hidden="true"
-                          ></i>{" "}
-                          OPD
-                        </li>
-                      </ul>
-                    </div>
+                    <h4>Students/Mentors</h4>
+                    <Doughnut data={data2} style={{ marginLeft: "150px" }} />
                   </div>
-                  <canvas id="bargraph"></canvas>
                 </div>
               </div>
             </div>
           </div>
-          <div className="row">
+          {/* <div className="row">
             <div className="col-12 col-md-6 col-lg-8 col-xl-8">
               <div className="card">
                 <div className="card-header">
@@ -454,8 +477,8 @@ const Dashboard = () => {
                 </div>
               </div>
             </div>
-          </div>
-          <div className="row">
+          </div> */}
+          {/* <div className="row">
             <div className="col-12 col-md-6 col-lg-8 col-xl-8">
               <div className="card">
                 <div className="card-header">
@@ -619,7 +642,7 @@ const Dashboard = () => {
                 </div>
               </div>
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
     </div>

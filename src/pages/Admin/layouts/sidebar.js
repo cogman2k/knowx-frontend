@@ -1,14 +1,17 @@
+import { LogoutOutlined } from "@ant-design/icons";
 import { Button } from "antd";
 import { useEffect, useState } from "react";
-import "./styles.scss";
+import { useLocation } from "react-router-dom";
 import "./style.css";
-import { LogoutOutlined } from "@ant-design/icons";
+import "./styles.scss";
 
-const sidebar = (props) => {
+const sidebar = () => {
   const [reportsPost, setReportsPost] = useState(0);
   const [reportsQuestion, setReportsQuestion] = useState(0);
   const [countRequest, setCountRequest] = useState(0);
-  const [activeObject, setActiveObject] = useState(null);
+  const location = useLocation();
+  const arr = location.pathname.split("/");
+  const activeObject = arr[arr.length - 1];
 
   useEffect(() => {
     const getReports = async () => {
@@ -112,22 +115,24 @@ const sidebar = (props) => {
         <div id="sidebar-menu" className="sidebar-menu">
           <ul>
             <li className="menu-title">Main</li>
-            <li className="active">
+            <li className={activeObject === "admin" ? "active" : "inactive"}>
               <a href="/admin">
                 <i className="fa fa-dashboard" /> <span>Dashboard</span>
               </a>
             </li>
-            <li>
+            <li
+              className={activeObject === "companies" ? "active" : "inactive"}
+            >
               <a href="/admin/companies">
                 <i className="fa-solid fa-user-tie" /> <span>Companies</span>
               </a>
             </li>
-            <li>
+            <li className={activeObject === "users" ? "active" : "inactive"}>
               <a href="/admin/users">
                 <i className="fa-solid fa-users" /> <span>Users</span>
               </a>
             </li>
-            <li>
+            <li className={activeObject === "reports" ? "active" : "inactive"}>
               <a href="/admin/reports">
                 <i className="fa-solid fa-circle-exclamation" />{" "}
                 <span>
@@ -150,7 +155,7 @@ const sidebar = (props) => {
                 </span>
               </a>
             </li>
-            <li>
+            <li className={activeObject === "requests" ? "active" : "inactive"}>
               <a href="/admin/requests">
                 <i className="fa fa-calendar-check-o" />{" "}
                 <span>
@@ -174,31 +179,7 @@ const sidebar = (props) => {
               </a>
             </li>
             {/* <li className="active"> */}
-            <li>
-              <a href="departments.html">
-                <i className="fa fa-hospital-o" /> <span>Departments</span>
-              </a>
-            </li>
-            <li className="submenu">
-              <a href="#">
-                <i className="fa fa-user" /> <span> Employees </span>{" "}
-                <span className="menu-arrow" />
-              </a>
-              <ul style={{ display: "none" }}>
-                <li>
-                  <a href="employees.html">Employees List</a>
-                </li>
-                <li>
-                  <a href="leaves.html">Leaves</a>
-                </li>
-                <li>
-                  <a href="holidays.html">Holidays</a>
-                </li>
-                <li>
-                  <a href="attendance.html">Attendance</a>
-                </li>
-              </ul>
-            </li>
+
             <Button
               onClick={handleLogout}
               type="primary"

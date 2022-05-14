@@ -172,54 +172,64 @@ const Profile = () => {
     <div class="tab-pane show active" id="about-cont">
       <div class="row">
         <div class="col-md-12">
-          <div class="card-box">
-            <h3 class="card-title">Education Informations</h3>
-            <div class="experience-box">
-              <ul class="experience-list">
-                {education.map((e) => (
-                  <li>
-                    <div class="experience-user">
-                      <div class="before-circle"></div>
-                    </div>
-                    <div class="experience-content">
-                      <div class="timeline-content">
-                        <a href="#/" class="name">
-                          {e.title}
-                        </a>
-                        <span class="time">
-                          {e.start_date} - {e.end_date}
-                        </span>
-                      </div>
-                    </div>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
-          <div class="card-box mb-0">
-            <h3 class="card-title">Experience</h3>
-            <div class="experience-box">
-              <ul class="experience-list">
-                {experience.map((e) => (
-                  <li>
-                    <div class="experience-user">
-                      <div class="before-circle"></div>
-                    </div>
-                    <div class="experience-content">
-                      <div class="timeline-content">
-                        <a href="#/" class="name">
-                          {e.title}
-                        </a>
-                        <span class="time">
-                          {e.start_date} - {e.end_date}
-                        </span>
-                      </div>
-                    </div>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
+          {data.role === "company" ? (
+            <div
+              style={{ fontFamily: "system-ui" }}
+              class="card-box"
+              dangerouslySetInnerHTML={{ __html: data.description }}
+            ></div>
+          ) : (
+            <>
+              <div class="card-box">
+                <h3 class="card-title">Education Informations</h3>
+                <div class="experience-box">
+                  <ul class="experience-list">
+                    {education.map((e) => (
+                      <li>
+                        <div class="experience-user">
+                          <div class="before-circle"></div>
+                        </div>
+                        <div class="experience-content">
+                          <div class="timeline-content">
+                            <a href="#/" class="name">
+                              {e.title}
+                            </a>
+                            <span class="time">
+                              {e.start_date} - {e.end_date}
+                            </span>
+                          </div>
+                        </div>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+              <div class="card-box mb-0">
+                <h3 class="card-title">Experience</h3>
+                <div class="experience-box">
+                  <ul class="experience-list">
+                    {experience.map((e) => (
+                      <li>
+                        <div class="experience-user">
+                          <div class="before-circle"></div>
+                        </div>
+                        <div class="experience-content">
+                          <div class="timeline-content">
+                            <a href="#/" class="name">
+                              {e.title}
+                            </a>
+                            <span class="time">
+                              {e.start_date} - {e.end_date}
+                            </span>
+                          </div>
+                        </div>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            </>
+          )}
         </div>
       </div>
     </div>

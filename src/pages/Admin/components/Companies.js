@@ -101,20 +101,11 @@ const Companies = () => {
                 <div className="profile-widget">
                   <div className="doctor-img">
                     <a href={`/admin/user/${company.id}`}>
-                      {/* <img
-                        alt=""
-                        src={`https://knowx-be.herokuapp.com/${company.image}`}
-                      /> */}
                       <Avatar
                         size={80}
                         src={`https://knowx-be.herokuapp.com/${company.image}`}
                       />
                     </a>
-
-                    {/* <Avatar
-                        size={64}
-                        src={`https://knowx-be.herokuapp.com/${company.image}`}
-                      /> */}
                   </div>
                   <div className="dropdown profile-action">
                     <a
@@ -143,7 +134,9 @@ const Companies = () => {
                     </div>
                   </div>
                   <h4 className="doctor-name text-ellipsis">
-                    <a href={`/user/${company.id}`}>{company.full_name}</a>
+                    <a href={`/admin/user/${company.id}`}>
+                      {company.full_name}
+                    </a>
                   </h4>
                   <div className="doc-prof">{company.email}</div>
                   <div className="user-country">

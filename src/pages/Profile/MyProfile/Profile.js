@@ -243,33 +243,34 @@ const Profile = () => {
       <Layout>
         <SidebarLeft />
         <Content>
-          <div className="container">
-            <Row>
-              <Col span={22}>
-                <h4>My Profile</h4>
-              </Col>
-              <Col span={2}>
-                <Button
-                  type="primary"
-                  onClick={() => {
-                    setKey("information");
-                  }}
-                  icon={<SettingFilled />}
-                >
-                  EDIT
-                </Button>
-              </Col>
-            </Row>
-            {spin ? (
-              <div style={{ textAlign: "center" }}>
-                <Spin size="large" />
-              </div>
-            ) : (
+          {spin ? (
+            <div style={{ textAlign: "center", marginTop: "50px" }}>
+              <Spin size="large" />
+            </div>
+          ) : (
+            <div className="container">
+              <Row>
+                <Col span={22}>
+                  <h4>My Profile</h4>
+                </Col>
+                <Col span={2}>
+                  <Button
+                    type="primary"
+                    onClick={() => {
+                      setKey("information");
+                    }}
+                    icon={<SettingFilled />}
+                  >
+                    EDIT
+                  </Button>
+                </Col>
+              </Row>
+
               <div className="my-profile content" style={{ height: "auto" }}>
                 <Row>
                   <Col span={13}>
                     <Row>
-                      <Col span={8}>
+                      <Col span={6}>
                         <Avatar
                           src={`https://knowx-be.herokuapp.com/${user.image}`}
                           size={128}
@@ -334,42 +335,42 @@ const Profile = () => {
                   </Col>
                 </Row>
               </div>
-            )}
-            <div className="navigation-profile">
-              <Menu
-                mode="horizontal"
-                style={{ fontSize: "14px", fontWeight: "600" }}
-                onClick={handleClick}
-                selectedKeys={key}
-              >
-                <Menu.Item key="about">ABOUT</Menu.Item>
-                <Menu.Item key="information">INFORMATION</Menu.Item>
-                <Menu.Item key="followers">
-                  FOLLOWERS ({countFollowers})
-                </Menu.Item>
-                <Menu.Item key="followings">
-                  FOLLOWINGS ({countFollowings})
-                </Menu.Item>
-                <Menu.Item key="bookmarks">
-                  BOOKMARKS ({countBookmarks})
-                </Menu.Item>
-                <Menu.Item key="mentor">MENTOR</Menu.Item>
-              </Menu>
+              <div className="navigation-profile">
+                <Menu
+                  mode="horizontal"
+                  style={{ fontSize: "14px", fontWeight: "600" }}
+                  onClick={handleClick}
+                  selectedKeys={key}
+                >
+                  <Menu.Item key="about">ABOUT</Menu.Item>
+                  <Menu.Item key="information">INFORMATION</Menu.Item>
+                  <Menu.Item key="followers">
+                    FOLLOWERS ({countFollowers})
+                  </Menu.Item>
+                  <Menu.Item key="followings">
+                    FOLLOWINGS ({countFollowings})
+                  </Menu.Item>
+                  <Menu.Item key="bookmarks">
+                    BOOKMARKS ({countBookmarks})
+                  </Menu.Item>
+                  <Menu.Item key="mentor">MENTOR</Menu.Item>
+                </Menu>
+              </div>
+              {key === "about" ? (
+                <About />
+              ) : key === "information" ? (
+                <Information />
+              ) : key === "followers" ? (
+                <Followers />
+              ) : key === "bookmarks" ? (
+                <Bookmark />
+              ) : key === "mentor" ? (
+                <Mentor />
+              ) : (
+                <Followings />
+              )}
             </div>
-            {key === "about" ? (
-              <About />
-            ) : key === "information" ? (
-              <Information />
-            ) : key === "followers" ? (
-              <Followers />
-            ) : key === "bookmarks" ? (
-              <Bookmark />
-            ) : key === "mentor" ? (
-              <Mentor />
-            ) : (
-              <Followings />
-            )}
-          </div>
+          )}
         </Content>
         <Modal
           title="Request Mentor"

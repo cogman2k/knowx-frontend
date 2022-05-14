@@ -58,11 +58,13 @@ const DetailPost = () => {
   const [disabled, setDisabled] = useState("none");
 
   const listReport = [
-    <Option value="1">Inappropriate language</Option>,
-    <Option value="2">Intentionally attacking other individuals</Option>,
-    <Option value="3">Report 3</Option>,
-    <Option value="4">Report 4</Option>,
-    <Option value="5">Other</Option>,
+    <Option value="Inappropriate language">Inappropriate language</Option>,
+    <Option value="Intentionally attacking other individuals">
+      Intentionally attacking other individuals
+    </Option>,
+    <Option value="Spam">Spam</Option>,
+    <Option value="Harassment">Harassment</Option>,
+    <Option value="other">Other</Option>,
   ];
 
   async function handleLike() {
@@ -143,7 +145,6 @@ const DetailPost = () => {
           requestOptions
         );
         const responseJSON = await response.json();
-        console.log(responseJSON);
         if (responseJSON.result === true) {
           setColorBookmark("#08c");
         } else {
@@ -171,7 +172,6 @@ const DetailPost = () => {
           requestOptions
         );
         const responseJSON = await response.json();
-        console.log(responseJSON);
         if (responseJSON.result === true) {
           setColorLike("#08c");
         } else {
@@ -199,7 +199,6 @@ const DetailPost = () => {
         const responseJSON = await response.json();
         setSpin(false);
         setCountLike(responseJSON.data.like);
-        console.log(responseJSON.data.like);
         setSelectedPost(responseJSON.data);
         setUser(responseJSON.user);
       } catch (error) {
@@ -228,7 +227,6 @@ const DetailPost = () => {
           requestOptions
         );
         const responseJSON = await response.json();
-        console.log(responseJSON);
         if (responseJSON.status === "success") {
           success();
           setRedirect(true);
@@ -295,7 +293,6 @@ const DetailPost = () => {
   };
 
   const handleCancel = () => {
-    console.log("Clicked cancel button");
     setVisible(false);
   };
 
@@ -346,7 +343,7 @@ const DetailPost = () => {
 
   function handleChange(value) {
     setDescription(value);
-    if (value === "5") {
+    if (value === "other") {
       setDisabled("block");
     }
   }
@@ -366,7 +363,6 @@ const DetailPost = () => {
             width={400}
           >
             <Select
-              defaultValue="1"
               style={{ width: 352, marginBottom: "20px" }}
               onChange={handleChange}
             >
@@ -425,13 +421,7 @@ const DetailPost = () => {
                           </Button>
                         </Dropdown>
                       </div>
-                    ) : (
-                      <WarningFilled
-                        className="postDetail-dropdown"
-                        style={{ fontSize: "24px" }}
-                        onClick={showModalReport}
-                      />
-                    )}
+                    ) : null}
                     <i className="ti-more-alt">
                       <div className="postDetail-option">
                         <a href="#">Edit</a>
@@ -470,6 +460,17 @@ const DetailPost = () => {
                           marginLeft: "20px",
                         }}
                         onClick={createBookmark}
+                      />
+                    </Tooltip>
+
+                    <Tooltip title="Report">
+                      <WarningFilled
+                        style={{
+                          fontSize: "30px",
+                          marginLeft: "20px",
+                          color: "#c7dfe2",
+                        }}
+                        onClick={showModalReport}
                       />
                     </Tooltip>
                   </div>

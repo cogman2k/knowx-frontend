@@ -25,11 +25,12 @@ import SidebarLeft from "../../../components/SidebarLeft/SidebarLeft";
 import Footer from "../../../components/Footer/Footer";
 import ListPost from "./ListPost";
 import ListQuestion from "./ListQuestion";
+import About from "../OtherProfile/About";
 
 const { Content } = Layout;
 
 const Profile = () => {
-  const [key, setKey] = useState("post");
+  const [key, setKey] = useState("about");
   const [countPosts, setCountPosts] = useState(0);
   const [countQuestions, setCountQuestions] = useState(0);
 
@@ -309,13 +310,20 @@ const Profile = () => {
                 onClick={handleClick}
                 selectedKeys={key}
               >
+                <Menu.Item key="about">ABOUT</Menu.Item>
                 <Menu.Item key="post">POST ({countPosts})</Menu.Item>
                 <Menu.Item key="question">
                   QUESTION ({countQuestions})
                 </Menu.Item>
               </Menu>
             </div>
-            {key === "post" ? <ListPost /> : <ListQuestion />}
+            {key === "about" ? (
+              <About />
+            ) : key === "post" ? (
+              <ListPost />
+            ) : (
+              <ListQuestion />
+            )}
           </div>
         </Content>
         {/* <SidebarRight /> */}

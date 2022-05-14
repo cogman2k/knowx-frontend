@@ -39,7 +39,7 @@ const Class = () => {
               >
                 <Menu.Item key="roadmap">ROAD MAP</Menu.Item>
                 <Menu.Item key="questions">QUESTIONS</Menu.Item>
-                <Menu.Item key="reference">DOCUMENT</Menu.Item>
+                <Menu.Item key="reference">REFERENCES</Menu.Item>
                 <Menu.Item key="members">MEMBERS</Menu.Item>
               </Menu>
             </div>

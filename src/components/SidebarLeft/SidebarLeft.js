@@ -279,16 +279,6 @@ const SidebarLeft = () => {
               MY CLASS
             </Typography>
           </Menu.Item>
-          <Menu.Item key="3" icon={<FileOutlined className="fontSize-24" />}>
-            <Typography
-              style={{ fontWeight: "600" }}
-              onClick={() => {
-                history.push("/reference");
-              }}
-            >
-              REFERENCE
-            </Typography>
-          </Menu.Item>
           <Menu.Item key="4" icon={<MessageOutlined className="fontSize-24" />}>
             {numberMessages === 0 ? (
               <Typography

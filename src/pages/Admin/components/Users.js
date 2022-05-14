@@ -130,15 +130,15 @@ const Users = () => {
       formatter: (cell, row, rowIndex, formatExtraData) => (
         <div style={{ width: "200px", display: "flex" }}>
           {row.isMentor ? (
-            <Button variant="success" size="sm">
+            <p variant="success" size="sm">
               Mentor
-            </Button>
+            </p>
           ) : row.role === "admin" ? (
-            <Button size="sm" variant="info">
+            <p size="sm" variant="info">
               Admin
-            </Button>
+            </p>
           ) : (
-            <Button size="sm">Student</Button>
+            <p size="sm">Student</p>
           )}
         </div>
       ),

@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import Header from "../layouts/header";
 import Sidebar from "../layouts/sidebar";
 import "./style.css";
-import { Image, Modal, notification, Space, Card } from "antd";
+import { Image, Modal, notification, Space, Card, Button } from "antd";
 
 const openNotificationWithIcon = (type, text) => {
   notification[type]({
@@ -127,9 +127,15 @@ const Request = () => {
   const handleOkReject = () => {
     handleReject();
     setIsModalVisibleReject(false);
+    setIsModalVisible(false);
   };
 
   const handleCancel = () => {
+    setIsModalVisible(false);
+  };
+
+  const handleCancelClick = () => {
+    showModalReject(tmpRequest);
     setIsModalVisible(false);
   };
 
@@ -143,8 +149,15 @@ const Request = () => {
         visible={isModalVisible}
         onOk={handleOk}
         onCancel={handleCancel}
-        okText="Accept"
         width={810}
+        footer={[
+          <Button type="primary" onClick={handleCancelClick}>
+            Reject
+          </Button>,
+          <Button type="primary" onClick={handleOk}>
+            Accept
+          </Button>,
+        ]}
       >
         <div style={{ display: "flex", marginBottom: "20px" }}>
           <img
@@ -167,17 +180,19 @@ const Request = () => {
             title="User Information"
             style={{ height: "306px", width: "220px" }}
           >
-            <b>Posts:</b>
-            <span className="ml-3">{tmpRequest.countPosts}</span>
-            <br />
-            <b>Questions:</b>
-            <span className="ml-3">{tmpRequest.countQuestions}</span>
-            <br />
-            <b>Class mentoring:</b>
-            <span className="ml-3">{tmpRequest.countClass}</span>
-            <br />
-            <b>Followers:</b>
-            <span className="ml-3">{tmpRequest.followers}</span>
+            <div style={{ marginTop: "40px" }}>
+              <b>Posts:</b>
+              <span className="ml-3">{tmpRequest.countPosts}</span>
+              <br />
+              <b>Questions:</b>
+              <span className="ml-3">{tmpRequest.countQuestions}</span>
+              <br />
+              <b>Class mentoring:</b>
+              <span className="ml-3">{tmpRequest.countClass}</span>
+              <br />
+              <b>Followers:</b>
+              <span className="ml-3">{tmpRequest.followers}</span>
+            </div>
           </Card>
           <Card title="Request infomation">
             <Space>
@@ -246,23 +261,18 @@ const Request = () => {
                               {e.user.full_name}
                             </a>
                           </th>
-                          <td style={{ width: " 250px" }}>{e.description}</td>
+                          <td style={{ width: " 350px" }}>{e.description}</td>
                           <td style={{ width: " 150px" }}>
                             {formatDate(e.created_at)}
                           </td>
                           <td style={{ width: " 300px" }}>{e.subject.name}</td>
-                          <td style={{ width: " 250px" }}>
+                          <td style={{ width: " 150px" }}>
                             <button
+                              style={{ marginRight: "15px" }}
                               className="btn btn-primary btn-primary-one float-right"
                               onClick={() => showModal(e)}
                             >
                               View Detail
-                            </button>
-                            <button
-                              className="btn btn-primary btn-primary-two float-left"
-                              onClick={() => showModalReject(e)}
-                            >
-                              Reject
                             </button>
                           </td>
                         </tr>

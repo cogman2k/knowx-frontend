@@ -101,7 +101,6 @@ const CreatePost = () => {
   };
 
   const handleImage = (e) => {
-    console.log(e.target.files[0]);
     setPicture(e.target.files[0]);
   };
 
@@ -177,31 +176,30 @@ const CreatePost = () => {
                     }}
                   />
                 </Form.Item>
-                <Form.Item>
-                  <div style={{ marginTop: "55px", textAlign: "center" }}>
-                    <Space size={20}>
-                      <Button
-                        size="large"
-                        type="primary"
-                        onClick={create}
-                        loading={loading}
-                        htmlType="submit"
-                      >
-                        CREATE
-                      </Button>
-                      <Button
-                        size="large"
-                        type="primary"
-                        onClick={() => {
-                          history.push("/homepage");
-                        }}
-                      >
-                        CANCEL
-                      </Button>
-                    </Space>
-                  </div>
-                </Form.Item>
+
                 <Form />
+                <div style={{ marginBottom: "20px", textAlign: "center" }}>
+                  <Space size={20}>
+                    <Button
+                      size="large"
+                      type="primary"
+                      onClick={create}
+                      loading={loading}
+                      htmlType="submit"
+                    >
+                      CREATE
+                    </Button>
+                    <Button
+                      size="large"
+                      type="primary"
+                      onClick={() => {
+                        history.push("/homepage");
+                      }}
+                    >
+                      CANCEL
+                    </Button>
+                  </Space>
+                </div>
               </div>
             </div>
           </Content>

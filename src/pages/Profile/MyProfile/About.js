@@ -1,30 +1,21 @@
-/* eslint-disable react/no-unescaped-entities */
-/* eslint-disable react/jsx-wrap-multilines */
-/* eslint-disable operator-linebreak */
-/* eslint-disable camelcase */
-/* eslint-disable comma-dangle */
-/* eslint-disable react/react-in-jsx-scope */
-import axios from "axios";
-import { useState, useEffect } from "react";
+import { DeleteFilled, PlusOutlined } from "@ant-design/icons";
 import {
-  Input,
   Button,
-  Steps,
-  Form,
-  Typography,
-  message,
-  Modal,
-  Space,
-  Drawer,
-  Row,
   Col,
   DatePicker,
+  Drawer,
+  Form,
+  Input,
+  Modal,
   notification,
+  Row,
+  Space,
   Timeline,
   Tooltip,
+  Image,
 } from "antd";
-import { PlusOutlined, DeleteFilled, CheckOutlined } from "@ant-design/icons";
 import moment from "moment";
+import { useEffect, useState } from "react";
 
 const openNotificationWithIcon = (type, msg) => {
   notification[type]({
@@ -34,19 +25,17 @@ const openNotificationWithIcon = (type, msg) => {
   });
 };
 
-const { Title } = Typography;
-const { Step } = Steps;
 const About = () => {
   const id = sessionStorage.getItem("user_id");
-  const [picture, setPicture] = useState();
-  const [user, setUser] = useState({});
-  const [spin, setSpin] = useState(true);
-  const [loading, setLoading] = useState(false);
   const [educationDrawer, setEducationDrawer] = useState(false);
   const [experienceDrawer, setExperienceDrawer] = useState(false);
+  const [archivesDrawer, setArchivesDrawer] = useState(false);
   const [isModalVisibleEducation, setIsModalVisibleEducation] = useState(false);
   const [isModalVisibleExperience, setIsModalVisibleExperience] =
     useState(false);
+
+  const [isModalVisibleArchives, setIsModalVisibleArchives] = useState(false);
+  const [activeArchives, setActiveArchives] = useState("");
   const [activeEducation, setActiveEducation] = useState("");
   const [activeExperience, setActiveExperience] = useState("");
 
@@ -56,6 +45,8 @@ const About = () => {
   };
   const [listEducation, setListEducation] = useState([]);
   const [listExperience, setListExperience] = useState([]);
+  const [listArchives, setListArchives] = useState([]);
+  const [archivesImage, setArchivesImage] = useState("");
 
   // handle get list education
   const getEducation = async () => {
@@ -93,13 +84,34 @@ const About = () => {
         requestOptions
       );
       const responseJSON = await response.json();
-      console.log(responseJSON);
       setListExperience(responseJSON.data);
     } catch (error) {
       console.log("Failed fetch get experience", error.message);
     }
   };
+  const getArchives = async () => {
+    const token = sessionStorage.getItem("token");
+    const requestOptions = {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
+
+    try {
+      const response = await fetch(
+        `https://knowx-be.herokuapp.com/api/user/archives/${id}`,
+        requestOptions
+      );
+      const responseJSON = await response.json();
+      setListArchives(responseJSON.data);
+      console.log("list archives: ", responseJSON.data);
+    } catch (error) {
+      console.log("Failed fetch get experience", error.message);
+    }
+  };
   useEffect(() => {
+    getArchives();
     getExperience();
     getEducation();
   }, []);
@@ -109,15 +121,21 @@ const About = () => {
     startTime: "",
     endTime: "",
   });
-
   const tmpEducationData = { ...educationData };
   const [experienceData, setExperienceData] = useState({
     degree: "",
     startTime: "",
     endTime: "",
+    workAt: "",
   });
-
   const tmpExperienceData = { ...experienceData };
+  const [archivesData, setArchivesData] = useState({
+    title: "",
+    image: "",
+    time: "",
+  });
+  const tmpArchivesData = { ...archivesData };
+
   async function updateEducation() {
     const token = sessionStorage.getItem("token");
     const formData = new FormData();
@@ -146,6 +164,7 @@ const About = () => {
     formData.append("title", tmpExperienceData.degree);
     formData.append("start_date", tmpExperienceData.startTime);
     formData.append("end_date", tmpExperienceData.endTime);
+    formData.append("work_at", tmpExperienceData.workAt);
     const requestOptions = {
       method: "POST",
       body: formData,
@@ -160,6 +179,30 @@ const About = () => {
       openNotificationWithIcon("success", "Experience updated!");
       getExperience();
       setExperienceDrawer(false);
+    }
+  }
+
+  async function updateArchives() {
+    const token = sessionStorage.getItem("token");
+    const formData = new FormData();
+    formData.append("title", tmpArchivesData.title);
+    formData.append("image", tmpArchivesData.image);
+    formData.append("time", tmpArchivesData.time);
+    const requestOptions = {
+      method: "POST",
+      body: formData,
+      headers: { Authorization: `Bearer ${token}` },
+    };
+    const response = await fetch(
+      "https://knowx-be.herokuapp.com/api/user/archives",
+      requestOptions
+    );
+    const responseJSON = await response.json();
+    console.log(responseJSON);
+    if (responseJSON.status === "success") {
+      openNotificationWithIcon("success", "Archives updated!");
+      getArchives();
+      setArchivesDrawer(false);
     }
   }
 
@@ -200,6 +243,24 @@ const About = () => {
     }
   };
 
+  const handleDeleteArchives = async () => {
+    const token = sessionStorage.getItem("token");
+
+    const requestOptions = {
+      method: "DELETE",
+      headers: { Authorization: `Bearer ${token}` },
+    };
+    const response = await fetch(
+      `https://knowx-be.herokuapp.com/api/user/archives/${activeArchives}`,
+      requestOptions
+    );
+    const responseJSON = await response.json();
+    if (responseJSON.status === "success") {
+      openNotificationWithIcon("success", "Item deleted!");
+      getArchives();
+    }
+  };
+
   const showModalEducation = (id) => {
     setIsModalVisibleEducation(true);
     setActiveEducation(id);
@@ -228,6 +289,26 @@ const About = () => {
     setIsModalVisibleExperience(false);
   };
 
+  //archives
+
+  const showModalArchives = (id) => {
+    setIsModalVisibleArchives(true);
+    setActiveArchives(id);
+  };
+
+  const handleOkArchives = () => {
+    setIsModalVisibleArchives(false);
+    handleDeleteArchives();
+  };
+
+  const handleCancelArchives = () => {
+    setIsModalVisibleArchives(false);
+  };
+
+  const handleImage = (e) => {
+    tmpArchivesData.image = e.target.files[0];
+  };
+
   return (
     <div>
       <Modal
@@ -246,8 +327,16 @@ const About = () => {
       >
         <p>Accept delete this item?</p>
       </Modal>
+      <Modal
+        title="Confirm delete experience"
+        visible={isModalVisibleArchives}
+        onOk={handleOkArchives}
+        onCancel={handleCancelArchives}
+      >
+        <p>Accept delete this item?</p>
+      </Modal>
       <div className="education-info content">
-        <h5 style={{ display: "inline-block" }}>Education Informations</h5>
+        <h5 style={{ display: "inline-block" }}>Education</h5>
         <Button
           style={{ float: "right" }}
           type="primary"
@@ -310,7 +399,8 @@ const About = () => {
               color="green"
               label={`${experience.start_date} - ${experience.end_date}`}
             >
-              <h6 style={{ paddingTop: "25px" }}>{experience.title}</h6>
+              <h6 style={{ paddingTop: "25px" }}>{experience.work_at}</h6>
+              <h7 style={{ paddingTop: "25px" }}>{experience.title}</h7>
               <Tooltip title="delete">
                 <Button
                   style={{
@@ -330,7 +420,146 @@ const About = () => {
           ))}
         </Timeline>
       </div>
+
+      {/* Archives information */}
+
+      <div className="exp-info content">
+        <h5 style={{ display: "inline-block" }}>Archives</h5>
+        <Button
+          style={{ float: "right" }}
+          type="primary"
+          icon={<PlusOutlined />}
+          onClick={() => {
+            setArchivesDrawer(true);
+          }}
+        >
+          Update
+        </Button>
+        <Timeline
+          mode="left"
+          style={{ marginLeft: "-800px", marginTop: "25px" }}
+        >
+          {listArchives.map((archive) => (
+            <Timeline.Item color="green" label={`${archive.time}`}>
+              <h6 style={{ paddingTop: "25px" }}>{archive.title}</h6>
+              <Image
+                width={200}
+                src={`https://knowx-be.herokuapp.com/${archive.image}`}
+              />
+              <Tooltip title="delete">
+                <Button
+                  style={{
+                    float: "right",
+                    marginTop: "-31px",
+                    marginRight: "8px",
+                  }}
+                  icon={<DeleteFilled />}
+                  danger
+                  size="small"
+                  onClick={() => showModalArchives(archive.id)}
+                >
+                  Remove
+                </Button>
+              </Tooltip>
+            </Timeline.Item>
+          ))}
+        </Timeline>
+      </div>
+
       <div>
+        {/* Add archives information */}
+
+        <Drawer
+          title="Archives information"
+          width={580}
+          onClose={() => {
+            setArchivesDrawer(false);
+          }}
+          visible={archivesDrawer}
+          bodyStyle={{ paddingBottom: 80 }}
+          extra={
+            <Space>
+              <Button
+                onClick={() => {
+                  setArchivesDrawer(false);
+                }}
+              >
+                Cancel
+              </Button>
+              <Button type="primary" onClick={updateArchives}>
+                OK
+              </Button>
+            </Space>
+          }
+        >
+          <Form layout="vertical">
+            <Row gutter={16}>
+              <Col span={24}>
+                <Form.Item
+                  name="title"
+                  label="Archive"
+                  rules={[
+                    {
+                      required: true,
+                      message: "Please enter title of archive",
+                    },
+                  ]}
+                >
+                  <Input
+                    onChange={(e) => {
+                      tmpArchivesData.title = e.target.value;
+                    }}
+                    placeholder="Please enter education title"
+                  />
+                </Form.Item>
+              </Col>
+            </Row>
+            <Row gutter={16}>
+              <Col span={24}>
+                <Form.Item
+                  name="image"
+                  label="Image"
+                  rules={[
+                    {
+                      required: true,
+                      message: "Please upload your image",
+                    },
+                  ]}
+                >
+                  <div className="input-group mb-3">
+                    <input
+                      type="file"
+                      id="image"
+                      className="form-control"
+                      onChange={handleImage}
+                    />
+                  </div>
+                </Form.Item>
+              </Col>
+            </Row>
+            <Row gutter={16}>
+              <Col span={12}>
+                <Form.Item
+                  name="time"
+                  label="Time"
+                  rules={[
+                    { required: true, message: "Please choose the time" },
+                  ]}
+                >
+                  <DatePicker
+                    style={{ width: "100%" }}
+                    format="MM-YYYY"
+                    picker="month"
+                    defaultValue={moment("01/2015", "MM-YYYY")}
+                    onChange={(date, dateString) => {
+                      tmpArchivesData.time = dateString;
+                    }}
+                  />
+                </Form.Item>
+              </Col>
+            </Row>
+          </Form>
+        </Drawer>
         {/* Add education information */}
 
         <Drawer
@@ -361,14 +590,16 @@ const About = () => {
               <Col span={24}>
                 <Form.Item
                   name="degree"
-                  label="Degree"
-                  rules={[{ required: true, message: "Please enter degree" }]}
+                  label="Education"
+                  rules={[
+                    { required: true, message: "Please enter education title" },
+                  ]}
                 >
                   <Input
                     onChange={(e) => {
                       tmpEducationData.degree = e.target.value;
                     }}
-                    placeholder="Please enter degree"
+                    placeholder="Please enter education title"
                   />
                 </Form.Item>
               </Col>
@@ -413,25 +644,6 @@ const About = () => {
                 </Form.Item>
               </Col>
             </Row>
-            {/* <Row gutter={16}>
-              <Col span={24}>
-                <Form.Item
-                  name="description"
-                  label="Description"
-                  rules={[
-                    {
-                      required: true,
-                      message: "Please enter description",
-                    },
-                  ]}
-                >
-                  <Input.TextArea
-                    rows={4}
-                    placeholder="Please enter description"
-                  />
-                </Form.Item>
-              </Col>
-            </Row> */}
           </Form>
         </Drawer>
 
@@ -465,18 +677,46 @@ const About = () => {
               <Col span={24}>
                 <Form.Item
                   name="degree"
-                  label="Degree"
-                  rules={[{ required: true, message: "Please enter degree" }]}
+                  label="Experience"
+                  rules={[
+                    {
+                      required: true,
+                      message: "Please enter experience title",
+                    },
+                  ]}
                 >
                   <Input
                     onChange={(e) => {
                       tmpExperienceData.degree = e.target.value;
                     }}
-                    placeholder="Please enter degree"
+                    placeholder="Please enter experience title..."
                   />
                 </Form.Item>
               </Col>
             </Row>
+
+            <Row gutter={16}>
+              <Col span={24}>
+                <Form.Item
+                  name="workAt"
+                  label="Work At"
+                  rules={[
+                    {
+                      required: true,
+                      message: "Please enter where you work",
+                    },
+                  ]}
+                >
+                  <Input
+                    onChange={(e) => {
+                      tmpExperienceData.workAt = e.target.value;
+                    }}
+                    placeholder="Please enter where you work"
+                  />
+                </Form.Item>
+              </Col>
+            </Row>
+
             <Row gutter={16}>
               <Col span={12}>
                 <Form.Item
@@ -517,25 +757,6 @@ const About = () => {
                 </Form.Item>
               </Col>
             </Row>
-            {/* <Row gutter={16}>
-              <Col span={24}>
-                <Form.Item
-                  name="description"
-                  label="Description"
-                  rules={[
-                    {
-                      required: true,
-                      message: "Please enter description",
-                    },
-                  ]}
-                >
-                  <Input.TextArea
-                    rows={4}
-                    placeholder="Please enter description"
-                  />
-                </Form.Item>
-              </Col>
-            </Row> */}
           </Form>
         </Drawer>
       </div>

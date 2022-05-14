@@ -54,16 +54,18 @@ const DetailQuestion = () => {
   const [disabled, setDisabled] = useState("none");
 
   const listReport = [
-    <Option value="1">Report 1</Option>,
-    <Option value="2">Report 2</Option>,
-    <Option value="3">Report 3</Option>,
-    <Option value="4">Report 4</Option>,
-    <Option value="5">Other</Option>,
+    <Option value="Inappropriate language">Inappropriate language</Option>,
+    <Option value="Intentionally attacking other individuals">
+      Intentionally attacking other individuals
+    </Option>,
+    <Option value="Spam">Spam</Option>,
+    <Option value="Harassment">Harassment</Option>,
+    <Option value="other">Other</Option>,
   ];
 
   function handleChange(value) {
     setDescription(value);
-    if (value === "5") {
+    if (value === "other") {
       setDisabled("block");
     }
   }
